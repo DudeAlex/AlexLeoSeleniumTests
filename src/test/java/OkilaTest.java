@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 public class OkilaTest {
 
     @Test
+
     public void doFirstTest() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
@@ -14,3 +15,4 @@ public class OkilaTest {
         driver.quit();
     }
 }
+

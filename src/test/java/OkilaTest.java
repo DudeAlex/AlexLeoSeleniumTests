@@ -6,4 +6,3 @@ public class OkilaTest {
     public void doFirstTest(){
 
     }
-}

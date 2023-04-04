@@ -79,7 +79,6 @@ public class OkilaTest {
         Thread.sleep(1000);
         driver.quit();
     }
-
 }
 
 

@@ -20,7 +20,7 @@ public class OkilaTest {
 
     @Test
 
-    public void checkSalesIcon() throws InterruptedException {
+    public void checkSalesIcon_TC_001_06() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -31,6 +31,22 @@ public class OkilaTest {
         Thread.sleep(1000);
         WebElement icon = driver.findElement(By.xpath("//span[@class='onsale']"));
         Assert.assertEquals(icon.getText(), "Sale!");
+        Thread.sleep(1000);
+        driver.quit();
+    }
+    @Test
+
+    public void checkDollarSymbol_TC_002_02() throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(1000);
+        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        driver.findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
+        Thread.sleep(1000);
+        WebElement symbol = driver.findElement(By.xpath("//span[@class='woocommerce-Price-currencySymbol']"));
+        Assert.assertEquals(symbol.getText(), "$");
         Thread.sleep(1000);
         driver.quit();
     }

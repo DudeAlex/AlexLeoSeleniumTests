@@ -63,6 +63,22 @@ public class OkilaTest {
         Assert.assertEquals(discount.getText(), "25% OFF On all products");
         driver.quit();
     }
+
+    @Test
+
+    public void checkAccountLogin_TC_004_02() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(1000);
+        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        driver.findElement(By.xpath("//a[@href=\"https://askomdch.com/account/\"]")).click();
+        Thread.sleep(2000);
+        WebElement text = driver.findElement(By.xpath("//h1[contains(text(), \"Account\")]"));
+        Assert.assertEquals(text.getText(), "Account");
+        Thread.sleep(1000);
+        driver.quit();
+    }
 }
 
 

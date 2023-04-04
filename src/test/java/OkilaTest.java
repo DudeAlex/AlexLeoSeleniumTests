@@ -79,6 +79,21 @@ public class OkilaTest {
         Thread.sleep(1000);
         driver.quit();
     }
+
+    @Test
+
+    public void checkStorePage_TC_005_02() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(1000);
+        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        driver.findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
+        Thread.sleep(1000);
+        WebElement store = driver.findElement(By.xpath("//h1[contains(text(), \"Store\")]"));
+        Assert.assertEquals(store.getText(), "Store");
+        driver.quit();
+    }
 }
 
 

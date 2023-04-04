@@ -3,7 +3,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class OkilaTest {
 
@@ -94,6 +97,24 @@ public class OkilaTest {
         Assert.assertEquals(store.getText(), "Store");
         driver.quit();
     }
+
+    @Test
+
+    public void checkFeaturedProductNumber_TC_006_02() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(1000);
+        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        Reporter.log("Page title check passed");
+        WebElement featuredProducts = driver.findElement(By.xpath("//ul[@class=\"products columns-5\"]"));
+        Thread.sleep(2000);
+        List<WebElement> products = featuredProducts.findElements(By.tagName("li"));
+        Assert.assertEquals(products.size(), 5);
+        Reporter.log("Product number check passed");
+        driver.quit();
+    }
+
 }
 
 

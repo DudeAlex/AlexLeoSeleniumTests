@@ -50,6 +50,19 @@ public class OkilaTest {
         Thread.sleep(1000);
         driver.quit();
     }
+
+    @Test
+
+    public void checkDiscount_TC_003_02() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(1000);
+        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        WebElement discount = driver.findElement(By.xpath("//h3[contains(text(), \"25% OFF \")]"));
+        Assert.assertEquals(discount.getText(), "25% OFF On all products");
+        driver.quit();
+    }
 }
 
 

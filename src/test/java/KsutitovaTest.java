@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class KsutitovaTest {
 
     @Test
-    public void VerifyTheDiscountMessageTest() {
+    public void verifyTheDiscountMessageTest() {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();

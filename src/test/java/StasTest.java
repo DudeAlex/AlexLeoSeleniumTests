@@ -5,7 +5,10 @@ import org.testng.annotations.Test;
 public class StasTest {
 
 
-    @Test
-    WebDriver driver  = new ChromeDriver();
+    public static void main(String[] args) {
+        System.out.println("Hello world");
+    }
+
+
 
 }

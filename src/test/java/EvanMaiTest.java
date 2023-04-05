@@ -28,6 +28,18 @@ public class EvanMaiTest {
     }
 
     @Test
+    public void Test_TC_001_01() {
+        List<WebElement> listFeaturedProducts = driver.findElements(By.className("astra-shop-thumbnail-wrap"));
+        List<WebElement> listFeaturedProductsText = driver.findElements(By.className("astra-shop-summary-wrap"));
+        for (int i = 0; i < listFeaturedProductsText.size(); i++) {
+            String[] arrProductText = listFeaturedProductsText.get(i).getText().split("\n");
+            if (arrProductText[2].split(" ").length > 1) {
+                Assert.assertEquals(listFeaturedProducts.get(i).getText(), "Sale!");
+            }
+        }
+    }
+
+    @Test
     public void Test_TC_006_01() {
         List<WebElement> list = driver.findElements(By.className("astra-shop-thumbnail-wrap"));
         Assert.assertEquals(list.size(), 5);

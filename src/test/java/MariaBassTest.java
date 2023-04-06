@@ -25,7 +25,7 @@ public class MariaBassTest {
     }
 
     @Test
-    public void checkSaleTag_TC_001() {
+    public void checkSaleTagTest_TC_001() {
         WebElement featuredProducts = driver.findElement(By.xpath(
                 "//ul[@class = 'products columns-5']"));
         List<WebElement> items = featuredProducts.findElements(By.tagName("li"));

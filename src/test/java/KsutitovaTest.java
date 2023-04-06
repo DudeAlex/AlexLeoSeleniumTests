@@ -51,4 +51,14 @@ public class KsutitovaTest {
         Assert.assertEquals(rezult.size(), 5);
     }
 
+
+    @Test
+    public void VerifyCardOnWomenPageeTest() {
+
+        driver.findElement(By.xpath("//li[@id='menu-item-1229']/a")).click();
+
+        List<WebElement> womenProducts = driver.findElements(By.xpath("//div[@class='astra-shop-thumbnail-wrap']"));
+        Assert.assertEquals(womenProducts.size(), 7);
+    }
+
 }

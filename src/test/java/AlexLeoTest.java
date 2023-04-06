@@ -6,4 +6,11 @@ public class AlexLeoTest {
     public void firstTest(){
 
     }
+
+    @Test
+    public void secondTest(){
+        System.out.println("Hello");
+    }
 }
+
+

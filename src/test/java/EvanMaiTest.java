@@ -47,6 +47,11 @@ public class EvanMaiTest {
             Assert.assertEquals(arrProductText[2].charAt(0), '$');
         }
     }
+    @Test
+    public void Test_TC_003_01() {
+        WebElement text = driver.findElement(By.xpath("//*[@id=\"post-61\"]/div/div[1]/div/div/div/h3"));
+        Assert.assertEquals(text.getText(), "25% OFF On all products");
+    }
 
     @Test
     public void Test_TC_006_01() {

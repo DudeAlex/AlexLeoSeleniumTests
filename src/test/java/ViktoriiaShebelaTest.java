@@ -16,4 +16,10 @@ public class ViktoriiaShebelaTest {
         driver.quit();
     }
 
+    @Test
+
+    public void checkSalesIcon_TC_001 () throws  InterruptedException{
+
+    }
+
 }

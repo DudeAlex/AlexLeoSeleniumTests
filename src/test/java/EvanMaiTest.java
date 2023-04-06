@@ -49,7 +49,7 @@ public class EvanMaiTest {
     }
     @Test
     public void Test_TC_003_01() {
-        WebElement text = driver.findElement(By.xpath("//*[@id=\"post-61\"]/div/div[1]/div/div/div/h3"));
+        WebElement text = driver.findElement(By.xpath("//h3[contains(text(), '25%')]"));
         Assert.assertEquals(text.getText(), "25% OFF On all products");
     }
 

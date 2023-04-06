@@ -40,6 +40,15 @@ public class EvanMaiTest {
     }
 
     @Test
+    public void Test_TC_002_01() {
+        List<WebElement> listFeaturedProductsText = driver.findElements(By.className("astra-shop-summary-wrap"));
+        for (WebElement webElement : listFeaturedProductsText) {
+            String[] arrProductText = webElement.getText().split("\n");
+            Assert.assertEquals(arrProductText[2].charAt(0), '$');
+        }
+    }
+
+    @Test
     public void Test_TC_006_01() {
         List<WebElement> list = driver.findElements(By.className("astra-shop-thumbnail-wrap"));
         Assert.assertEquals(list.size(), 5);

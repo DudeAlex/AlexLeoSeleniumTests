@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ViktoriiaKarpus {
+public class ViktoriiaKarpusTest {
 
     @Test
     public void testAccountLogin_TC_004_01_06() throws InterruptedException {

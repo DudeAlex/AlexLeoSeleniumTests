@@ -47,6 +47,7 @@ public class EvanMaiTest {
             Assert.assertEquals(arrProductText[2].charAt(0), '$');
         }
     }
+
     @Test
     public void test_TC_003_01() {
         WebElement text = driver.findElement(By.xpath("//h3[contains(text(), '25%')]"));
@@ -57,5 +58,12 @@ public class EvanMaiTest {
     public void test_TC_006_01() {
         List<WebElement> list = driver.findElements(By.className("astra-shop-thumbnail-wrap"));
         Assert.assertEquals(list.size(), 5);
+    }
+
+    @Test
+    public void test_TC_007_01() {
+        driver.findElement(By.cssSelector("a[href='https://askomdch.com/product-category/men/']")).click();
+        WebElement buttonSearch = driver.findElement(By.cssSelector("button[value='Search']"));
+        Assert.assertEquals(buttonSearch.getCssValue("background-color"), "rgba(49, 151, 214, 1)");
     }
 }

@@ -38,4 +38,27 @@ public class PetroMatsiuraTest {
         }
         driver.quit();
     }
+
+    @Test
+    public void discountTest_TC_003_23() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com");
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.findElement(By.cssSelector("h3[class*='medium-font-size']")).
+                getText(), "25% OFF On all products");
+        driver.quit();
+    }
+
+    @Test
+    public void accountTest_TC_004_23() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com");
+        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("li#menu-item-1237")).click();
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/account/");
+        driver.quit();
+    }
 }

@@ -53,10 +53,18 @@ public class EvanMaiTest {
         WebElement text = driver.findElement(By.xpath("//h3[contains(text(), '25%')]"));
         Assert.assertEquals(text.getText(), "25% OFF On all products");
     }
+
     @Test
     public void test_TC_004_01() {
         driver.findElement(By.linkText("Account")).click();
         Assert.assertEquals(driver.findElement(By.className("has-text-align-center")).getText(), "Account");
+    }
+
+    @Test
+    public void test_TC_005_01() {
+        driver.findElement(By.cssSelector("a[href='/store']")).click();
+        WebElement store = driver.findElement(By.xpath("//header[contains(@class, 'woocommerce-products-header')]//following::h1"));
+        Assert.assertEquals(store.getText(), "Store");
     }
 
     @Test

@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,7 +13,12 @@ public class StasTest {
 
     public void verifySale_TC_001_04() {
 
-        WebDriver driver = new ChromeDriver();
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+
+
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://askomdch.com");
         driver.manage().window().maximize();
         WebElement saleSign = driver.findElement(By.className("onsale"));
@@ -21,16 +27,8 @@ public class StasTest {
         driver.quit();
     }
 
-//    @Test
-//
-//    public void discount25_Off_TC_() {
-//
-//        WebDriver driver = new ChromeDriver();
-//        driver.get("https://askomdch.com");
-//        driver.manage().window().maximize();
-//        WebElement sign_25_off = driver.findElement();
-//
-//    }
+
+
     }
 
 

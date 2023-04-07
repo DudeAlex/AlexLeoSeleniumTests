@@ -11,7 +11,7 @@ import java.time.Duration;
 
 public class IrynaHTest {
 
-    private WebDriver driver;]
+    private WebDriver driver;
     private final By SALE25_TEXTh3 = By.xpath("//h3[contains(text(), '25%')]");
 
     @BeforeMethod

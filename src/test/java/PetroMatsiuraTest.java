@@ -49,4 +49,16 @@ public class PetroMatsiuraTest {
                 getText(), "25% OFF On all products");
         driver.quit();
     }
+
+    @Test
+    public void accountTest_TC_004_23() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com");
+        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("li#menu-item-1237")).click();
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/account/");
+        driver.quit();
+    }
 }

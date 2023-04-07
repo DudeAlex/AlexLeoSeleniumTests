@@ -6,8 +6,9 @@ import org.testng.annotations.Test;
 
 public class VViktoriaTest {
     @Test
-    public static void buttonOpened(){
+    public void buttonOpened_TC_009(){
         WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
         String url = "https://askomdch.com/store";
 

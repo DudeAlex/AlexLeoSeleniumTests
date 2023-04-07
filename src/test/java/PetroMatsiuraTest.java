@@ -73,4 +73,15 @@ public class PetroMatsiuraTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/store");
         driver.quit();
     }
+
+    @Test
+    public void productsNumberTest_TC_006_23() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.findElement(By.cssSelector("ul.products.columns-5")).
+                findElements(By.tagName("li")).size(), 5);
+        driver.quit();
+    }
 }

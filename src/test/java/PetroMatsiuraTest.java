@@ -61,4 +61,16 @@ public class PetroMatsiuraTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/account/");
         driver.quit();
     }
+
+    @Test
+    public void shopTest_TC_005_23() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com");
+        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("a.wp-block-button__link")).click();
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/store");
+        driver.quit();
+    }
 }

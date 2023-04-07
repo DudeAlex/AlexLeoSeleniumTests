@@ -84,4 +84,16 @@ public class PetroMatsiuraTest {
                 findElements(By.tagName("li")).size(), 5);
         driver.quit();
     }
+
+    @Test
+    public void colourTest_TC_007_23() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("a[href*='men']")).click();
+        Assert.assertEquals(driver.findElement(By.cssSelector("button[value='Search']")).
+                getCssValue("background-color"), "rgba(49, 151, 214, 1)");
+        driver.quit();
+    }
 }

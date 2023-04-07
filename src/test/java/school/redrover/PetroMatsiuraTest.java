@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class PetroMatsiuraTest {
+
     @Test
     public void storeTest() throws InterruptedException {
         ChromeOptions chromeOptions = new ChromeOptions();

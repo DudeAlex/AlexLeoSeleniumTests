@@ -72,4 +72,10 @@ public class PetroMatsiuraTest {
         Assert.assertEquals(driver.findElement(By.cssSelector("button[value='Search']")).
                 getCssValue("background-color"), "rgba(49, 151, 214, 1)");
     }
+
+    @Test
+    public void findMoreButtonTest_TC_008_23() {
+        driver.findElement(By.cssSelector("div.wp-block-button.is-style-fill")).click();
+        Assert.assertEquals(driver.getTitle(), "Contact Us – AskOmDch");
+    }
 }

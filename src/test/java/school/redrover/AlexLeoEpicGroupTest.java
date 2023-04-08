@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -27,6 +29,21 @@ public class AlexLeoEpicGroupTest {
         Assert.assertEquals(icon.getText(), "Sale!");
         driver.quit();
     }
+
+
+    @Test
+    public void verifySaleSTas_TC_001_04() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get("https://askomdch.com");
+        driver.manage().window().maximize();
+        WebElement saleSign = driver.findElement(By.className("onsale"));
+        Assert.assertEquals(saleSign.getText(), "Sale!");
+
+        driver.quit();
+}
     @Test
     public void buttonOpened(){
         ChromeOptions chromeOptions = new ChromeOptions();

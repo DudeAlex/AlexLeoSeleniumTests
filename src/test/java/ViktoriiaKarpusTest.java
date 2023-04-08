@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ViktoriiaKarpus {
+public class ViktoriiaKarpusTest {
 
     @Test
     public void testAccountLogin_TC_004_01_06() throws InterruptedException {
@@ -29,6 +29,18 @@ public class ViktoriiaKarpus {
         Thread.sleep(3000);
         String icon = driver.findElement(By.xpath("//span[@class ='onsale']")).getText();
         Assert.assertEquals(icon, "Sale!");
+        Thread.sleep(3000);
+        driver.quit();
+    }
+
+    @Test
+    public void testDiscountMessage_TC_003() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(3000);
+        WebElement text = driver.findElement(By.xpath("//h3[text()='25% OFF On all products']"));
+        Assert.assertEquals(text.getText(), "25% OFF On all products");
         Thread.sleep(3000);
         driver.quit();
     }

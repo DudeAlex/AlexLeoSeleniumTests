@@ -9,7 +9,11 @@ import java.util.List;
 
 public class GannaTest {
     @Test
+
     public void testVerifyProdDisplayedTC_006() throws InterruptedException {
+
+    
+
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
@@ -26,7 +30,11 @@ public class GannaTest {
 
 
     @Test
+
      public void testStorePageIsOpenedTC_005() throws InterruptedException {
+
+     
+
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
@@ -36,7 +44,11 @@ public class GannaTest {
         driver.get(expectedUrl);
         try {
             Assert.assertEquals(expectedUrl, driver.getCurrentUrl());
+
             System.out.println("Navigated to the correct store page");
+
+            System.out.println("Navigated to correct page");
+
         }
         catch (Throwable pageNavigationError) {
             System.out.println("Did not navigate to correct page");
@@ -44,6 +56,7 @@ public class GannaTest {
         Thread.sleep(2000);
         driver.quit();
     }
+
 
     @Test
 
@@ -96,4 +109,5 @@ public class GannaTest {
         }
         driver.quit();
     }
+
 }

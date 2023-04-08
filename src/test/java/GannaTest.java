@@ -82,7 +82,7 @@ public class GannaTest {
 
     @Test
 
-    public void testValidate_$_SignIsPresent () throws InterruptedException {
+    public void testVerifySaleSignIsPresentTC_002() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");

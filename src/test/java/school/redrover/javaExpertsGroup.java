@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class JavaExpertsGroup {
+public class javaExpertsGroup {
     @Test
     public void testFirst() throws InterruptedException {
 

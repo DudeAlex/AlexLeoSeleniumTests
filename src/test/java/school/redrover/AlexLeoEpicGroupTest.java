@@ -57,7 +57,7 @@ public class AlexLeoEpicGroupTest {
         Assert.assertEquals(url, "https://askomdch.com/store");
         driver.quit();
     }
-    @Ignore
+
     @Test
     public void colourTest_TC_007_23() {
         ChromeOptions chromeOptions = new ChromeOptions();

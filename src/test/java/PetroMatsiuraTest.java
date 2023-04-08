@@ -28,11 +28,9 @@ public class PetroMatsiuraTest {
 
     @Test
     public void saleTest_TC_001_23() {
-        driver.findElement(By.cssSelector("a[href='https://askomdch.com/product/basic-blue-jeans/']")).click();
-        Assert.assertEquals(driver.findElement(By.cssSelector("span.onsale")).getText(), "Sale!");
-        driver.navigate().back();
-        driver.findElement(By.cssSelector("a[href='https://askomdch.com/product/anchor-bracelet/']")).click();
-        Assert.assertEquals(driver.findElement(By.cssSelector("span.onsale")).getText(), "Sale!");
+        for(WebElement element : driver.findElements(By.cssSelector("span[class='onsale']"))){
+            Assert.assertEquals(element.getText(), "Sale!");
+        }
     }
 
     @Test

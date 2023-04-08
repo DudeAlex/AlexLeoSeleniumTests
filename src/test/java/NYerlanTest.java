@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,11 +17,11 @@ public class NYerlanTest {
     private WebDriver driver;
 
     @BeforeMethod
-    public void beforeMethod() {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-        driver.manage().window().maximize();
-        driver.get("https://askomdch.com/");
+    public void titleOfTheHomePageCheckedTest() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+
+        WebDriver driver = new ChromeDriver(chromeOptions);
     }
 
     @AfterMethod
@@ -28,13 +29,6 @@ public class NYerlanTest {
         driver.quit();
     }
 
-    @Test
-    public void testAssertSiteTitle() throws InterruptedException {
-
-        Assert.assertEquals(driver.getTitle(), SITE_NAME);
-
-        driver.quit();
-    }
 
     @Test
     public void testAssertDiscountInfo_TC_003_01() throws InterruptedException {

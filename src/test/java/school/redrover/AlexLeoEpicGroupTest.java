@@ -27,4 +27,21 @@ public class AlexLeoEpicGroupTest {
         Assert.assertEquals(icon.getText(), "Sale!");
         driver.quit();
     }
+
+    @Test
+    public void testAssertDiscountInfo() {
+
+        final String DISCOUNT_INFO = "25% OFF On all products";
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get("https://askomdch.com/");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebElement textDiscount = driver.findElement(By.xpath("//h3[text()='25% OFF On all products']"));
+
+        Assert.assertEquals(textDiscount.getText(), DISCOUNT_INFO);
+
+        driver.quit();
+    }
 }

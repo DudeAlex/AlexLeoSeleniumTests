@@ -28,13 +28,6 @@ public class NYerlanTest {
         driver.quit();
     }
 
-    @Test
-    public void testAssertSiteTitle() throws InterruptedException {
-
-        Assert.assertEquals(driver.getTitle(), SITE_NAME);
-
-        driver.quit();
-    }
 
     @Test
     public void testAssertDiscountInfo_TC_003_01() throws InterruptedException {

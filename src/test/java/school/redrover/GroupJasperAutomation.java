@@ -15,17 +15,17 @@ import org.testng.annotations.Test;
 
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://football.ua/");
-        Thread.sleep(300);
+        Thread.sleep(3000);
 
         WebElement textBox = driver.findElement(By.id("searchInput"));
-        Thread.sleep(200);
+        Thread.sleep(2000);
         textBox.sendKeys("Реал Мадрид");
-        Thread.sleep(200);
+        Thread.sleep(2000);
 
 
         textBox.sendKeys(Keys.RETURN);
 
-        Thread.sleep(200);
+        Thread.sleep(2000);
 
 
 

@@ -17,10 +17,12 @@ public class SchoolWebTest {
 
         driver.get("https://redrover.school");
 
-        for (int i = 0; i < links.length; i++) {
-            driver.findElement(new By.ByLinkText(links[i])).click();
+        for (String link : links) {
+            driver.findElement(new By.ByLinkText(link)).click();
             String copyright = driver.findElement(By.xpath("//*[contains(text(), 'Copyright ©')]")).getText();
             Assert.assertEquals(copyright, "Copyright © 2022 RedRover School. All rights reserved");
         }
+
+        driver.quit();
     }
 }

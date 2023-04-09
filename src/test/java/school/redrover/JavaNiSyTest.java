@@ -69,5 +69,27 @@ public class JavaNiSyTest {
 
         browser.quit();
     }
+    @Test
+    public void testGoogleTransl() throws InterruptedException {
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
+        driver.get("https://www.google.com/");
+
+        WebElement textBox = driver.findElement(By.name("q"));
+        textBox.sendKeys("гугл переводчик");
+        textBox.sendKeys(Keys.RETURN);
+
+        Thread.sleep(2000);
+
+        WebElement text =  driver.findElement(By.xpath("//h3[@class='LC20lb MBeuO DKV0Md']"));
+
+        Assert.assertEquals(text.getText(),"Google Переводчик");
+
+        driver.quit();
+    }
+
 }
 

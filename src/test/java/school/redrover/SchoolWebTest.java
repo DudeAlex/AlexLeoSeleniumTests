@@ -1,11 +1,26 @@
 package school.redrover;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class SchoolWebTest {
     String[] links = {"Courses", "Training", "About school", "Teachers"};
     @Test
     public void testCopyright() {
-        WebUtils.copyright(links);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
+        driver.get("https://redrover.school");
+
+        for (int i = 0; i < links.length; i++) {
+            driver.findElement(new By.ByLinkText(links[i])).click();
+            String copyright = driver.findElement(By.xpath("//*[contains(text(), 'Copyright ©')]")).getText();
+            Assert.assertEquals(copyright, "Copyright © 2022 RedRover School. All rights reserved");
+        }
     }
 }

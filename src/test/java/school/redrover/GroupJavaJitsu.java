@@ -33,7 +33,7 @@ public class GroupJavaJitsu {
     }
 
     @Test
-    public void testAriumFindACommunity() throws InterruptedException {
+    public void testAriumFindACommunity() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
 

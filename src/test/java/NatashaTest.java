@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 public class NatashaTest {
     private WebDriver driver;
     private final String SITE_NAME = "AskOmDch – Become a Selenium automation expert!";
@@ -76,5 +78,11 @@ public class NatashaTest {
         Thread.sleep(3000);
         List<WebElement> products = driver.findElements(By.xpath("//a[@class='ast-loop-product__link']"));
         Assert.assertEquals(products.size(), 5);
+    }
+    @Test
+    public void VerifyTheBackgroundColorOfTheSearchButton_007() {
+        driver.findElement(By.xpath("//li[@id='menu-item-1228']")).click();
+        WebElement searchButton = driver.findElement(By.xpath("//button[@value='Search']"));
+        assertEquals(searchButton.getCssValue("background-color"), "rgba(49, 151, 214, 1)");
     }
 }

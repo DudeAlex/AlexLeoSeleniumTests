@@ -13,7 +13,7 @@ import java.util.List;
 public class GroupJavaJitsu {
 
     @Test
-    public void testCarServiceOptions() {
+    public void testCarServiceOptions(){
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");

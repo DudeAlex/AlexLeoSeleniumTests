@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class InnaKushchakTest {
     @Test
-    public void VerifySaleIcon_TC_001_06() throws InterruptedException {
+    public void VerifySaleIcon_TC_001() throws InterruptedException {
         WebDriver driver=new ChromeDriver();
         driver.get("https://askomdch.com");
         Assert.assertEquals(driver.getTitle(),"AskOmDch – Become a Selenium automation expert!");
@@ -21,10 +21,13 @@ public class InnaKushchakTest {
 
     }
     @Test
-    public void OFFOnAllProducts_TC_003_06(){
+    public void OFFOnAllProducts_TC_003() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.get("https://askomdch.com");
         Assert.assertEquals(driver.getTitle(),"AskOmDch – Become a Selenium automation expert!");
-
+        String message= driver.findElement(By.xpath("//h3[text()='25% OFF On all products']")).getText();
+        Assert.assertEquals(message, "25% OFF On all products");
+        Thread.sleep(1000);
+        driver.quit();
     }
 }

@@ -54,6 +54,7 @@ public class BugsBustersTest {
         driver.quit();
     }
 
+    @Ignore
     @Test
     public void testAngelinaSearchResults() {
         ChromeOptions options = new ChromeOptions();

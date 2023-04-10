@@ -15,14 +15,18 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 // Executes JS code. In this case, window.alert() for the pop-up message
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
 public class KirillKTest {
 
     @Test
     public void redRoverLangTest() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("--remote-allow-origins=*");
-            chromeOptions.addArguments("--start-maximized");
+            chromeOptions.addArguments("--remote-allow-origins=*", "--start-maximized");
         WebDriver driver = new ChromeDriver(chromeOptions);
         Actions actions = new Actions(driver);
 
@@ -32,9 +36,13 @@ public class KirillKTest {
 
         WebElement langDropdownBase = driver.findElement(By.cssSelector("a[data-tooltip-menu-id= '546712221']"));
         actions.moveToElement(langDropdownBase).perform(); // hovers over element
-        Thread.sleep(500);
 
-        WebElement langOptionRu = driver.findElement(By.cssSelector("a[href= '/ru']"));
+        // explicit wait
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[class= 't794__typo t794__link t-name t-name_xs']")));
+
+        WebElement langOptionRu = driver.findElement(By.cssSelector("a[class= 't794__typo t794__link t-name t-name_xs']"));
+        actions.moveToElement(langOptionRu); // hovers over element
         actions.click(langOptionRu).perform();
         Thread.sleep(500);
 

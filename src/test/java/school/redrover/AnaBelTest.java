@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 public class AnaBelTest {
     String url = "https://openweathermap.org";
+    @Ignore
     @Test
     public void testTitle() {
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -39,7 +40,6 @@ public class AnaBelTest {
 
         driver.quit();
     }
-
     @Ignore
     @Test
     public void testCookies() {

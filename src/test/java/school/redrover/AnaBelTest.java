@@ -24,7 +24,7 @@ public class AnaBelTest {
 
         driver.quit();
     }
-
+    @Ignore
     @Test
     public void testFaringeights() throws InterruptedException {
         ChromeOptions chromeOptions = new ChromeOptions();

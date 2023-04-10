@@ -136,7 +136,7 @@ public class GroupOlesyaTests {
             //removing backpack from the cart:
          WebElement cartremovebutton = driver.findElement(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]"));
          cartremovebutton.click();
-        Assert.assertTrue(driver.findElements(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]")).isEmpty());
+         Assert.assertTrue(driver.findElements(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]")).isEmpty());
 
          driver.quit();
     }
@@ -390,10 +390,36 @@ public class GroupOlesyaTests {
         fillOutOrderForm("name", "surname", "414525");
         driverCha.findElement(By.id("finish")).click();
 
-        String finishMessage = driverCha.findElement(By.className("complete-header"))
-                .getText();
+        String finishMessage = driverCha.findElement(By.className("complete-header")).getText();
         String expectedFinishMessage = "Thank you for your order!";
 
         Assert.assertEquals(finishMessage, expectedFinishMessage);
+    }
+
+    @Test
+    public void sortByNameAZTest(){
+        loginToSite(LOGIN, PASSWORD);
+
+        sortElements("Price (low to high)");
+        List<String> firstOrderItems = productNames();
+        Collections.sort(firstOrderItems);
+
+        sortElements("Name (A to Z)");
+        List<String> sortOrderItems = productNames();
+
+        Assert.assertEquals(firstOrderItems, sortOrderItems);
+    }
+
+    @Test
+    public void sortByNameZATest(){
+        loginToSite(LOGIN, PASSWORD);
+
+        List<String> firstOrderItems = productNames();
+        firstOrderItems.sort(Collections.reverseOrder());
+
+        sortElements("Name (Z to A)");
+        List<String> sortOrderItems = productNames();
+
+        Assert.assertEquals(firstOrderItems, sortOrderItems);
     }
 }

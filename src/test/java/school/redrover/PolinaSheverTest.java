@@ -27,8 +27,7 @@ public class PolinaSheverTest {
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://www.usps.com/");
 
-//        driver.findElement(By.xpath("//a[@id='mail-ship-width']")).click();
-//        mouse over the element instead of clicking 2 different elements
+
         WebElement mailAndSnip = driver.findElement(By.xpath("//a[@id='mail-ship-width']"));
         new Actions(driver).moveToElement(mailAndSnip).perform();
 
@@ -50,7 +49,7 @@ public class PolinaSheverTest {
         driver.findElement(By.xpath("//input[@id='tCity']")).sendKeys(city);
         driver.findElement(By.xpath("//a[@id='zip-by-address']")).click();
 
-        WebElement resultElement = driver.findElement(By.xpath("//div[@id='zipByAddressDiv']"));
+        driver.findElement(By.xpath("//div[@id='zipByAddressDiv']"));
         Thread.sleep(3000);
 
         List<WebElement> list = driver.findElements(By.xpath("//*[@class='zipcode-result-address']"));

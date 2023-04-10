@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,13 +30,13 @@ public class InnaKushchakTest {
         WebElement icon = driver.findElement(By.xpath("//span[@class='onsale']"));
         Assert.assertEquals(icon.getText(), "Sale!");
 
-
-
     }
     @Test
+
     public void OFFOnAllProducts_TC_003()  {
         String message= driver.findElement(By.xpath("//h3[text()='25% OFF On all products']")).getText();
         Assert.assertEquals(message, "25% OFF On all products");
 
+   
     }
 }

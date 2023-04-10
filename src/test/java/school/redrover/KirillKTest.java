@@ -29,6 +29,7 @@ public class KirillKTest {
             chromeOptions.addArguments(
                     "--remote-allow-origins=*",
                     "--window-size=1300,700",
+                    "--headless",
                     "--start-maximized"
             );
         WebDriver driver = new ChromeDriver(chromeOptions);

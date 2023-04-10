@@ -21,6 +21,7 @@ public class KirillKTest {
     public void redRoverLangTest() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("--remote-allow-origins=*");
             chromeOptions.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(chromeOptions);
         Actions actions = new Actions(driver);

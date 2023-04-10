@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class GroupOlesyaTests {
     private final String URL = "https://www.saucedemo.com/";
@@ -66,11 +67,41 @@ public class GroupOlesyaTests {
         return driverCha.findElement(By.xpath("//span[@class = 'active_option']")).getText();
     }
 
+    public List<String> productNames(){
+        List<WebElement> el = driverCha.findElements(By.xpath("//div[@class = 'inventory_item_name']"));
+        return el.stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    public void sortElements(String visibleText){
+        Select dropdownMenu = new Select(driverCha.findElement(By.className("product_sort_container")));
+        dropdownMenu.selectByVisibleText(visibleText);
+    }
+
+    public void choiceItem(String item){
+        driverCha
+                .findElement(By.id(String.format("%s", item))).click();
+    }
+
+    public void shoppingCart(){
+        driverCha.findElement(By.className("shopping_cart_link")).click();
+    }
+
+    public void clickCheckout(){
+        driverCha.findElement(By.id("checkout")).click();
+    }
+
+    public void fillOutOrderForm(String name, String surname, String postcode){
+        driverCha.findElement(By.id("first-name")).sendKeys(name);
+        driverCha.findElement(By.id("last-name")).sendKeys(surname);
+        driverCha.findElement(By.id("postal-code")).sendKeys(postcode);
+        driverCha.findElement(By.id("continue")).click();
+    }
+
     @Test
     public void standardUserLoginTest() {
         standardUserLogin();
 
-        Assert.assertEquals(driverCha.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        Assert.assertEquals(driverCha.getCurrentUrl(), NEW_PAGE);
         driverCha.quit();
     }
 
@@ -105,7 +136,7 @@ public class GroupOlesyaTests {
             //removing backpack from the cart:
          WebElement cartremovebutton = driver.findElement(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]"));
          cartremovebutton.click();
-         Assert.assertEquals(driver.findElements(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]")).isEmpty(), true);
+        Assert.assertTrue(driver.findElements(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]")).isEmpty());
 
          driver.quit();
     }
@@ -195,12 +226,6 @@ public class GroupOlesyaTests {
         Assert.assertEquals(beforeFilterPriceList, afterFilterPriceList);
 
         driver.quit();
-    }
-
-    @Test
-    public void testLoginByKololesya() {
-        loginToSite(LOGIN, PASSWORD);
-        Assert.assertEquals(driverCha.getCurrentUrl(), NEW_PAGE);
     }
 
     @Test
@@ -352,5 +377,23 @@ public class GroupOlesyaTests {
         Assert.assertEquals(shoppingCardLinkButton.getText(), "1");
         Assert.assertEquals(driverCha.findElement(By.id("remove-sauce-labs-backpack")).getText(), "Remove");
         driverCha.quit();
+    }
+
+    @Test
+    public void finishOrderTest(){
+        loginToSite(LOGIN, PASSWORD);
+        choiceItem("add-to-cart-sauce-labs-bolt-t-shirt");
+        shoppingCart();
+
+        clickCheckout();
+
+        fillOutOrderForm("name", "surname", "414525");
+        driverCha.findElement(By.id("finish")).click();
+
+        String finishMessage = driverCha.findElement(By.className("complete-header"))
+                .getText();
+        String expectedFinishMessage = "Thank you for your order!";
+
+        Assert.assertEquals(finishMessage, expectedFinishMessage);
     }
 }

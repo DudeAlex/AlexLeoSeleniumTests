@@ -67,6 +67,14 @@ public class GroupOlesyaTests {
     }
 
     @Test
+    public void standardUserLoginTest() {
+        standardUserLogin();
+
+        Assert.assertEquals(driverCha.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        driverCha.quit();
+    }
+
+    @Test
     public void nsergeevaTest (){
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
@@ -190,56 +198,46 @@ public class GroupOlesyaTests {
     }
 
     @Test
+    public void testLoginByKololesya() {
+        loginToSite(LOGIN, PASSWORD);
+        Assert.assertEquals(driverCha.getCurrentUrl(), NEW_PAGE);
+    }
+
+    @Test
     public void test9ContinueShopping() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        loginToSite(LOGIN, PASSWORD);
 
-        WebDriver driver = new ChromeDriver();
-        loginToSite(driver);
-
-        WebElement addToCart = driver.findElement(By.id("add-to-cart-sauce-labs-backpack"));
+        WebElement addToCart = driverCha.findElement(By.id("add-to-cart-sauce-labs-backpack"));
         addToCart.click();
 
-        WebElement shoppingCartLink = driver.findElement(By.className("shopping_cart_link"));
+        WebElement shoppingCartLink = driverCha.findElement(By.className("shopping_cart_link"));
         shoppingCartLink.click();
 
-        WebElement continueShopping = driver.findElement(By.id("continue-shopping"));
+        WebElement continueShopping = driverCha.findElement(By.id("continue-shopping"));
         continueShopping.click();
 
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        Assert.assertEquals(driverCha.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
 
-        driver.quit();
+        driverCha.quit();
     }
 
     @Test
     public void test10GoToAllItems() throws InterruptedException {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        loginToSite(LOGIN, PASSWORD);
 
-        WebDriver driver = new ChromeDriver();
-        loginToSite(driver);
-
-        WebElement shopButton = driver.findElement(By.className("shopping_cart_link"));
+        WebElement shopButton = driverCha.findElement(By.className("shopping_cart_link"));
         shopButton.click();
 
-        WebElement burgerMenuLink = driver.findElement(By.id("react-burger-menu-btn"));
+        WebElement burgerMenuLink = driverCha.findElement(By.id("react-burger-menu-btn"));
         burgerMenuLink.click();
 
         Thread.sleep(3000);
 
-        WebElement allItemsLink = driver.findElement(By.id("inventory_sidebar_link"));
+        WebElement allItemsLink = driverCha.findElement(By.id("inventory_sidebar_link"));
         allItemsLink.click();
 
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
-
-        driver.quit();
-    }
-
-    @Test
-    public void standardUserLoginTest() {
-        standardUserLogin();
-
         Assert.assertEquals(driverCha.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+
         driverCha.quit();
     }
 

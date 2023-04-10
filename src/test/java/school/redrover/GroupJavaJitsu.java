@@ -118,6 +118,7 @@ public class GroupJavaJitsu {
     }
 
 
+
     @Test
     public void testAboutDoctorsFind() {
         ChromeOptions chromeOptions = new ChromeOptions();

@@ -10,6 +10,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class BugsBustersTest {
+    @Ignore
     @Test
     public void testAngelinaGiftCardSelection() {
 

@@ -12,23 +12,36 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class GroupOlesyaTests {
     private final String URL = "https://www.saucedemo.com/";
+    private final String LOGIN = "standard_user";
+    private final String NEW_PAGE = "https://www.saucedemo.com/inventory.html";
     private final String PASSWORD = "secret_sauce";
-    private WebDriver driverCha;
+    private static WebDriver driverCha;
 
-    private void loginToSite(WebDriver driver) {
+    static WebDriver createDriver() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
 
-        driver.get("https://www.saucedemo.com/");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        WebElement login = driver.findElement(By.name("user-name"));
-        WebElement password = driver.findElement(By.name("password"));
-        WebElement button = driver.findElement(By.name("login-button"));
+        return driver;
+    }
 
-        login.sendKeys("standard_user");
-        password.sendKeys("secret_sauce");
-        button.click();
+    protected static WebDriver getDriver() {
+        driverCha = createDriver();
+        return driverCha;
+    }
+
+    private void loginToSite(String login, String password) {
+        getDriver().get("https://www.saucedemo.com/");
+        driverCha.findElement(By.name("user-name")).sendKeys(login);
+        driverCha.findElement(By.name("password")).sendKeys(password);
+        driverCha.findElement(By.name("login-button")).click();
     }
 
     public void standardUserLogin() {
@@ -52,6 +65,44 @@ public class GroupOlesyaTests {
     public String getSortingStatus() {
 
         return driverCha.findElement(By.xpath("//span[@class = 'active_option']")).getText();
+    }
+
+    public List<String> productNames(){
+        List<WebElement> el = driverCha.findElements(By.xpath("//div[@class = 'inventory_item_name']"));
+        return el.stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    public void sortElements(String visibleText){
+        Select dropdownMenu = new Select(driverCha.findElement(By.className("product_sort_container")));
+        dropdownMenu.selectByVisibleText(visibleText);
+    }
+
+    public void choiceItem(String item){
+        driverCha
+                .findElement(By.id(String.format("%s", item))).click();
+    }
+
+    public void shoppingCart(){
+        driverCha.findElement(By.className("shopping_cart_link")).click();
+    }
+
+    public void clickCheckout(){
+        driverCha.findElement(By.id("checkout")).click();
+    }
+
+    public void fillOutOrderForm(String name, String surname, String postcode){
+        driverCha.findElement(By.id("first-name")).sendKeys(name);
+        driverCha.findElement(By.id("last-name")).sendKeys(surname);
+        driverCha.findElement(By.id("postal-code")).sendKeys(postcode);
+        driverCha.findElement(By.id("continue")).click();
+    }
+
+    @Test
+    public void standardUserLoginTest() {
+        standardUserLogin();
+
+        Assert.assertEquals(driverCha.getCurrentUrl(), NEW_PAGE);
+        driverCha.quit();
     }
 
     @Test
@@ -85,7 +136,7 @@ public class GroupOlesyaTests {
             //removing backpack from the cart:
          WebElement cartremovebutton = driver.findElement(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]"));
          cartremovebutton.click();
-         Assert.assertEquals(driver.findElements(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]")).isEmpty(), true);
+         Assert.assertTrue(driver.findElements(By.xpath("//*[@id=\"remove-sauce-labs-backpack\"]")).isEmpty());
 
          driver.quit();
     }
@@ -179,55 +230,39 @@ public class GroupOlesyaTests {
 
     @Test
     public void test9ContinueShopping() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        loginToSite(LOGIN, PASSWORD);
 
-        WebDriver driver = new ChromeDriver();
-        loginToSite(driver);
-
-        WebElement addToCart = driver.findElement(By.id("add-to-cart-sauce-labs-backpack"));
+        WebElement addToCart = driverCha.findElement(By.id("add-to-cart-sauce-labs-backpack"));
         addToCart.click();
 
-        WebElement shoppingCartLink = driver.findElement(By.className("shopping_cart_link"));
+        WebElement shoppingCartLink = driverCha.findElement(By.className("shopping_cart_link"));
         shoppingCartLink.click();
 
-        WebElement continueShopping = driver.findElement(By.id("continue-shopping"));
+        WebElement continueShopping = driverCha.findElement(By.id("continue-shopping"));
         continueShopping.click();
 
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        Assert.assertEquals(driverCha.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
 
-        driver.quit();
+        driverCha.quit();
     }
 
     @Test
     public void test10GoToAllItems() throws InterruptedException {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        loginToSite(LOGIN, PASSWORD);
 
-        WebDriver driver = new ChromeDriver();
-        loginToSite(driver);
-
-        WebElement shopButton = driver.findElement(By.className("shopping_cart_link"));
+        WebElement shopButton = driverCha.findElement(By.className("shopping_cart_link"));
         shopButton.click();
 
-        WebElement burgerMenuLink = driver.findElement(By.id("react-burger-menu-btn"));
+        WebElement burgerMenuLink = driverCha.findElement(By.id("react-burger-menu-btn"));
         burgerMenuLink.click();
 
         Thread.sleep(3000);
 
-        WebElement allItemsLink = driver.findElement(By.id("inventory_sidebar_link"));
+        WebElement allItemsLink = driverCha.findElement(By.id("inventory_sidebar_link"));
         allItemsLink.click();
 
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
-
-        driver.quit();
-    }
-
-    @Test
-    public void standardUserLoginTest() {
-        standardUserLogin();
-
         Assert.assertEquals(driverCha.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+
         driverCha.quit();
     }
 
@@ -342,5 +377,49 @@ public class GroupOlesyaTests {
         Assert.assertEquals(shoppingCardLinkButton.getText(), "1");
         Assert.assertEquals(driverCha.findElement(By.id("remove-sauce-labs-backpack")).getText(), "Remove");
         driverCha.quit();
+    }
+
+    @Test
+    public void finishOrderTest(){
+        loginToSite(LOGIN, PASSWORD);
+        choiceItem("add-to-cart-sauce-labs-bolt-t-shirt");
+        shoppingCart();
+
+        clickCheckout();
+
+        fillOutOrderForm("name", "surname", "414525");
+        driverCha.findElement(By.id("finish")).click();
+
+        String finishMessage = driverCha.findElement(By.className("complete-header")).getText();
+        String expectedFinishMessage = "Thank you for your order!";
+
+        Assert.assertEquals(finishMessage, expectedFinishMessage);
+    }
+
+    @Test
+    public void sortByNameAZTest(){
+        loginToSite(LOGIN, PASSWORD);
+
+        sortElements("Price (low to high)");
+        List<String> firstOrderItems = productNames();
+        Collections.sort(firstOrderItems);
+
+        sortElements("Name (A to Z)");
+        List<String> sortOrderItems = productNames();
+
+        Assert.assertEquals(firstOrderItems, sortOrderItems);
+    }
+
+    @Test
+    public void sortByNameZATest(){
+        loginToSite(LOGIN, PASSWORD);
+
+        List<String> firstOrderItems = productNames();
+        firstOrderItems.sort(Collections.reverseOrder());
+
+        sortElements("Name (Z to A)");
+        List<String> sortOrderItems = productNames();
+
+        Assert.assertEquals(firstOrderItems, sortOrderItems);
     }
 }

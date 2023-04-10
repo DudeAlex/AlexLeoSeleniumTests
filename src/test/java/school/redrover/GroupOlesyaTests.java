@@ -12,8 +12,42 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class GroupOlesyaTests {
+    private static WebDriver driver;
+    private final String newPage = "https://www.saucedemo.com/inventory.html";
+    private final String login = "standard_user";
+    private final String password = "secret_sauce";
+
+    static WebDriver createDriver() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        return driver;
+    }
+
+    protected static WebDriver getDriver() {
+        driver = createDriver();
+        return driver;
+    }
+
+    private void loginToSite(String login, String password) {
+        getDriver().get("https://www.saucedemo.com/");
+        driver.findElement(By.name("user-name")).sendKeys(login);
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.name("login-button")).click();
+    }
+
+    @Test
+    public void testLoginByKololesya() {
+        loginToSite(login, password);
+        Assert.assertEquals(driver.getCurrentUrl(), newPage);
+    }
+
     @Test
     public void nsergeevaTest (){
         ChromeOptions chromeOptions = new ChromeOptions();

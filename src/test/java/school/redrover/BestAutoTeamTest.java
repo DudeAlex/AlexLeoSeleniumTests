@@ -64,8 +64,6 @@ public class BestAutoTeamTest {
         WebElement Button = driver.findElement(By.xpath("//div[@class='user-menu']/a[@href='/app/']"));
         Button.click();
 
-        Thread.sleep(1000);
-
         WebElement Header = driver.findElement(By.xpath("//h1[@class='login__heading']"));
 
         Assert.assertEquals(Header.getText(), "Login");

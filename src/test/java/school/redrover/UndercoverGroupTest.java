@@ -40,7 +40,6 @@ public class UndercoverGroupTest {
         searchbox.sendKeys("selenium\n");
 
         WebElement text = driver.findElement(By.xpath("//h3[text() = 'Selenium']"));
-
         Assert.assertEquals(text.getText(), "Selenium");
 
         driver.quit();

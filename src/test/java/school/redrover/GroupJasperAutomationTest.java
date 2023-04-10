@@ -35,12 +35,13 @@ import org.testng.annotations.Test;
         driver.quit();
     }
     @Test
-    public void testTitle(){
+    public void testTitle() throws InterruptedException {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless", "--window-size=1920,1080");
 
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://football.ua/");
+        Thread.sleep(3000);
 
         String title = driver.getTitle();
         Assert.assertEquals(title, "Football.ua - Новости футбола - Футбол онлайн - Результаты матчей, трансляции — football.ua");

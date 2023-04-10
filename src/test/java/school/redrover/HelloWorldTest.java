@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
+
 public class HelloWorldTest {
 
     @Test
@@ -98,6 +99,26 @@ public class HelloWorldTest {
         Assert.assertEquals(text.getText(),"XPath");
 
         driver.quit();
+    }
+
+    @Test
+    public void firstTest() throws InterruptedException {
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        //chromeOptions.addArguments("--remote-allow-origins=*", "--start-maximized");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get("https://askomdch.com/");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/");
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//a[@class=\"wp-block-button__link\"]")).click();
+        Thread.sleep(3000);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/store");
+
+        Thread.sleep(3000);
+        driver.quit();
+
+
     }
 
 

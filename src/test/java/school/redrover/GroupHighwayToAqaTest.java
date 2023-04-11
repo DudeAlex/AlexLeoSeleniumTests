@@ -218,7 +218,7 @@ public class GroupHighwayToAqaTest {
         ChromeOptions chromeOptions=new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
 
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://magento.softwaretestingboard.com");
         WebElement href = driver.findElement(By.xpath("//div/nav/ul/li [1]"));
         String value = href.getText();

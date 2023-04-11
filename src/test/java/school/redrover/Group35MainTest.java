@@ -29,4 +29,8 @@ public class Group35MainTest {
         Assert.assertEquals (value, "Ваш лунный день рождения. Рассчёт лунного календаря на любой день.");
         driver.quit();
     }
+    @Test
+    public void aLugovskayaTest2(){
+        Assert.assertEquals("Test", "Test");
+    }
 }

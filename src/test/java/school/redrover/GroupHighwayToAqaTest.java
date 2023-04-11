@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 public class GroupHighwayToAqaTest {
 
     private static final String BASE_URL = "https://magento.softwaretestingboard.com/";
@@ -210,7 +212,40 @@ public class GroupHighwayToAqaTest {
 
         driver.quit();
     }
-}
+        @Test
+        public void searchItem() throws InterruptedException {
+            ChromeOptions chromeOptions=new ChromeOptions();
+            chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+
+            WebDriver driver = new ChromeDriver();
+            driver.get("https://magento.softwaretestingboard.com");
+            WebElement href = driver.findElement(By.xpath("//div/nav/ul/li [1]"));
+            String value = href.getText();
+            assertEquals("What's New", value);
+            WebElement href2 = driver.findElement(By.xpath("//div/nav/ul/li [2]"));
+            String value1 = href2.getText();
+            assertEquals("Women", value1);
+            WebElement href3 = driver.findElement(By.xpath("//div/nav/ul/li [3]"));
+            String value2 = href3.getText();
+            assertEquals("Men", value2);
+            WebElement href4 = driver.findElement(By.xpath("//div/nav/ul/li [4]"));
+            String value3 = href4.getText();
+            assertEquals("Gear", value3);
+            WebElement href5 = driver.findElement(By.xpath("//div/nav/ul/li [5]"));
+            String value4 = href5.getText();
+            assertEquals("Training", value4);
+            WebElement href6 = driver.findElement(By.xpath("//div/nav/ul/li [6]"));
+            String value5 = href6.getText();
+            assertEquals("Sale", value5);
+            driver.findElement(By.xpath("//div/nav/ul/li [2]")).click();
+            String text= driver.getTitle();
+            assertEquals("Women",text);
+            driver.findElement(By.xpath("//html/body/div[1]/div[2]/ul/li[1]/a")).click();
+            String title= driver.getTitle();
+            assertEquals("Home Page",title);
+            driver.quit();
+        }
+    }
 
 
 

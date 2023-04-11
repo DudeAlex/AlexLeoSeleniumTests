@@ -10,8 +10,6 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-
 public class SergeyDTest {
 
     @Ignore

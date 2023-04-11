@@ -13,7 +13,6 @@ public class CordedWareTest {
 
     private static final String URL_BOTTLES = "https://www.99-bottles-of-beer.net/";
 
-    @Ignore
     @Test
     public void testTitlePageBottles99() {
         WebDriver driver = new ChromeDriver();
@@ -25,7 +24,6 @@ public class CordedWareTest {
         driver.quit();
     }
 
-    @Ignore
     @Test
     public void testH2StartPageBottles99() {
         WebDriver driver = new ChromeDriver();
@@ -37,7 +35,7 @@ public class CordedWareTest {
 
         driver.quit();
     }
-    @Ignore
+
     @Test
     public void testPageSearchLanguages() {
         WebDriver driver = new ChromeDriver();

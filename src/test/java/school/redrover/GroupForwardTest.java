@@ -1,6 +1,7 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -76,4 +77,28 @@ public class GroupForwardTest {
 
         driver.quit();
     }
+    
+    @Test
+    public void SauceDemoLoginSuccessTest() {
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*","--headless", "--window-size=1920,1080");
+
+        WebDriver driver = new ChromeDriver(options);
+        String link = "https://www.saucedemo.com/";
+        String endpoint_inventory = "inventory.html";
+        driver.get(link);
+
+        WebElement username = driver.findElement(By.cssSelector("#user-name"));
+        username.sendKeys("standard_user");
+        WebElement password = driver.findElement(By.cssSelector("#password"));
+        password.sendKeys("secret_sauce");
+        WebElement loginButton = driver.findElement(By.cssSelector("#login-button"));
+        loginButton.sendKeys(Keys.ENTER);
+        Assert.assertEquals(driver.getCurrentUrl(), link+endpoint_inventory);
+
+        driver.quit();
+      }
+
 }
+

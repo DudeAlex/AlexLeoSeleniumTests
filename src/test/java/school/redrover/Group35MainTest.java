@@ -12,7 +12,7 @@ public class Group35MainTest {
 
     @Test
     public void simpleTest_01() {
-        Assert.assertEquals(5, 5);
+        Assert.assertEquals(7, 7);
     }
     @Test
     public void aLugovskayaTest(){

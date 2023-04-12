@@ -70,7 +70,6 @@ public class GroupJavaExplorersTest {
     @Test
     public void TestS() {
     }
- @Ignore
     @Test
     public void testOracleSearch() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();

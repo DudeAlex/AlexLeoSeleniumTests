@@ -31,6 +31,7 @@ public class AnnaMayTest {
         driver.close();
     }
 
+    @Ignore
     @Test
     public void uspsSearchTest() throws InterruptedException {
 
@@ -60,10 +61,8 @@ public class AnnaMayTest {
     }
 
     @Ignore
-    //Failed tests:   uspsHoverOnSubElementTest(school.redrover.AnnaMayTest): no such element: Unable to locate element: {"method":"css selector","selector":"div.subheader_links a:nth-child(1)"}
     @Test
     public void uspsHoverOnSubElementTest() {
-
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");

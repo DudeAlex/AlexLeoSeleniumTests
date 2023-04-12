@@ -287,7 +287,6 @@ public class GroupJavaJitsu {
 
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://www.selenium.dev");
-
         WebElement Button = driver.findElement(By.xpath("//a[@class='nav-link'][@href='/documentation']/span"));
         Button.click();
 

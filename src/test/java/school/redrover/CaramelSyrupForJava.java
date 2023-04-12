@@ -22,7 +22,7 @@ public class CaramelSyrupForJava {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
 
 
@@ -56,9 +56,9 @@ public class CaramelSyrupForJava {
         String expectedResult = "https://thehostbest.ru/business-card-site/";
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        chromeOptions.addArguments("--remote-allow-origins=*","--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         driver.get("https://thehostbest.ru/");
@@ -81,7 +81,7 @@ public class CaramelSyrupForJava {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
 
@@ -111,9 +111,9 @@ public class CaramelSyrupForJava {
         int expectedResult = 3;
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        chromeOptions.addArguments("--remote-allow-origins=*","--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
 
         driver.get("https://openweathermap.org/");
         Thread.sleep(5000);
@@ -157,9 +157,9 @@ public class CaramelSyrupForJava {
         String expectedResultAskAQuestion = "https://home.openweathermap.org/questions";
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
 
         driver.get("https://openweathermap.org/");
         Thread.sleep(5000);
@@ -190,4 +190,30 @@ public class CaramelSyrupForJava {
 
         driver.quit();
     }
+    @Test
+    public void artyomDulyaAuthorizationText() throws InterruptedException {
+
+        String actualResult = "Sign In To Your Account";
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
+        driver.get("https://openweathermap.org/");
+        Thread.sleep(5000);
+
+        WebElement signIn = driver.findElement
+                (By.xpath("//div[@id='desktop-menu']//ul//li[11]//a[text()='Sign in']"));
+        signIn.click();
+
+        WebElement loginText = driver.findElement(By.xpath("//h3"));
+
+        String expectedResult = loginText.getText();
+
+        Assert.assertEquals(actualResult, expectedResult);
+
+        driver.quit();
+    }
+
+
 }

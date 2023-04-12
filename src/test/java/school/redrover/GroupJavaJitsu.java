@@ -383,13 +383,14 @@ public class GroupJavaJitsu {
 
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://www.selenium.dev");
+
         WebElement button = driver.findElement(By.xpath("//a[@class='nav-link'][@href='/documentation']/span"));
         button.click();
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.selenium.dev/documentation/");
         driver.quit();
     }
-}
+
 
     @Test
 

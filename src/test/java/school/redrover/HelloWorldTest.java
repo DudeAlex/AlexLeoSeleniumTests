@@ -145,4 +145,16 @@ public class HelloWorldTest {
         System.out.println("It's work");
     }
 
+    @Test
+    public void seleniumTest() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get("https://www.google.ru/");
+        WebElement inputField = driver.findElement(By.name("q"));
+        inputField.sendKeys("Selenium");
+        inputField.sendKeys(Keys.ENTER);
+        driver.quit();
+    }
+
 }

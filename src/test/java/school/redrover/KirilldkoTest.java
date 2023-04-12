@@ -19,7 +19,7 @@ public class KirilldkoTest {
         // передаем опции
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get(url);
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         driver.close();
 
 

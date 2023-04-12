@@ -121,7 +121,21 @@ public class HelloWorldTest {
 
     }
 
+    @Test
+    public void youtubeTest() throws InterruptedException {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(options);
 
+        driver.get("https://www.youtube.com");
+        driver.findElement(By.xpath("//input[@id='search']")).sendKeys("Nyan Cat");
+        driver.findElement(By.xpath("//button[@id='search-icon-legacy']")).click();
 
+        Thread.sleep(2000);
+
+        String actualText = driver.findElement(By.xpath("//h3[contains(@class, 'title')]")).getText();
+        Assert.assertEquals(actualText, "Nyan Cat [original]");
+        driver.quit();
+    }
 
 }

@@ -278,5 +278,21 @@ public class GroupJavaJitsu {
         Assert.assertEquals(successfullySubmitted.getText(), "Name:Artem De");
         driver.quit();
     }
+
+    @Test
+
+    public void agTest () throws InterruptedException {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get("https://www.selenium.dev");
+
+        WebElement Button = driver.findElement(By.xpath("//a[@class='nav-link'][@href='/documentation']/span"));
+        Button.click();
+
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.selenium.dev/documentation/");
+        driver.quit();
+    }
 }
 

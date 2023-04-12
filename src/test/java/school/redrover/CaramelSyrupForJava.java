@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.ArrayList;
 
-public class Caramel_surup_for_java {
+public class CaramelSyrupForJava {
 
     @Test
     public void artyomDulyaOpenWeatherGuideClick() throws InterruptedException {
@@ -36,7 +36,7 @@ public class Caramel_surup_for_java {
                 By.xpath("//main//div[2]/div/div/p[1]/a[text()='complex enterprise systems']"));
         complexEnterprise.click();
 
-        ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+        ArrayList<String> windows = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(windows.get(1));
 
         WebElement text = driver.findElement(By.xpath("//h1//span[@class='white-text']"));
@@ -125,7 +125,7 @@ public class Caramel_surup_for_java {
 
         WebElement[] headers = {guide, api, dashboard};
 
-        ArrayList<String> urls = new ArrayList<String>(10);
+        ArrayList<String> urls = new ArrayList<>(10);
         urls.add("https://openweathermap.org/guide");
         urls.add("https://openweathermap.org/api");
         urls.add("https://openweathermap.org/weather-dashboard");

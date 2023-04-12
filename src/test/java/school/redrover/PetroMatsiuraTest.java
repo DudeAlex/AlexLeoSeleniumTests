@@ -12,7 +12,7 @@ import java.time.Duration;
 public class PetroMatsiuraTest {
 
     @Test
-    public void googleStoreTest() {
+    public void googleStoreTest() throws InterruptedException {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
         WebDriver driver = new ChromeDriver(chromeOptions);
@@ -20,6 +20,7 @@ public class PetroMatsiuraTest {
         driver.get("https://www.google.com/");
         driver.findElement(By.linkText("Store")).click();
         driver.navigate().refresh();
+        Thread.sleep(5000);
         Assert.assertEquals(driver.getTitle(), "Google Store for Google Made Devices & Accessories");
         driver.quit();
     }

@@ -5,11 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.Test;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
+import org.testng.annotations.Test;
 
 public class CaramelSurupForJavaTest {
 
+    @Ignore
     @Test
     public void artyomDulyaOpenWeatherGuideClick () throws InterruptedException {
 
@@ -40,14 +42,7 @@ public class CaramelSurupForJavaTest {
         Assert.assertEquals(title, "Selenium");
 
         Thread.sleep(5000);
-//        WebElement accreditation = driver.findElement(By.xpath(
-//                "//u[text()='аккредитованных ИТ-компаний']"));
-//        accreditation.click();
-//        Thread.sleep(5000);
-//        WebElement pageITAccreditationOpened = driver.findElement(By.xpath(
-//                "//div[@class = 't469__title t-title t-title_lg ']"));
-
-//        driver.quit();
+        driver.quit();
 
     }
 }

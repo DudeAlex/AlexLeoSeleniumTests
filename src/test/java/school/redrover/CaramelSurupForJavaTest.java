@@ -31,7 +31,7 @@ public class CaramelSurupForJavaTest {
     }
 
     @Test
-    public void serhiiHaponyukFirstSeleniumTest() throws InterruptedException {
+    public void serhiiHaponiukFirstSeleniumTest() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
@@ -42,7 +42,12 @@ public class CaramelSurupForJavaTest {
         Assert.assertEquals(title, "Selenium");
 
         Thread.sleep(5000);
-        driver.quit();
+        WebElement SeleniumWebDriverButton = driver.findElement(By.xpath
+                ("//*[contains(@class, 'selenium-button selenium-webdriver')]"));
+        SeleniumWebDriverButton.click();
 
+        Thread.sleep(5000);
+        Assert.assertEquals(driver.getTitle(), "WebDriver | Selenium");
+        driver.quit();
     }
 }

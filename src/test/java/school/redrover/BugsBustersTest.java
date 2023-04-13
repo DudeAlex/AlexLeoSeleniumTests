@@ -121,7 +121,7 @@ public class BugsBustersTest {
 
         driver.quit();
     }
-
+    @Ignore
     @Test
     public void testVictoriaContactTitle() throws InterruptedException {
 

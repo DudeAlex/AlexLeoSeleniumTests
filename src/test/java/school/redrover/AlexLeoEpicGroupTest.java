@@ -566,4 +566,16 @@ public class AlexLeoEpicGroupTest {
 
         driver.quit();
     }
+    @Test
+    public void test_TC_004_01() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
+        driver.get("https://askomdch.com");
+        driver.findElement(By.linkText("Account")).click();
+        Assert.assertEquals(driver.findElement(By.className("has-text-align-center")).getText(), "Account");
+
+        driver.quit();
+    }
 }

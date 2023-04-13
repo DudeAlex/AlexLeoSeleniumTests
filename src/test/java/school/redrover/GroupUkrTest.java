@@ -5,8 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -45,32 +44,28 @@ public class GroupUkrTest {
 
     }
     @Test
-    public void VNZooleaderTest(){
+    public void VNUiTest(){
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless","--window-size= 1920,1080");
 
         WebDriver driver = new ChromeDriver(chromeOptions);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
-        driver.get("https://zooleader.com.ua/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(60000));
+        driver.get("http://uitestingplayground.com/home");
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(20000));
         String title = driver.getTitle();
-        Assert.assertEquals("Зоомагазин ZOOЛИДЕР. Купить Товары для Животных в Украине", title);
-        WebElement popupBtn = driver.findElement(By.xpath("//div[@id='onloadModal']//button[@class = 'modal-close close']"));
-        WebElement srchField = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//input[@class='block-search__input']"));
-        WebElement srchBtn = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//button[@class='block-search__btn']"));
+        Assert.assertEquals(title,"UI Test Automation Playground");
 
-            popupBtn.click();
-            wait.until(ExpectedConditions.elementToBeClickable(srchBtn));
+        WebElement textInputLink = driver.findElement(By.xpath("//section[@id = 'overview']//a[text() = 'Text Input']"));
+        textInputLink.click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(20000));
+        WebElement textField = driver.findElement(By.xpath("//input[@id='newButtonName']"));
+        WebElement updButton = driver.findElement(By.xpath("//button[@id='updatingButton']"));
 
-            srchField.sendKeys("36494");
-            srchBtn.click();
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//section[@class = 'product__hero']")));
-            WebElement resultName = driver.findElement(By.xpath("//section[@class = 'product__hero']//h1[@class='product__title']"));
+        textField.sendKeys("New Name");
+        updButton.click();
+        Assert.assertEquals(updButton.getText(), "New Name");
 
-            Assert.assertTrue(resultName.getText().contains("Davis «Pink Grapefruit»"));
-
-            driver.quit();
+        driver.quit();
 
 
     }

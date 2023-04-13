@@ -22,5 +22,7 @@ public class AlexFrTest {
         System.out.println("Hello");
         System.out.println("Hello, who are you?");
         System.out.println("Hello, Alex!!!");
+        System.out.println("How would you resolve that conflict?");
     }
+
 }

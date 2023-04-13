@@ -18,8 +18,9 @@ public class AlexLeoTest {
     }
 
     @Test
-    public void secondTest(){
-        System.out.println("Hello");
+    public void webDriverTest(){
+
+
     }
 }
 

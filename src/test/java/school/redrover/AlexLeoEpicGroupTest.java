@@ -550,4 +550,20 @@ public class AlexLeoEpicGroupTest {
         driver.quit();
     }
 
+    @Test
+    public void VerifySearchBackgroundButtonColorOnMenPage() {
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
+        driver.get("https://askomdch.com");
+        driver.findElement(By.xpath("//*[@id=\"menu-item-1228\"]/a")).click();
+
+        String backgroundButtonColor = driver.findElement(By.xpath("//*[@id=\"woocommerce_product_search-1\"]/form/button")).getCssValue("background-color");
+
+        Assert.assertEquals(backgroundButtonColor, "rgba(49, 151, 214, 1)");
+
+        driver.quit();
+    }
 }

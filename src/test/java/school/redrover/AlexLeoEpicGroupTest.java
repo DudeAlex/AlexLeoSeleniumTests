@@ -289,4 +289,28 @@ public class AlexLeoEpicGroupTest {
         driver.quit();
     }
 
+
+
+       @Test
+       public void testLoginPageIsOpenedTC_004() throws InterruptedException {
+           ChromeOptions chromeOptions = new ChromeOptions();
+           chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+           WebDriver driver = new ChromeDriver(chromeOptions);
+           driver.get("https://askomdch.com/");
+           Thread.sleep(2000);
+           driver.findElement(By.xpath("//li[@id=\"menu-item-1237\"]")).click();
+           String expectedUrl = "https://askomdch.com/account/";
+           driver.get(expectedUrl);
+           try {
+               Assert.assertEquals(expectedUrl, driver.getCurrentUrl());
+               System.out.println("Navigated to the correct login page");
+           }
+           catch (Throwable pageNavigationError) {
+               System.out.println("Did not navigate to correct page");
+           }
+           Thread.sleep(2000);
+           driver.quit();
+
+       }
+
 }

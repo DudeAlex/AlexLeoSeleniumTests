@@ -7,13 +7,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 import static org.testng.Assert.assertEquals;
 
-public class NeedMoreCoffeeTestCase {
+public class JavaJitsuKatTest {
     @Test
-    public void testBozhok() throws InterruptedException{
-        ChromeOptions chromeOptions = new ChromeOptions(); // это опции для запуска на сервеере
-        chromeOptions.addArguments("--headless", "--window-size=1920,1080"); //чтобы не открывалось окно браузера и с одним размером окна. Потому что на сервере не установлен этот браузер. Тест упадет, если оставить открытие браузера
+    public void testKatya2() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless","--window-size=1920,1080");
 
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://www.selenium.dev/selenium/web/web-form.html");
@@ -21,7 +23,7 @@ public class NeedMoreCoffeeTestCase {
         String title = driver.getTitle();
         assertEquals("Web form", title);
 
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         WebElement textBox = driver.findElement(By.name("my-text"));
         WebElement submitButton = driver.findElement(By.cssSelector("button"));
@@ -34,14 +36,6 @@ public class NeedMoreCoffeeTestCase {
         assertEquals("Received!", value);
 
         driver.quit();
-
     }
-    @Test
-    public void elBaronTest(){
-
-        System.out.println("Test for Test");
-
-    }
-    }
-
+}
 

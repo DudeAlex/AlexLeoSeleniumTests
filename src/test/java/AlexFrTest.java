@@ -3,7 +3,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.sql.SQLOutput;
 import java.time.Duration;
 
 public class AlexFrTest {
@@ -21,6 +20,8 @@ public class AlexFrTest {
     @Test
     public void secondTest(){
         System.out.println("Hello");
+        System.out.println("Hello, who are you?");
+        System.out.println("Hello, Alex!!!");
         System.out.println("How would you resolve that conflict?");
     }
 

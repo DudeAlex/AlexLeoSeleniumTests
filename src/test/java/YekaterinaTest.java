@@ -90,6 +90,30 @@ public class YekaterinaTest {
         }
         driver.quit();
     }
+
+    @Test
+    //TC_007 Men Page | Search Bar: Verify the background color of the "Search" button
+    public void buttonColorTest(){
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        driver.findElement(By.xpath("//li[@id='menu-item-1228']")).click();
+        String searchButton = driver.findElement(By.xpath("//button[@value='Search']"))
+                .getCssValue("background-color");
+        Assert.assertEquals(searchButton, "rgba(49, 151, 214, 1)");
+        driver.quit();
+    }
+
+    @Test
+    //TC_008 Home page | Verify hitting Find More button redirects User to Contact Us page
+    public void contactUsPageTest(){
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        driver.findElement(By.xpath("//a[text()='Find More']")).click();
+        Assert.assertEquals(driver.getTitle(), "Contact Us – AskOmDch");
+        driver.quit();
+    }
 }
 
 

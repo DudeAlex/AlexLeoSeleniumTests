@@ -295,7 +295,7 @@ public class GroupJavaJitsu {
     }
 
     @Test
-    public void testKatya1() {
+    public void testKatya2() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless","--window-size=1920,1080");
 

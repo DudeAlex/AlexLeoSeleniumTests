@@ -53,9 +53,9 @@ public class GroupUkrTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         driver.get("https://zooleader.com.ua/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(30000));
 
-        WebElement srchField = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//input[@id='search']"));
+        WebElement srchField = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//input[@class='block-search__input']"));
         WebElement srchBtn = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//button[@class='block-search__btn']"));
         WebElement popupBtn = driver.findElement(By.xpath("//div[@id='onloadModal']//button[@class = 'modal-close close']"));
             popupBtn.click();

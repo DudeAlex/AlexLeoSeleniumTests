@@ -20,6 +20,7 @@ public class AlexFrTest {
     @Test
     public void secondTest(){
         System.out.println("Hello");
+        System.out.println("Hello, who are you?");
     }
 
 }

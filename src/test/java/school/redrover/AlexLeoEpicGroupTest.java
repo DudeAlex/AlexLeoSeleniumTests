@@ -6,11 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -64,7 +62,7 @@ public class AlexLeoEpicGroupTest {
     }
 
     @Test
-    public void colourTest_TC_007_23() {
+    public void colourTest_TC_007_23_PetroMatsiura() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
         WebDriver driver = new ChromeDriver(chromeOptions);
@@ -121,7 +119,7 @@ public class AlexLeoEpicGroupTest {
     }
 
     @Test
-    public void productsNumberTest_TC_006_23() {
+    public void productsNumberTest_TC_006_23_PetroMatsiura() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
         WebDriver driver = new ChromeDriver(chromeOptions);
@@ -133,7 +131,7 @@ public class AlexLeoEpicGroupTest {
     }
 
     @Test
-    public void currencyTest_TC_002_23() {
+    public void currencyTest_TC_002_23_PetroMatsiura() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
         WebDriver driver = new ChromeDriver(chromeOptions);

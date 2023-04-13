@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 
 public class JavaJitsuKatTest {
     @Test
-    public void testKatya() {
+    public void testKatya2() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless","--window-size=1920,1080");
 

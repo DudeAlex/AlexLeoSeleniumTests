@@ -46,7 +46,5 @@ public class GroupSomeGroupTest {
         String title = driver.getTitle();
 
         Assert.assertEquals(title, "JavaScript Tutorial");
-
-
     }
 }

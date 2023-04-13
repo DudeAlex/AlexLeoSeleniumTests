@@ -19,6 +19,8 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 public class GroupJavaJitsu {
 
     @Test
@@ -293,16 +295,17 @@ public class GroupJavaJitsu {
     }
 
     @Test
-    public void testKatya() throws InterruptedException {
+    public void testKatya1() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless","--window-size=1920,1080");
 
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://www.selenium.dev/selenium/web/web-form.html");
 
         String title = driver.getTitle();
-        Assert.assertEquals("Web form", title);
+        assertEquals("Web form", title);
 
-        //  driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         WebElement textBox = driver.findElement(By.name("my-text"));
         WebElement submitButton = driver.findElement(By.cssSelector("button"));
@@ -312,7 +315,7 @@ public class GroupJavaJitsu {
 
         WebElement message = driver.findElement(By.id("message"));
         String value = message.getText();
-        Assert.assertEquals("Received!", value);
+        assertEquals("Received!", value);
 
         driver.quit();
     }

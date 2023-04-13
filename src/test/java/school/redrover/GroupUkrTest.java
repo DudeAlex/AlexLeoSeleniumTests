@@ -50,10 +50,10 @@ public class GroupUkrTest {
         chromeOptions.addArguments("--headless","--window-size= 1920,1080");
 
         WebDriver driver = new ChromeDriver(chromeOptions);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
         driver.get("https://zooleader.com.ua/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(30000));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(60000));
 
         WebElement srchField = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//input[@class='block-search__input']"));
         WebElement srchBtn = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//button[@class='block-search__btn']"));

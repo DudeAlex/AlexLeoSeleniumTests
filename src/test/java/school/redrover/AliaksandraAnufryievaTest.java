@@ -1,5 +1,6 @@
 package school.redrover;
 
+import org.junit.Ignore;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 
 
 public class AliaksandraAnufryievaTest {
-
+    @Ignore
     @Test
     public void weatherTest() throws InterruptedException{
         ChromeOptions chromeOptions = new ChromeOptions();

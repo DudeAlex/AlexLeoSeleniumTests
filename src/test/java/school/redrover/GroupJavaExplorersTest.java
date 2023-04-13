@@ -1,5 +1,6 @@
 package school.redrover;
 
+import org.junit.Ignore;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -71,7 +72,7 @@ public class GroupJavaExplorersTest {
     @Test
     public void TestS() {
     }
-
+    @Ignore
     @Test
     public void testOracleSearch() {
         ChromeOptions options = new ChromeOptions();

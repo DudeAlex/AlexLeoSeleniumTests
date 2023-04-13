@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 
 public class SergeiLebedevTest {
     @Test
-    public void testWeather() throws InterruptedException {
+    public void weatherTest() throws InterruptedException {
         //Chrome options
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("−−incognito", "--window-size=1920,1080");
+        chromeOptions.addArguments("--headless", "--window-size=1920,1080");
 
         //Open start page
         WebDriver driver = new ChromeDriver(chromeOptions);

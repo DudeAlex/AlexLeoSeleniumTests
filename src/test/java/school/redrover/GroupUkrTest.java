@@ -54,10 +54,12 @@ public class GroupUkrTest {
 
         driver.get("https://zooleader.com.ua/");
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(60000));
-
+        String title = driver.getTitle();
+        Assert.assertEquals("Зоомагазин ZOOЛИДЕР. Купить Товары для Животных в Украине", title);
+        WebElement popupBtn = driver.findElement(By.xpath("//div[@id='onloadModal']//button[@class = 'modal-close close']"));
         WebElement srchField = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//input[@class='block-search__input']"));
         WebElement srchBtn = driver.findElement(By.xpath("//header[@class = 'header header--fixed']//button[@class='block-search__btn']"));
-        WebElement popupBtn = driver.findElement(By.xpath("//div[@id='onloadModal']//button[@class = 'modal-close close']"));
+
             popupBtn.click();
             wait.until(ExpectedConditions.elementToBeClickable(srchBtn));
 

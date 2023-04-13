@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class JavaJitsuTest {
 
     @Test
-    public void testKatya2() throws InterruptedException {
+    public void eightComponents() throws InterruptedException {
 
        // ChromeOptions chromeOptions = new ChromeOptions();
       //  chromeOptions.addArguments("--headless","--window-size=1920,1080");

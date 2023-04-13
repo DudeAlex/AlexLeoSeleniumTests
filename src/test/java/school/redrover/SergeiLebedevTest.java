@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class SergeiLebedevTest {
     @Test
-    public void testWeather() throws InterruptedException {
+    public void testWeatherSL() throws InterruptedException {
         //Chrome options
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless", "--window-size=1920,1080");

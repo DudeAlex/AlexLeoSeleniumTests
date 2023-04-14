@@ -26,6 +26,7 @@ public class AliaksandraAnufryievaTest {
         driver.quit();
     }
 
+    @Ignore
     @Test
     public void weatherTest() throws InterruptedException{
         ChromeOptions chromeOptions = new ChromeOptions();

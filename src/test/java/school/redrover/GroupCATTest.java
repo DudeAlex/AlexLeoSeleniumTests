@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GroupCAT {
+public class GroupCATTest {
 
     @FindBy(xpath = "//a[@class='btn btn-secondary m-1']")
     public WebElement buttonDocumentation;
@@ -86,7 +86,6 @@ public class GroupCAT {
     public final void clickButtonDocumentation() {
         verifyElementVisible(buttonDocumentation);
         verifyElementIsClickable(buttonDocumentation).click();
-
     }
 
     public final void clickButtonDownload() {
@@ -107,7 +106,7 @@ public class GroupCAT {
         return element.getText();
     }
 
-    public List<String> getNamesOfSupporters(List<WebElement> elements) {
+    public List<String> getNamesOfLists(List<WebElement> elements) {
         List<String> texts = new ArrayList<>();
 
         for (WebElement element : elements) {
@@ -117,15 +116,6 @@ public class GroupCAT {
         return texts;
     }
 
-    public List<String> getNamesOfFeatureListSegment(List<WebElement> elements) {
-        List<String> texts = new ArrayList<>();
-
-        for (WebElement element : elements) {
-            texts.add(getText(element));
-        }
-
-        return texts;
-    }
     @Test
     public void textVerification() {
 
@@ -143,7 +133,6 @@ public class GroupCAT {
         Assert.assertEquals(actualText, expectedText, "Text verification is FAILED");
 
         driver.quit();
-
     }
 
     @Test
@@ -163,11 +152,9 @@ public class GroupCAT {
         actions.dragAndDrop(image, box).perform();
 
         driver.quit();
-
     }
 
     @Test
-
     public void testVerifyRedirectFromJetLabel() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -187,11 +174,9 @@ public class GroupCAT {
         Assert.assertEquals(title.getText(), "Essential tools for software developers and teams");
 
         driver.quit();
-
     }
 
     @Test
-
     public void testVerifyLink() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -243,16 +228,15 @@ public class GroupCAT {
 
     @Test
     public void testNamesOfSupporters(){
-        final List<String> expectedNamesOfSupporters = Arrays.asList("Atlassian", "Datadog", "DigitalOcean",
-                "Discourse", "Fastly",
-                "IBM", "Netlify", "PagerDuty", "Sentry", "SpinUp", "Tsinghua University", "XMission");
+        final List<String> expectedNamesOfSupporters = Arrays.asList("Atlassian", "Datadog", "DigitalOcean", "Discourse",
+                "Fastly", "IBM", "Netlify", "PagerDuty", "Sentry", "SpinUp", "Tsinghua University", "XMission");
 
         getBaseUrl();
 
         scrollByElement(containerOfSupporters);
         getWait10();
 
-        List<String> actualNamesOfSupporters = getNamesOfSupporters(supporters);
+        List<String> actualNamesOfSupporters = getNamesOfLists(supporters);
 
         Assert.assertEquals(actualNamesOfSupporters, expectedNamesOfSupporters);
 
@@ -277,9 +261,9 @@ public class GroupCAT {
                 "Easy installation", "Easy configuration", "Plugins", "Extensible", "Distributed");
 
         getBaseUrl();
-        verifyElementVisible(containerOfNamesOfFeatureListSegment);
+        scrollByElement(containerOfNamesOfFeatureListSegment);
         getWait10();
-        List<String> actualNamesOfNamesOfFeatureListSegment = getNamesOfFeatureListSegment(featureListSegment);
+        List<String> actualNamesOfNamesOfFeatureListSegment = getNamesOfLists(featureListSegment);
 
         Assert.assertEquals(actualNamesOfNamesOfFeatureListSegment, expectedNamesOfFeatureListSegment);
         driver.quit();

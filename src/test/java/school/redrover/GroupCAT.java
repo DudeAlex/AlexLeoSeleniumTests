@@ -24,14 +24,16 @@ public class GroupCAT {
 
     @FindBy(xpath = "//a[@class='btn btn-secondary m-1']")
     public WebElement buttonDocumentation;
-
     @FindBy(xpath = "//a[@class='btn btn-primary m-1']")
     public WebElement buttonDownload;
     @FindBy(xpath = "//div[@class='supporters']//li")
     public List<WebElement> supporters;
-
     @FindBy(xpath = "//div[@class='supporters']")
     public WebElement containerOfSupporters;
+    @FindBy(xpath = "//div[@class='row chunks features uniform-height']")
+    public WebElement containerOfNamesOfFeatureListSegment;
+    @FindBy(xpath = "//div[@class='row chunks features uniform-height']//h5")
+    public List<WebElement> featureListSegment;
 
     public final static String BASE_URL = "https://www.jenkins.io/";
 
@@ -106,6 +108,16 @@ public class GroupCAT {
     }
 
     public List<String> getNamesOfSupporters(List<WebElement> elements) {
+        List<String> texts = new ArrayList<>();
+
+        for (WebElement element : elements) {
+            texts.add(getText(element));
+        }
+
+        return texts;
+    }
+
+    public List<String> getNamesOfFeatureListSegment(List<WebElement> elements) {
         List<String> texts = new ArrayList<>();
 
         for (WebElement element : elements) {
@@ -256,6 +268,20 @@ public class GroupCAT {
         String actualTitle = driver.getTitle();
 
         Assert.assertEquals(actualTitle, expectedTitle);
+        driver.quit();
+    }
+
+    @Test
+    public void testNamesOfFeatureListSegment(){
+        final List<String> expectedNamesOfFeatureListSegment = Arrays.asList("Continuous Integration and Continuous Delivery",
+                "Easy installation", "Easy configuration", "Plugins", "Extensible", "Distributed");
+
+        getBaseUrl();
+        verifyElementVisible(containerOfNamesOfFeatureListSegment);
+        getWait10();
+        List<String> actualNamesOfNamesOfFeatureListSegment = getNamesOfFeatureListSegment(featureListSegment);
+
+        Assert.assertEquals(actualNamesOfNamesOfFeatureListSegment, expectedNamesOfFeatureListSegment);
         driver.quit();
     }
 }

@@ -1,10 +1,14 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import runner.BaseTest;
 
-public class AnnaMorozTest {
+import java.util.List;
+
+public class AnnaMorozTest extends BaseTest {
     @Test
     //TC_002.06 Home Page | Featured Products: Validate "$" sign is present under all displayed products
     public void testSecondOriginal() throws InterruptedException {
@@ -35,5 +39,20 @@ public class AnnaMorozTest {
         Assert.assertEquals(text,"Store");
 
         driver.quit();
+    }
+
+    @Test
+    public void testCheckSale() throws InterruptedException {
+        getDriver().get("https://askomdch.com/");
+        Thread.sleep(3000);
+
+        List<WebElement> listFeaturedProducts = getDriver().findElements(By.className("astra-shop-thumbnail-wrap"));
+        List<WebElement> listFeaturedProductsText = getDriver().findElements(By.className("astra-shop-summary-wrap"));
+        for (int i = 0; i < listFeaturedProductsText.size(); i++) {
+            String[] arrProductText = listFeaturedProductsText.get(i).getText().split("\n");
+            if (arrProductText[2].split(" ").length > 1) {
+                Assert.assertEquals(listFeaturedProducts.get(i).getText(), "Sale!");
+            }
+        }
     }
 }

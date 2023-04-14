@@ -30,7 +30,7 @@ public class EvanMaiTest extends BaseTest {
     }
 
     @Test
-    public void test_TC_003_01() {
+    public void testVerifyDiscountMessagePresented() {
         WebElement text = getDriver().findElement(By.xpath("//h3[contains(text(), '25%')]"));
         Assert.assertEquals(text.getText(), "25% OFF On all products");
     }

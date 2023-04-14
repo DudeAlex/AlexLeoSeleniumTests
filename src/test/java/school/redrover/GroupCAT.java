@@ -24,6 +24,9 @@ public class GroupCAT {
 
     @FindBy(xpath = "//a[@class='btn btn-secondary m-1']")
     public WebElement buttonDocumentation;
+
+    @FindBy(xpath = "//a[@class='btn btn-primary m-1']")
+    public WebElement buttonDownload;
     @FindBy(xpath = "//div[@class='supporters']//li")
     public List<WebElement> supporters;
 
@@ -83,6 +86,12 @@ public class GroupCAT {
         verifyElementIsClickable(buttonDocumentation).click();
 
     }
+
+    public final void clickButtonDownload() {
+        verifyElementVisible(buttonDownload);
+        verifyElementIsClickable(buttonDownload).click();
+    }
+
     public void scrollByElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
@@ -235,6 +244,18 @@ public class GroupCAT {
 
         Assert.assertEquals(actualNamesOfSupporters, expectedNamesOfSupporters);
 
+        driver.quit();
+    }
+
+    @Test
+    public void testClickDownloadButton() {
+        final String expectedTitle = "Jenkins download and deployment";
+
+        getBaseUrl();
+        clickButtonDownload();
+        String actualTitle = driver.getTitle();
+
+        Assert.assertEquals(actualTitle, expectedTitle);
         driver.quit();
     }
 }

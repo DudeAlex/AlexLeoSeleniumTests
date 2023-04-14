@@ -432,7 +432,7 @@ public class GroupHighwayToAqaTest {
     }
 
     @Test
-    public void testBlockPromo() {
+    public void testBlockPromo() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
@@ -443,7 +443,7 @@ public class GroupHighwayToAqaTest {
 
         WebElement blockPromo = driver.findElement(By.xpath("//span[@class='action more button']"));
         blockPromo.click();
-
+       Thread.sleep(2000);
         String title = driver.findElement(By.xpath("//span[@class='base']")).getText();
 
         Assert.assertEquals(title, "New Luma Yoga Collection");

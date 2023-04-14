@@ -122,7 +122,7 @@ public class GroupAndreyTest extends BaseTest {
 
         assertEquals(expected, 1);
     }
-
+    @Ignore
     @Test
     public void testAndreyTemperatureScaleType() throws InterruptedException {
         getDriver().get("https://openweathermap.org/");

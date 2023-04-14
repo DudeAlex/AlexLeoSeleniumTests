@@ -24,8 +24,6 @@ public class GroupAndreyTest extends BaseTest {
         button.click();
 
         assertEquals(getDriver().getTitle(), "OpenWeatherMap API guide - OpenWeatherMap");
-
-        getDriver().quit();
     }
 
     @Test
@@ -45,8 +43,6 @@ public class GroupAndreyTest extends BaseTest {
 
         assertEquals(suggestButton.getText(), "Omsk, RU");
         assertEquals(suggestButton2.getText(), "Omskaya Oblast’, RU");
-
-        getDriver().quit();
     }
 
     @Test
@@ -70,8 +66,6 @@ public class GroupAndreyTest extends BaseTest {
         WebElement text = getDriver().findElement(By.xpath("//*[@class=\"grid-container grid-4-5\"]/div/div/h2"));
 
         assertEquals(text.getText(), "Omsk, RU");
-
-        getDriver().quit();
     }
     @Ignore
     @Test
@@ -100,8 +94,6 @@ public class GroupAndreyTest extends BaseTest {
         String expectedDate = formatDate.format(currentDate).replace("AM", "am").replace("PM", "pm");
 
         assertEquals(text.getText(), expectedDate);
-
-        getDriver().quit();
     }
 
     @Test
@@ -129,8 +121,28 @@ public class GroupAndreyTest extends BaseTest {
         }
 
         assertEquals(expected, 1);
+    }
 
-        getDriver().quit();
+    @Test
+    public void testAndreyTemperatureScaleType() throws InterruptedException {
+        getDriver().get("https://openweathermap.org/");
+
+        Thread.sleep(3500);
+
+        WebElement button = getDriver().findElement(
+                By.xpath("//*[@id=\"weather-widget\"]/div[1]/div/div/div[1]/div[2]/div[3]"));
+        button.click();
+
+        WebElement heading = getDriver().findElement(
+                By.xpath("//*[@id=\"weather-widget\"]/div[2]/div[1]/div[1]/div[2]/div[1]/span"));
+        String heading1 = heading.getText();
+        int expected;
+        if (heading1.contains("F")) {
+            expected = 1;
+        } else {
+            expected = 2;
+        }
+
+        assertEquals(expected, 1);
     }
 }
-

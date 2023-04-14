@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
+
 import java.time.Duration;
 import java.util.List;
 import static org.testng.Assert.assertTrue;
@@ -13,6 +15,7 @@ import static org.testng.Assert.fail;
 import school.redrover.runner.BaseTest;
 
 public class AlexLeoEpicGroupTest extends BaseTest{
+
     @Test
     public void titleOfTheHomePageCheckedTest() {
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -340,16 +343,10 @@ public class AlexLeoEpicGroupTest extends BaseTest{
     }
 
     @Test
-    public void test_TC_006_01() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
-        WebDriver driver = new ChromeDriver(chromeOptions);
-
-        driver.get("https://askomdch.com");
-        List<WebElement> list = driver.findElements(By.className("astra-shop-thumbnail-wrap"));
-        Assert.assertEquals(list.size(), 5);
-
-        driver.quit();
+    public void testVerifyDiscountMessagePresented() {
+        getDriver().get("https://askomdch.com");
+        WebElement text = getDriver().findElement(By.xpath("//h3[contains(text(), '25%')]"));
+        Assert.assertEquals(text.getText(), "25% OFF On all products");
     }
 
 

@@ -45,4 +45,17 @@ public class ViktoriiaKarpusTest {
         driver.quit();
     }
 
+    @Test
+    public void testShopNow_TC_005() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
+        WebElement pageStore = driver.findElement(By.xpath("//h1[contains(text(), \"Store\")]"));
+        Assert.assertEquals(pageStore.getText(), "Store");
+        Thread.sleep(3000);
+        driver.quit();
+    }
+
 }

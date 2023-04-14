@@ -28,11 +28,9 @@ public class PetroMatsiuraTest {
 
     @Test
     public void saleTest_TC_001_23() {
-        driver.findElement(By.cssSelector("a[href='https://askomdch.com/product/basic-blue-jeans/']")).click();
-        Assert.assertEquals(driver.findElement(By.cssSelector("span.onsale")).getText(), "Sale!");
-        driver.navigate().back();
-        driver.findElement(By.cssSelector("a[href='https://askomdch.com/product/anchor-bracelet/']")).click();
-        Assert.assertEquals(driver.findElement(By.cssSelector("span.onsale")).getText(), "Sale!");
+        for(WebElement element : driver.findElements(By.cssSelector("span[class='onsale']"))){
+            Assert.assertEquals(element.getText(), "Sale!");
+        }
     }
 
     @Test
@@ -71,5 +69,11 @@ public class PetroMatsiuraTest {
         driver.findElement(By.cssSelector("a[href*='men']")).click();
         Assert.assertEquals(driver.findElement(By.cssSelector("button[value='Search']")).
                 getCssValue("background-color"), "rgba(49, 151, 214, 1)");
+    }
+
+    @Test
+    public void findMoreButtonTest_TC_008_23() {
+        driver.findElement(By.cssSelector("div.wp-block-button.is-style-fill")).click();
+        Assert.assertEquals(driver.getTitle(), "Contact Us – AskOmDch");
     }
 }

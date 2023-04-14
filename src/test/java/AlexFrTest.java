@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class AlexLeoTest {
+public class AlexFrTest {
 
     @Test
     public void firstTest(){
@@ -18,10 +18,11 @@ public class AlexLeoTest {
     }
 
     @Test
-    public void webDriverTest(){
-
-
+    public void secondTest(){
+        System.out.println("Hello");
+        System.out.println("Hello, who are you?");
+        System.out.println("Hello, Alex!!!");
+        System.out.println("How would you resolve that conflict?");
     }
+
 }
-
-

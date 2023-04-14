@@ -70,4 +70,17 @@ public class GroupUkrTest {
 
     }
 
+    @Test
+    public void AlexTest(){
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get("https://demoqa.com/");
+        WebElement element = driver.findElement(By.className("card-up"));
+        element.click();
+        WebElement header = driver.findElement(By.className("main-header"));
+        Assert.assertEquals(header.getText(),"Elements");
+        driver.quit();
+    }
+
 }

@@ -20,6 +20,7 @@ public class FuOpyatJavaTest {
         driver.get("https://www.selenium.dev/selenium/web/web-form.html");
 
         String title = driver.getTitle();
+
         assertEquals("Web form", title);
 
         Thread.sleep(3000);

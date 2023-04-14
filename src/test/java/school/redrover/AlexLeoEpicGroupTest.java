@@ -587,7 +587,7 @@ public class AlexLeoEpicGroupTest extends BaseTest{
     }
 
     @Test
-    public void testLoginPageOpenedMariaB() {
+    public void testLoginPageOpened() {
 
         getDriver().get("https://askomdch.com/");
 
@@ -600,7 +600,7 @@ public class AlexLeoEpicGroupTest extends BaseTest{
     }
 
     @Test
-    public void testTheStorePageOpenedMariaB() {
+    public void testTheStorePageOpened() {
         getDriver().get("https://askomdch.com/");
 
         WebElement shopNowButton = getDriver().findElement(By.xpath("//a[contains(text(),'Shop Now')]"));
@@ -610,7 +610,7 @@ public class AlexLeoEpicGroupTest extends BaseTest{
     }
 
     @Test
-    public void testNumberOfFeaturedProductsMariaB() {
+    public void testNumberOfFeaturedProducts() {
         getDriver().get("https://askomdch.com/");
 
         WebElement featuredProductsBlock = getDriver().findElement(By.xpath(

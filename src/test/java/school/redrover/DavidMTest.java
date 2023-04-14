@@ -1,3 +1,5 @@
+package school.redrover;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -47,7 +49,7 @@ public class DavidMTest {
         String title = driver.getTitle();
         Assert.assertEquals("Web form", title);
 
-        //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+
 
         Thread.sleep(2000);
 

@@ -6,11 +6,10 @@ import runner.BaseTest;
 
 
 public class OksanaTest extends BaseTest {
-    WebDriver driver;
 
     @Test
     public void testContactUs() {
-        String text = driver.findElement(By.xpath("//*[@id=\"menu-item-1233\"]/a")).getText();
+        String text = getDriver().findElement(By.xpath("//*[@id=\"menu-item-1233\"]/a")).getText();
         Assert.assertEquals(text, "Contact Us");
 
     }

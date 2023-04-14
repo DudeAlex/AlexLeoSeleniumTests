@@ -46,7 +46,7 @@ public class GroupUkrTest extends BaseTest {
 
     }
     @Test
-    public void renameBtnTest(){
+    public void testRenameBtn(){
         final String NAME = "new button name";
 
         getDriver().get("http://uitestingplayground.com/home");

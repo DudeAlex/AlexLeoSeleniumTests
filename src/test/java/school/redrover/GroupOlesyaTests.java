@@ -156,36 +156,7 @@ public class GroupOlesyaTests {
         driver.quit();
     }
 
-    @Test
-    public void checkSortingByPriceLowToHigh() { //Stoyana's Test
 
-        standardUserLogin();
-
-        List<WebElement> beforeFilterPrice = driver.findElements(By.className("inventory_item_price"));
-        List<Double> beforeFilterPriceList = new ArrayList<>();
-
-        for (WebElement e : beforeFilterPrice) {
-            beforeFilterPriceList.add(Double.valueOf(e.getText().replace("$", "")));
-        }
-
-        WebElement funnelIcon = driver.findElement(By.className("select_container"));
-        funnelIcon.click();
-
-        Select drpOrder = new Select(driver.findElement(By.className("product_sort_container")));
-        drpOrder.selectByVisibleText("Price (low to high)");
-
-        List<WebElement> afterFilterPrice = driver.findElements(By.className("inventory_item_price"));
-        List<Double> afterFilterPriceList = new ArrayList<>();
-
-        for (WebElement e : afterFilterPrice) {
-            afterFilterPriceList.add(Double.valueOf(e.getText().replace("$", "")));
-        }
-        Collections.sort(beforeFilterPriceList);
-
-        Assert.assertEquals(beforeFilterPriceList, afterFilterPriceList);
-
-        driver.quit();
-    }
     @Test
     //testing continue shopping button
     
@@ -197,14 +168,12 @@ public class GroupOlesyaTests {
         driver.findElement(By.xpath("//span[@class='shopping_cart_badge']")).click();
         driver.findElement(By.id("continue-shopping")).click();
 
-
-
         Assert.assertEquals(driver.getCurrentUrl(), MAIN_PAGE);
         driver.quit();
     }
 
     @Test
-    public void checkSortinByPriceLowToHigh() { //Stoyana's Test
+    public void checkSortingByPriceLowToHigh() { //Stoyana's Test
         loginToSite(LOGIN);
         List<Double> expectedResult = getListBeforeSorting("Price (low to high)");
         Assert.assertEquals(getListAfterSorting(), expectedResult);
@@ -213,33 +182,6 @@ public class GroupOlesyaTests {
 
     @Test
     public void checkSortingByPriceHighToLow() { //Stoyana's Test
-
-        standardUserLogin();
-        List<WebElement> beforeFilterPrice = driver.findElements(By.className("inventory_item_price"));
-        List<Double> beforeFilterPriceList = new ArrayList<>();
-
-        for (WebElement e : beforeFilterPrice) {
-            beforeFilterPriceList.add(Double.valueOf(e.getText().replace("$", "")));
-        }
-
-        WebElement funnelIcon = driver.findElement(By.className("select_container"));
-        funnelIcon.click();
-
-        Select drpOrder = new Select(driver.findElement(By.className("product_sort_container")));
-        drpOrder.selectByVisibleText("Price (high to low)");
-
-        List<WebElement> afterFilterPrice = driver.findElements(By.className("inventory_item_price"));
-        List<Double> afterFilterPriceList = new ArrayList<>();
-
-        for (WebElement e : afterFilterPrice) {
-            afterFilterPriceList.add(Double.valueOf(e.getText().replace("$", "")));
-        }
-        Collections.sort(beforeFilterPriceList);
-        Collections.reverse(beforeFilterPriceList); //reverse the sorted list
-
-        Assert.assertEquals(beforeFilterPriceList, afterFilterPriceList);
-
-        driver.quit();
         loginToSite(LOGIN);
         List<Double> expectedResult = getListBeforeSorting("Price (high to low)");
         Collections.reverse(expectedResult);
@@ -435,6 +377,7 @@ public class GroupOlesyaTests {
         String expectedFinishMessage = "Thank you for your order!";
 
         Assert.assertEquals(finishMessage, expectedFinishMessage);
+        driver.quit();
     }
 
     @Test
@@ -449,6 +392,7 @@ public class GroupOlesyaTests {
         List<String> sortOrderItems = productNames();
 
         Assert.assertEquals(firstOrderItems, sortOrderItems);
+        driver.quit();
     }
 
     @Test
@@ -462,6 +406,7 @@ public class GroupOlesyaTests {
         List<String> sortOrderItems = productNames();
 
         Assert.assertEquals(firstOrderItems, sortOrderItems);
+        driver.quit();
     }
 
     @Ignore
@@ -510,6 +455,7 @@ public class GroupOlesyaTests {
         WebElement cartListAfterRemove = driver.findElement(By.className("cart_list"));
         List<WebElement> cartItemsAfterRemove = cartListAfterRemove.findElements(By.className("cart_item"));
         Assert.assertTrue(cartItemsAfterRemove.isEmpty());
+        driver.quit();
     }
 
     @Test
@@ -524,7 +470,11 @@ public class GroupOlesyaTests {
         List<String> list = new ArrayList<>(windowsHandles);
         driver.switchTo().window(list.get(1));
 
-        Assert.assertTrue(driver.getCurrentUrl().contains(socialMedia.toLowerCase()) && driver.getCurrentUrl().contains(URL.substring(12, 17)));
+        Assert.assertTrue(driver
+                .getCurrentUrl()
+                .contains(socialMedia.toLowerCase()) && driver.getCurrentUrl()
+                .contains(URL.substring(12, 17)));
+        driver.quit();
     }
     @Test
         public void testUGLogOut() throws InterruptedException {
@@ -549,7 +499,7 @@ public class GroupOlesyaTests {
         logOut.click();
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
-
+        driver.quit();
         }
 
     @Test
@@ -597,6 +547,7 @@ public class GroupOlesyaTests {
         logOut.click();
 
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        driver.quit();
 
     }
 

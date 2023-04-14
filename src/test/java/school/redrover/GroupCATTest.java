@@ -1,6 +1,5 @@
 package school.redrover;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,13 +13,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GroupCATTest {
+public class GroupCATTest extends BaseTest {
 
     @FindBy(xpath = "//a[@class='btn btn-secondary m-1']")
     public WebElement buttonDocumentation;
@@ -39,37 +39,15 @@ public class GroupCATTest {
 
     public WebDriverWait webDriverWait10;
 
-    public WebDriver driver;
-
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public final ChromeOptions chromeOptions() {
-
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--window-size=1920,1080");
-
-        return chromeOptions;
-    }
-
-    public final WebDriver createDriver() {
-        WebDriver driver = new ChromeDriver(chromeOptions());
-
-        WebDriverManager.chromedriver().setup();
-        return driver;
-    }
-
     public final void getBaseUrl() {
-        driver = createDriver();
-        driver.get(BASE_URL);
+        getDriver().get(BASE_URL);
 
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(getDriver(), this);
     }
 
     public final WebDriverWait getWait10() {
         if (webDriverWait10 == null) {
-            webDriverWait10 = new WebDriverWait(driver, Duration.ofSeconds(5));
+            webDriverWait10 = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
         }
         return webDriverWait10;
     }
@@ -204,11 +182,11 @@ public class GroupCATTest {
 
         clickButtonDocumentation();
 
-        String actualTitle = driver.getTitle();
+        String actualTitle = getDriver().getTitle();
 
         Assert.assertEquals(actualTitle, expectedTitle);
 
-        driver.quit();
+        getDriver().quit();
     }
     @Test
     public void testSizeSupporters(){
@@ -223,7 +201,7 @@ public class GroupCATTest {
         getWait10();
 
         Assert.assertEquals(actualSizeOfSupporters, expectedSizeOfSupporters);
-        driver.quit();
+        getDriver().quit();
     }
 
     @Test
@@ -240,7 +218,7 @@ public class GroupCATTest {
 
         Assert.assertEquals(actualNamesOfSupporters, expectedNamesOfSupporters);
 
-        driver.quit();
+        getDriver().quit();
     }
 
     @Test
@@ -249,10 +227,10 @@ public class GroupCATTest {
 
         getBaseUrl();
         clickButtonDownload();
-        String actualTitle = driver.getTitle();
+        String actualTitle = getDriver().getTitle();
 
         Assert.assertEquals(actualTitle, expectedTitle);
-        driver.quit();
+        getDriver().quit();
     }
 
     @Test
@@ -266,6 +244,6 @@ public class GroupCATTest {
         List<String> actualNamesOfNamesOfFeatureListSegment = getNamesOfLists(featureListSegment);
 
         Assert.assertEquals(actualNamesOfNamesOfFeatureListSegment, expectedNamesOfFeatureListSegment);
-        driver.quit();
+        getDriver().quit();
     }
 }

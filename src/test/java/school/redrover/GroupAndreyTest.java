@@ -135,9 +135,8 @@ public class GroupAndreyTest extends BaseTest {
 
         WebElement heading = getDriver().findElement(
                 By.xpath("//*[@id=\"weather-widget\"]/div[2]/div[1]/div[1]/div[2]/div[1]/span"));
-        String heading1 = heading.getText();
         int expected;
-        if (heading1.contains("F")) {
+        if (heading.getText().contains("F")) {
             expected = 1;
         } else {
             expected = 2;

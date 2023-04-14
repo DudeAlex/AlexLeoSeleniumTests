@@ -71,7 +71,7 @@ public class GroupUkrTest {
     }
 
     @Test
-    public void AlexTest(){
+    public void OpenElementsTab(){
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless", "--window-size=1920,1080");
         WebDriver driver = new ChromeDriver(chromeOptions);

@@ -158,7 +158,7 @@ public class GroupOlesyaTests {
 
 
     @Test
-    //testing continue shopping button
+
     
     public void testContinueShopping()  {
 

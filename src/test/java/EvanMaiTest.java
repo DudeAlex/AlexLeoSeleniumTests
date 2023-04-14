@@ -1,36 +1,17 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import runner.BaseTest;
 
-import java.time.Duration;
 import java.util.List;
 
-public class EvanMaiTest {
-    private WebDriver driver;
-
-    @BeforeMethod
-    public void beforeMethod() {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        driver.get("https://askomdch.com/");
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        driver.quit();
-    }
+public class EvanMaiTest extends BaseTest {
 
     @Test
     public void test_TC_001_01() {
-        List<WebElement> listFeaturedProducts = driver.findElements(By.className("astra-shop-thumbnail-wrap"));
-        List<WebElement> listFeaturedProductsText = driver.findElements(By.className("astra-shop-summary-wrap"));
+        List<WebElement> listFeaturedProducts = getDriver().findElements(By.className("astra-shop-thumbnail-wrap"));
+        List<WebElement> listFeaturedProductsText = getDriver().findElements(By.className("astra-shop-summary-wrap"));
         for (int i = 0; i < listFeaturedProductsText.size(); i++) {
             String[] arrProductText = listFeaturedProductsText.get(i).getText().split("\n");
             if (arrProductText[2].split(" ").length > 1) {
@@ -41,7 +22,7 @@ public class EvanMaiTest {
 
     @Test
     public void test_TC_002_01() {
-        List<WebElement> listFeaturedProductsText = driver.findElements(By.className("astra-shop-summary-wrap"));
+        List<WebElement> listFeaturedProductsText = getDriver().findElements(By.className("astra-shop-summary-wrap"));
         for (WebElement webElement : listFeaturedProductsText) {
             String[] arrProductText = webElement.getText().split("\n");
             Assert.assertEquals(arrProductText[2].charAt(0), '$');
@@ -50,33 +31,33 @@ public class EvanMaiTest {
 
     @Test
     public void test_TC_003_01() {
-        WebElement text = driver.findElement(By.xpath("//h3[contains(text(), '25%')]"));
+        WebElement text = getDriver().findElement(By.xpath("//h3[contains(text(), '25%')]"));
         Assert.assertEquals(text.getText(), "25% OFF On all products");
     }
 
     @Test
     public void test_TC_004_01() {
-        driver.findElement(By.linkText("Account")).click();
-        Assert.assertEquals(driver.findElement(By.className("has-text-align-center")).getText(), "Account");
+        getDriver().findElement(By.linkText("Account")).click();
+        Assert.assertEquals(getDriver().findElement(By.className("has-text-align-center")).getText(), "Account");
     }
 
     @Test
     public void test_TC_005_01() {
-        driver.findElement(By.cssSelector("a[href='/store']")).click();
-        WebElement store = driver.findElement(By.xpath("//header[contains(@class, 'woocommerce-products-header')]//following::h1"));
+        getDriver().findElement(By.cssSelector("a[href='/store']")).click();
+        WebElement store = getDriver().findElement(By.xpath("//header[contains(@class, 'woocommerce-products-header')]//following::h1"));
         Assert.assertEquals(store.getText(), "Store");
     }
 
     @Test
     public void test_TC_006_01() {
-        List<WebElement> list = driver.findElements(By.className("astra-shop-thumbnail-wrap"));
+        List<WebElement> list = getDriver().findElements(By.className("astra-shop-thumbnail-wrap"));
         Assert.assertEquals(list.size(), 5);
     }
 
     @Test
     public void test_TC_007_01() {
-        driver.findElement(By.cssSelector("a[href='https://askomdch.com/product-category/men/']")).click();
-        WebElement buttonSearch = driver.findElement(By.cssSelector("button[value='Search']"));
+        getDriver().findElement(By.cssSelector("a[href='https://askomdch.com/product-category/men/']")).click();
+        WebElement buttonSearch = getDriver().findElement(By.cssSelector("button[value='Search']"));
         Assert.assertEquals(buttonSearch.getCssValue("background-color"), "rgba(49, 151, 214, 1)");
     }
 }

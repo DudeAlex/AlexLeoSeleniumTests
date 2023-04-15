@@ -448,14 +448,15 @@ public class GroupHighwayToAqaTest {
 
     @Test
     public void CreateAnAccountWithFacker() throws InterruptedException {
-       ChromeOptions chromeOptions = new ChromeOptions();
-       chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
-        System.out.println(password);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get(BASE_URL);
+
         WebElement href = driver.findElement(By.linkText("Create an Account"));
         href.click();
         String value = driver.getTitle();
+
         Assert.assertEquals(value, "Create New Customer Account");
         Thread.sleep(2000);
         driver.findElement(By.id("firstname")).sendKeys(firstName);
@@ -468,8 +469,10 @@ public class GroupHighwayToAqaTest {
         Thread.sleep(2000);
         WebElement title = driver.findElement(By.xpath("//div[@class='message-success success message']"));;
         String value1 =title.getText();
+
         Assert.assertEquals(value1, "Thank you for registering with Main Website Store.");
         System.out.println(password);
+
         driver.quit();
     }
 }

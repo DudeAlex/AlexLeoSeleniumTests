@@ -227,7 +227,7 @@ public class CaramelSyrupForJavaTest extends BaseTest {
         driver.quit();
     }
     @Test
-    public void testAnastasiyaAbr() {
+    public void testAnastasiyaAbramova() {
         String expectedResult = "https://openweathermap.org/";
         beforeMethod();
         getDriver().get("https://openweathermap.org/");

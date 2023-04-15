@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -19,12 +18,6 @@ import static org.testng.Assert.assertTrue;
 public class GroupHighwayToAqaTest {
 
     private static final String BASE_URL = "https://magento.softwaretestingboard.com/";
-    Faker javaFaker = Faker.instance();
-
-    public Faker getJavaFaker() {
-        return javaFaker;
-    }
-
     Faker faker = new Faker();
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
@@ -34,7 +27,7 @@ public class GroupHighwayToAqaTest {
 
 
     @Test
-    public void openContactUsPageTest() {
+    public void testOpenContactUsPage() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
 
@@ -455,26 +448,22 @@ public class GroupHighwayToAqaTest {
 
     @Test
     public void CreateAnAccountWithFacker() throws InterruptedException {
-      //  ChromeOptions chromeOptions = new ChromeOptions();
-      //  chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+       ChromeOptions chromeOptions = new ChromeOptions();
+       chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
         System.out.println(password);
-        WebDriver driver = new ChromeDriver(/*chromeOptions*/);
+        WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get(BASE_URL);
         WebElement href = driver.findElement(By.linkText("Create an Account"));
         href.click();
         String value = driver.getTitle();
         Assert.assertEquals(value, "Create New Customer Account");
+        Thread.sleep(2000);
         driver.findElement(By.id("firstname")).sendKeys(firstName);
-        Thread.sleep(2000);
         driver.findElement(By.id("lastname")).sendKeys(lastName);
-        Thread.sleep(2000);
         driver.findElement(By.id("email_address")).sendKeys(email);
-        Thread.sleep(2000);
         driver.findElement(By.id("password")).sendKeys(password);
-        Thread.sleep(2000);
         driver.findElement(By.id("password-confirmation")).sendKeys(password);
-        Thread.sleep(2000);
-        WebElement button = driver.findElement(By.xpath("//*[@id='form-validate']/div/div[1]/button/span"));
+        WebElement button = driver.findElement(By.xpath("//*[@id='form-validate']//button/span[text()='Create an Account']"));
         button.click();
         Thread.sleep(2000);
         WebElement title = driver.findElement(By.xpath("//div[@class='message-success success message']"));;

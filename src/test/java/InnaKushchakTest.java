@@ -41,7 +41,7 @@ public class InnaKushchakTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(By.cssSelector("ul.products.columns-5")).findElements(By.tagName("li")).size(), 5);
     }
     @Test
-    public void testManSearchButtonColorVerification() {
+    public void testSearchButtonColorVerification() {
 
         getDriver().findElement(By.cssSelector("li[id='menu-item-1228']")).click();
         Assert.assertEquals(getDriver().findElement(By.xpath("//button[@value='Search']")).getCssValue("background-color"), "rgba(49, 151, 214, 1)");

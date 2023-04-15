@@ -463,7 +463,7 @@ public class GroupHighwayToAqaTest {
         driver.findElement(By.id("email_address")).sendKeys(email);
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.id("password-confirmation")).sendKeys(password);
-        WebElement button = driver.findElement(By.xpath("//*[@id='form-validate']//button/span[text()='Create an Account']"));
+        WebElement button = driver.findElement(By.xpath("//form[@id='form-validate']//button/span[text()='Create an Account']"));
         button.click();
         Thread.sleep(2000);
         WebElement title = driver.findElement(By.xpath("//div[@class='message-success success message']"));;

@@ -60,4 +60,25 @@ public class DreamTeamTest extends BaseTest {
 
     }
 
+    @Test
+    public void testZoom(){
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get("https://zoom.us");
+
+        String title = driver.getTitle();
+        Assert.assertEquals("One platform to connect | Zoom", title);
+
+        WebElement solutionButton = driver.findElement(By.id("btnNewSolutions"));
+        solutionButton.click();
+
+        WebElement discoverButton = driver.findElement(By.id("discoverZoom"));
+        String link = discoverButton.getAttribute("href");
+        Assert.assertEquals(link, "https://explore.zoom.us/en/industry/");
+        driver.quit();
+
+    }
+
 }

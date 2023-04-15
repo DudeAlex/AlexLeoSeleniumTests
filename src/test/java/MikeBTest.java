@@ -2,19 +2,34 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class MikeBTest {
 
+    private WebDriver driver;
+
+    @BeforeMethod
+    private void beforeMethod() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "headless", "--window-size=1920,1080");
+        driver = new ChromeDriver(chromeOptions);
+    }
+
+    @AfterMethod
+    private void afterMethod(){
+        driver.quit();
+    }
+
+
     @Test
-    //Home Page | Featured Products: Verify "Sale!" icon is present on sale products
-    public void Test_TC_001_01() throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-
+    public void testFieldValidation() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
         Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
@@ -25,17 +40,11 @@ public class MikeBTest {
 
         String saleTag = driver.findElement(By.xpath("//span[@class=\"onsale\"]")).getText();
         Assert.assertEquals(saleTag, "Sale!");
-        driver.quit();
-
-
     }
 
     @Test
-    //Home Page | Featured Products: Validate "$" sign is present under all displayed products
-    public void Test_TC_002_02() throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-
+    public void testCurrencyValidation() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
         Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
@@ -43,17 +52,11 @@ public class MikeBTest {
         String currencyValidation = driver.findElement(By.xpath("//span[@class=\"woocommerce-Price-currencySymbol\"]")).getText();
         Assert.assertEquals(currencyValidation, "$");
         Thread.sleep(3000);
-        driver.quit();
-
-
     }
 
     @Test
-    //Home Page: Verify the discount message is presented on the page
-    public void Test_TC_003_03() throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-
+    public void testDiscountCheckt() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
         Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
@@ -61,18 +64,11 @@ public class MikeBTest {
         String discountCheck = driver.findElement(By.xpath("//h3[@class=\"has-text-align-center has-white-color has-text-color has-medium-font-size\"]")).getText();
         Assert.assertEquals(discountCheck, "25% OFF On all products");
         Thread.sleep(3000);
-
-        driver.quit();
-
-
     }
 
     @Test
-    //Home Page: Verify the Login page is opened after clicking on the "Account" button
-    public void Test_TC_004_04() throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-
+    public void testCheckMenuItem() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
         Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/");
@@ -80,17 +76,11 @@ public class MikeBTest {
         driver.findElement(By.xpath("//li[@id=\"menu-item-1237\"]")).click();
         Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/account/");
         Thread.sleep(2000);
-
-        driver.quit();
-
-
     }
 
     @Test
-    //Home Page: Verify the Store page is opened after clicking on the "Shop Now" button
-    public void Test_TC_005_05() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
 
+    public void testValidateWebsitet() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
         Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/");
@@ -98,17 +88,11 @@ public class MikeBTest {
         driver.findElement(By.xpath("//a[@class=\"wp-block-button__link\"]")).click();
         Assert.assertEquals(driver.getCurrentUrl(), "https://askomdch.com/store");
         Thread.sleep(3000);
-
-        driver.quit();
-
-
     }
 
     @Test
-    //Home Page | Featured Products: Verify number of products displayed
-    public void Test_TC_006_06() {
-        WebDriver driver = new ChromeDriver();
 
+    public void testConfirmAllProducts() {
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
         Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
@@ -116,13 +100,7 @@ public class MikeBTest {
         WebElement allProducts = driver.findElement(By.xpath("//ul[@class=\"products columns-5\"]"));
         List<WebElement> products = allProducts.findElements(By.tagName("li"));
         Assert.assertEquals(products.size(), 5);
-
-        driver.quit();
-
-
     }
-
-
 }
 
 

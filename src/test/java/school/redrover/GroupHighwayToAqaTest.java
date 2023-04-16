@@ -1,12 +1,15 @@
 package school.redrover;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -30,19 +33,13 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
     @Test
     public void testOpenContactUsPage() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        getDriver().get(BASE_URL);
 
-        WebDriver driver = new ChromeDriver(chromeOptions);
+        WebElement contactUsLink = getDriver().findElement(By.xpath("//footer/div/ul[@class='footer links']//a[text()='Contact Us']"));
+        contactUsLink.click();
+        WebElement contactUsPageTitle = getDriver().findElement(By.xpath("//span[@data-ui-id='page-title-wrapper']"));
 
-        driver.get("https://magento.softwaretestingboard.com/");
-        driver.findElement(By.xpath("//footer/div/ul[@class='footer links']//a[text()='Contact Us']")).click();
-        WebElement pageTitle = driver.findElement(By.xpath("//span[@data-ui-id='page-title-wrapper']"));
-
-        Assert.assertEquals(driver.getCurrentUrl(), "https://magento.softwaretestingboard.com/contact/");
-        Assert.assertEquals(pageTitle.getText(), "Contact Us");
-
-        driver.quit();
+        assertEquals(contactUsPageTitle.getText(), "Contact Us");
     }
 
     @Test

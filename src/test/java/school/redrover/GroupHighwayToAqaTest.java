@@ -126,9 +126,10 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
         WebDriver driver = new ChromeDriver(chromeOptions);
 
-        driver.get(BASE_URL);
+        driver.get("https://magento.softwaretestingboard.com/");
 
-        Assert.assertEquals(driver.getTitle(), "Home Page");
+        String title = driver.getTitle();
+        Assert.assertEquals("Home Page", title);
 
         driver.quit();
     }
@@ -430,7 +431,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
         WebElement blockPromo = driver.findElement(By.xpath("//span[@class='action more button']"));
         blockPromo.click();
-       Thread.sleep(2000);
+        Thread.sleep(2000);
         String title = driver.findElement(By.xpath("//span[@class='base']")).getText();
 
         Assert.assertEquals(title, "New Luma Yoga Collection");
@@ -467,6 +468,38 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
         driver.quit();
     }
+
+    @Test
+    public void testSubscription() throws InterruptedException {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get(BASE_URL);
+        char[] prefix = new char[6];
+        for (int i = 0; i < prefix.length; i++) {
+            prefix[i] = (char) (Math.random() * (122 - 97) + 97);
+        }
+        WebElement emailInput = driver.findElement(By.cssSelector("#newsletter"));
+        String emailPostfix = "@mail.ru";
+        String emailPrefix = new String(prefix);
+        String email = emailPrefix.concat(emailPostfix);
+        emailInput.sendKeys(email);
+        WebElement submitButton = driver.findElement(By
+                .xpath("//button[@title = 'Subscribe']"));
+        submitButton.click();
+        Thread.sleep(5000);
+        WebElement message = driver.findElement(By
+                .xpath("//div[@data-bind = 'html: $parent.prepareMessageForHtml(message.text)']"));
+        Assert.assertEquals(message.getText(), "Thank you for your subscription.");
+        emailInput = driver.findElement(By.xpath("//input[@placeholder = 'Enter your email address']"));
+        emailInput.sendKeys(email);
+        submitButton = driver.findElement(By
+                .xpath("//button[@title = 'Subscribe']"));
+        submitButton.click();
+        Thread.sleep(5000);
+        WebElement errorMessage = driver.findElement(By
+                .xpath("//div[@data-bind = 'html: $parent.prepareMessageForHtml(message.text)']"));
+        Assert.assertEquals(errorMessage.getText(), "This email address is already subscribed.");
+        driver.quit();
+    }
 }
-
-

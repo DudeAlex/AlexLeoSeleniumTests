@@ -219,13 +219,13 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.get("https://magento.softwaretestingboard.com");
-        WebElement href = driver.findElement(By.xpath("//div/nav/ul/li [1]"));
+        WebElement href = driver.findElement(By.xpath("//div/nav/ul/li[1]"));
         String value = href.getText();
         assertEquals(value, "What's New");
-        WebElement href2 = driver.findElement(By.xpath("//div/nav/ul/li [2]"));
+        WebElement href2 = driver.findElement(By.xpath("//div/nav/ul/li[2]"));
         String value1 = href2.getText();
         assertEquals(value1, "Women");
-        WebElement href3 = driver.findElement(By.xpath("//div/nav/ul/li [3]"));
+        WebElement href3 = driver.findElement(By.xpath("//div/nav/ul/li[3]"));
         String value2 = href3.getText();
         assertEquals(value2, "Men");
         WebElement href4 = driver.findElement(By.xpath("//div/nav/ul/li [4]"));
@@ -439,7 +439,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
     }
 
     @Test
-    public void CreateAnAccountWithFacker() throws InterruptedException {
+    public void testCreateAnAccountWithFacker() throws InterruptedException {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
         WebDriver driver = new ChromeDriver(chromeOptions);

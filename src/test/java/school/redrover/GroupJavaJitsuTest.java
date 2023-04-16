@@ -1,8 +1,6 @@
 package school.redrover;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -15,8 +13,8 @@ import static org.testng.Assert.assertEquals;
 
 public class GroupJavaJitsuTest extends BaseTest {
 
-   @Ignore
-   @Test
+    @Ignore
+    @Test
     public void testCarServiceOptions() {
         getDriver().get("https://www.homesteadhyundai.net/");
         getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
@@ -151,23 +149,22 @@ public class GroupJavaJitsuTest extends BaseTest {
 
         Assert.assertEquals("ПроДокторов – сайт отзывов пациентов о врачах №1 в России", title);
 
-        WebElement urlElement = getDriver().findElement(By.className("b-choose-town-btn-v2"));
-        urlElement.click();
+        WebElement urlTownElement = getDriver().findElement(By.className("b-choose-town-btn-v2"));
+        urlTownElement.click();
         WebElement inputElementSearch = getDriver().findElement(By.className("b-choose-town-popup__search-input"));
         inputElementSearch.sendKeys("Краснодар");
         Thread.sleep(2000);
-        WebElement SearchboxElement = getDriver().findElement(By.className("tt-dataset"));
-        SearchboxElement.click();
+        WebElement SearchBoxElement = getDriver().findElement(By.className("tt-dataset"));
+        SearchBoxElement.click();
         Thread.sleep(2000);
-
-//      WebElement inputElement = driver.findElement(By.className("text-field__input"));
-        getDriver().findElement(By.xpath("//div[@class = 'text-field base-search__input'")).click();
-        getDriver().findElement(By.xpath("//div[@class = 'text-field base-search__input']/div[1]/div[1]/input[1]")).sendKeys("Ницакова Марина Петровна");
+        WebElement inputPlaceholderElement = getDriver().findElement(By.xpath("//input[@placeholder = 'Врачи, клиники, услуги']"));
+        Thread.sleep(2000);
+        inputPlaceholderElement.sendKeys("Ницакова Марина Петровна");
         WebElement submitButton = getDriver().findElement(By.className("base-search__button"));
         submitButton.click();
-        WebElement link = getDriver().findElement(By.className("b-card__name-link"));
-        link.click();
-        WebElement text = getDriver().findElement(By.className("ui-text"));
+        WebElement linkName = getDriver().findElement(By.className("b-card__name-link"));
+        linkName.click();
+
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://prodoctorov.ru/krasnodar/vrach/177664-nicakova/");
     }
 
@@ -252,25 +249,26 @@ public class GroupJavaJitsuTest extends BaseTest {
         Assert.assertEquals("Soccer Zone", getDriver().getTitle());
     }
 
-        @Test
-        public void testKatya2 () {
-            getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
+    @Test
+    public void testKatya2() {
+        getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
 
-            String title = getDriver().getTitle();
-            assertEquals("Web form", title);
+        String title = getDriver().getTitle();
+        assertEquals("Web form", title);
 
-            getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-            WebElement textBox = getDriver().findElement(By.name("my-text"));
-            WebElement submitButton = getDriver().findElement(By.cssSelector("button"));
+        WebElement textBox = getDriver().findElement(By.name("my-text"));
+        WebElement submitButton = getDriver().findElement(By.cssSelector("button"));
 
-            textBox.sendKeys("Selenium");
-            submitButton.click();
+        textBox.sendKeys("Selenium");
+        submitButton.click();
 
-            WebElement message = getDriver().findElement(By.id("message"));
-            String value = message.getText();
-            assertEquals("Received!", value);
-        }
+        WebElement message = getDriver().findElement(By.id("message"));
+        String value = message.getText();
+        assertEquals("Received!", value);
+    }
+
     @Test
     public void formFillOut() {
         getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
@@ -344,28 +342,29 @@ public class GroupJavaJitsuTest extends BaseTest {
         Assert.assertEquals(checkMultiBox.getText(), "Hyundai");
     }
 
-        @Test
-        public void Liliia_loginTestErrorAppears() {
-            getDriver().get("https://automationteststore.com/");
+    @Test
+    public void Liliia_loginTestErrorAppears() {
+        getDriver().get("https://automationteststore.com/");
 
-            WebElement loginOrRegister = getDriver().findElement(By.xpath("//ul[@id='customer_menu_top']/li"));
-            loginOrRegister.click();
+        WebElement loginOrRegister = getDriver().findElement(By.xpath("//ul[@id='customer_menu_top']/li"));
+        loginOrRegister.click();
 
-            WebElement loginNameInput = getDriver().findElement(By.xpath("//input[@id='loginFrm_loginname']"));
-            loginNameInput.sendKeys("avadakedavra");
+        WebElement loginNameInput = getDriver().findElement(By.xpath("//input[@id='loginFrm_loginname']"));
+        loginNameInput.sendKeys("avadakedavra");
 
-            WebElement passwordInput = getDriver().findElement(By.xpath("//input[@id='loginFrm_password']"));
-            passwordInput.sendKeys("12345");
+        WebElement passwordInput = getDriver().findElement(By.xpath("//input[@id='loginFrm_password']"));
+        passwordInput.sendKeys("12345");
 
-            WebElement loginButton = getDriver().findElement(By.xpath("//button[@title='Login']"));
-            loginButton.click();
+        WebElement loginButton = getDriver().findElement(By.xpath("//button[@title='Login']"));
+        loginButton.click();
 
-            WebElement alert = getDriver().findElement(By.xpath("//div[@class='alert alert-error alert-danger']"));
-            WebElement closeButton = alert.findElement(By.tagName("button"));
-            String alertText = alert.getText().replace(closeButton.getText(), "").trim();
+        WebElement alert = getDriver().findElement(By.xpath("//div[@class='alert alert-error alert-danger']"));
+        WebElement closeButton = alert.findElement(By.tagName("button"));
+        String alertText = alert.getText().replace(closeButton.getText(), "").trim();
 
-            Assert.assertEquals(alertText, "Error: Incorrect login or password provided.");
+        Assert.assertEquals(alertText, "Error: Incorrect login or password provided.");
     }
+
     @Test
     public void testfindBookAndreyP() throws InterruptedException {
         getDriver().get("https://demoqa.com/");

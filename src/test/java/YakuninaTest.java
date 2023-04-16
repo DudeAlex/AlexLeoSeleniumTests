@@ -1,35 +1,34 @@
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import runner.BaseTest;
+
 import static org.testng.Assert.assertEquals;
 import java.time.Duration;
 
-public class YakuninaTest {
+public class YakuninaTest extends BaseTest {
+
+    //TC_004
     @Test
-    public void ProjectTest() {
+    public void testAccountButtonOpensLoginPage() {
+        String title = getDriver().getTitle();
+        assertEquals(title, "AskOmDch – Become a Selenium automation expert!");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
+        getDriver().findElement(By.xpath("//a[@href=\"https://askomdch.com/account/\"][@class=\"menu-link\"]")).click();
+        assertEquals("https://askomdch.com/account/", getDriver().getCurrentUrl());
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+    }
 
-        String title = driver.getTitle();
-        assertEquals("Web form", title);
+    //TC_005
+    @Test
+    public void testShopNowButtonOpensUpStorePage() {
+        String title = getDriver().getTitle();
+        assertEquals(title, "AskOmDch – Become a Selenium automation expert!");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-
-        WebElement textBox = driver.findElement(By.name("my-text"));
-        WebElement submitButton = driver.findElement(By.cssSelector("button"));
-
-        textBox.sendKeys("Selenium");
-        submitButton.click();
-
-        WebElement message = driver.findElement(By.id("message"));
-        String value = message.getText();
-        assertEquals("Received!", value);
-
-        driver.quit();
-
+        getDriver().findElement(By.cssSelector("a.wp-block-button__link")).click();
+        assertEquals("https://askomdch.com/store", getDriver().getCurrentUrl());
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
     }
 }
 

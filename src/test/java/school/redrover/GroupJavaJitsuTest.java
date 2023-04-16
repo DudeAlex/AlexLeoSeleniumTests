@@ -252,7 +252,7 @@ public class GroupJavaJitsuTest extends BaseTest {
     @Test
     public void testKatya2() {
         getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
-
+        
         String title = getDriver().getTitle();
         assertEquals("Web form", title);
 
@@ -260,7 +260,7 @@ public class GroupJavaJitsuTest extends BaseTest {
 
         WebElement textBox = getDriver().findElement(By.name("my-text"));
         WebElement submitButton = getDriver().findElement(By.cssSelector("button"));
-
+        
         textBox.sendKeys("Selenium");
         submitButton.click();
 

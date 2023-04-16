@@ -497,4 +497,30 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
         assertEquals(cartDropDownDialog.getText(),"You have no items in your shopping cart.");
     }
+
+    @Test
+    public void testNumOfItemsInCartCounter() throws InterruptedException {
+        getDriver().get(BASE_URL);
+
+        Thread.sleep(3000);
+        WebElement womenLink = getDriver().findElement(By.xpath("//a[@id='ui-id-4']"));
+        womenLink.click();
+        WebElement topsLink = getDriver().findElement(By.xpath("//dl[@class='options']//a[contains(text(), 'Tops')]"));
+        topsLink.click();
+        WebElement firstItemInListLink = getDriver().findElement(By.xpath("//ol[@class='products list items product-items']/li//a"));
+        firstItemInListLink.click();
+
+        Thread.sleep(3000);
+        WebElement itemSize = getDriver().findElement(By.xpath("//div[@class='swatch-option text']"));
+        itemSize.click();
+        WebElement itemColor = getDriver().findElement(By.xpath("//div[@class='swatch-option color']"));
+        itemColor.click();
+        WebElement addToCartButton = getDriver().findElement(By.id("product-addtocart-button"));
+        addToCartButton.click();
+
+        Thread.sleep(3000);
+        WebElement numOfItemsInCart = getDriver().findElement(By.xpath("//div[@data-block='minicart']//span[@class='counter-number']"));
+
+        assertEquals(numOfItemsInCart.getText(), "1");
+    }
 }

@@ -551,4 +551,12 @@ public class AlexLeoEpicGroupTest extends BaseTest{
 
         Assert.assertEquals(buttonSearch.getCssValue("background-color"), "rgba(49, 151, 214, 1)");
     }
+
+    @Test
+    public void testVerifyPromoText() {
+        getDriver().get("https://askomdch.com");
+        WebElement promoText = getDriver().findElement(By.xpath(".//h3[@class = 'has-text-align-center has-white-color has-text-color has-medium-font-size']"));
+
+        Assert.assertEquals(promoText.getText(), "25% OFF On all products");
+    }
 }

@@ -1,26 +1,27 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import runner.BaseTest;
 
-import java.time.Duration;
+import java.util.List;
 
-public class AlexLeoTest {
+public class AlexLeoTest extends BaseTest {
 
     @Test
-    public void firstTest(){
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get("https://askomdch.com/");
-        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
-        driver.quit();
+    public void testCheckSiteTitle(){
+        getDriver().get("https://askomdch.com/");
+        Assert.assertEquals(getDriver().getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        getDriver().quit();
     }
 
     @Test
-    public void webDriverTest(){
+    public void testNumberOfFeaturedProducts(){
+        WebElement featuredProducts = getDriver()
+                .findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
+        List<WebElement> products = featuredProducts.findElements(By.tagName("li"));
 
-
+        Assert.assertEquals(products.size(), 5);
     }
 }
 

@@ -1,7 +1,5 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
@@ -10,9 +8,7 @@ import java.util.List;
 
 public class AnnaMorozTest extends BaseTest {
     @Test
-    //TC_002.06 Home Page | Featured Products: Validate "$" sign is present under all displayed products
     public void testSecondOriginal() {
-
         String text = getDriver().findElement(By.cssSelector("h2.has-text-align-center")).getText();
 
         Assert.assertEquals(text,"Featured Products");
@@ -24,7 +20,6 @@ public class AnnaMorozTest extends BaseTest {
 
     @Test
     public void testOpenShop() {
-
         getDriver().findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
         String text = getDriver().findElement(By.xpath("//h1[@class='woocommerce-products-header__title page-title']")).getText();
 
@@ -33,7 +28,6 @@ public class AnnaMorozTest extends BaseTest {
 
     @Test
     public void testCheckSale() {
-
         List<WebElement> listFeaturedProducts = getDriver().findElements(By.className("astra-shop-thumbnail-wrap"));
         List<WebElement> listFeaturedProductsText = getDriver().findElements(By.className("astra-shop-summary-wrap"));
         for (int i = 0; i < listFeaturedProductsText.size(); i++) {
@@ -46,10 +40,17 @@ public class AnnaMorozTest extends BaseTest {
 
     @Test
     public void testCheckContactUs() {
-
         getDriver().findElement(By.xpath("//div[@class ='wp-block-button is-style-fill']")).click();
         String textContact  = getDriver().findElement(By.xpath("//h1[@class ='has-text-align-center']")).getText();
 
         Assert.assertEquals(textContact,"Contact Us");
+    }
+
+    @Test
+    public void testVerifyNumberOfProduct() {
+        getDriver().findElement(By.xpath("//li[@id='menu-item-1229']/a")).click();
+
+        List<WebElement> womenProducts = getDriver().findElements(By.xpath("//div[@class='astra-shop-thumbnail-wrap']"));
+        Assert.assertEquals(womenProducts.size(), 7);
     }
 }

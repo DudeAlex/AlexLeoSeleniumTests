@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 
 public abstract class BaseTest {
 
-    public WebDriver driver;
+    protected WebDriver driver;
 
     @BeforeMethod
     protected void beforeMethod() {

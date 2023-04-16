@@ -440,28 +440,25 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
     @Test
     public void testCreateAnAccountWithFacker() throws InterruptedException {
-        driver.get(BASE_URL);
+        getDriver().get(BASE_URL);
 
-        WebElement href = driver.findElement(By.linkText("Create an Account"));
-        href.click();
-        String value = driver.getTitle();
+        WebElement createAnAccountHref = getDriver().findElement(By.linkText("Create an Account"));
+        createAnAccountHref.click();
+        String value = getDriver().getTitle();
 
         Assert.assertEquals(value, "Create New Customer Account");
         Thread.sleep(2000);
-        driver.findElement(By.id("firstname")).sendKeys(firstName);
-        driver.findElement(By.id("lastname")).sendKeys(lastName);
-        driver.findElement(By.id("email_address")).sendKeys(email);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("password-confirmation")).sendKeys(password);
-        WebElement buttonForCreationAccout = driver.findElement(By.xpath("//form[@id='form-validate']//button/span[text()='Create an Account']"));
+        getDriver().findElement(By.id("firstname")).sendKeys(firstName);
+        getDriver().findElement(By.id("lastname")).sendKeys(lastName);
+        getDriver().findElement(By.id("email_address")).sendKeys(email);
+        getDriver().findElement(By.id("password")).sendKeys(password);
+        getDriver().findElement(By.id("password-confirmation")).sendKeys(password);
+        WebElement buttonForCreationAccout = getDriver().findElement(By.xpath("//form[@id='form-validate']//button/span[text()='Create an Account']"));
         buttonForCreationAccout.click();
         Thread.sleep(2000);
-        WebElement titleOfSucessCreationAccountMessage = driver.findElement(By.xpath("//div[@class='message-success success message']"));;
+        WebElement titleOfSucessCreationAccountMessage = getDriver().findElement(By.xpath("//div[@class='message-success success message']"));;
         String value1 =titleOfSucessCreationAccountMessage.getText();
 
         Assert.assertEquals(value1, "Thank you for registering with Main Website Store.");
-        System.out.println(password);
-
-        driver.quit();
     }
 }

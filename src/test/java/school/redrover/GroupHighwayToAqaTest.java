@@ -36,8 +36,8 @@ public class GroupHighwayToAqaTest extends BaseTest {
         getDriver().get(BASE_URL);
 
         WebElement contactUsLink = getDriver().findElement(By.xpath("//footer/div/ul[@class='footer links']//a[text()='Contact Us']"));
-        WebElement contactUsPageTitle = getDriver().findElement(By.xpath("//span[@data-ui-id='page-title-wrapper']"));
         contactUsLink.click();
+        WebElement contactUsPageTitle = getDriver().findElement(By.xpath("//span[@data-ui-id='page-title-wrapper']"));
 
         assertEquals(contactUsPageTitle.getText(), "Contact Us");
     }

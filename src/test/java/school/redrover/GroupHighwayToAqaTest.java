@@ -457,8 +457,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
         buttonForCreationAccout.click();
         Thread.sleep(2000);
         WebElement titleOfSucessCreationAccountMessage = getDriver().findElement(By.xpath("//div[@class='message-success success message']"));;
-        String value1 =titleOfSucessCreationAccountMessage.getText();
 
-        Assert.assertEquals(value1, "Thank you for registering with Main Website Store.");
+        Assert.assertEquals(titleOfSucessCreationAccountMessage.getText(), "Thank you for registering with Main Website Store.");
     }
 }

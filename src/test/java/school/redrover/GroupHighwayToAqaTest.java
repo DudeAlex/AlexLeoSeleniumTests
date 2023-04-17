@@ -13,7 +13,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -31,7 +30,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
     String email = faker.internet().emailAddress();
-    String password = faker.internet().password(11, 12, true,
+    String password = faker.internet().password(11,12,true,
             true, true);
 
 
@@ -87,7 +86,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
         Assert.assertEquals(text.getText(), "Create New Customer Account");
 
-        WebElement firstName = getDriver().findElement(By.xpath("//input[@id = 'firstname']"));
+        WebElement firstName =getDriver().findElement(By.xpath("//input[@id = 'firstname']"));
         firstName.sendKeys("Marina");
         WebElement lastName = getDriver().findElement(By.xpath("//input[@id = 'lastname']"));
         lastName.sendKeys("Los");
@@ -424,8 +423,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
         WebElement buttonForCreationAccout = getDriver().findElement(By.xpath("//form[@id='form-validate']//button/span[text()='Create an Account']"));
         buttonForCreationAccout.click();
         Thread.sleep(2000);
-        WebElement titleOfSucessCreationAccountMessage = getDriver().findElement(By.xpath("//div[@class='message-success success message']"));
-        ;
+        WebElement titleOfSucessCreationAccountMessage = getDriver().findElement(By.xpath("//div[@class='message-success success message']"));;
 
         Assert.assertEquals(titleOfSucessCreationAccountMessage.getText(), "Thank you for registering with Main Website Store.");
     }
@@ -475,7 +473,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
         WebElement cartDropDownDialog = getDriver().findElement(
                 By.xpath("//div[@id='ui-id-1']//div[@class='block-content']//strong"));
 
-        assertEquals(cartDropDownDialog.getText(), "You have no items in your shopping cart.");
+        assertEquals(cartDropDownDialog.getText(),"You have no items in your shopping cart.");
     }
 
     @Test
@@ -502,6 +500,25 @@ public class GroupHighwayToAqaTest extends BaseTest {
         WebElement numOfItemsInCart = getDriver().findElement(By.xpath("//div[@data-block='minicart']//span[@class='counter-number']"));
 
         assertEquals(numOfItemsInCart.getText(), "1");
+    }
+
+    @Test
+    public void testHoodiesAndSweatshirtsHeader() throws InterruptedException {
+        getDriver().get(BASE_URL);
+
+        Thread.sleep(2000);
+        WebElement whatsNewLink = getDriver().findElement(By.xpath("//a[@id='ui-id-3']"));
+        whatsNewLink.click();
+
+        Thread.sleep(2000);
+
+        WebElement hoodiesAndSweatshirtsLink = getDriver().findElement
+                (By.xpath("//div[@class='categories-menu']/ul/li/a[contains(@href,'sweatshirts-women')]"));
+        hoodiesAndSweatshirtsLink.click();
+
+        Thread.sleep(2000);
+
+        Assert.assertEquals(getDriver().findElement(By.xpath("//span[@data-ui-id='page-title-wrapper']")).getText(),"Hoodies & Sweatshirts");
     }
 
     @Test
@@ -535,8 +552,3 @@ public class GroupHighwayToAqaTest extends BaseTest {
         driver.quit();
     }
 }
-
-
-
-
-

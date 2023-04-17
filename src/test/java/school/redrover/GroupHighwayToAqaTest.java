@@ -1,8 +1,6 @@
 package school.redrover;
 
 import com.github.javafaker.Faker;
-import org.checkerframework.checker.i18nformatter.qual.I18nChecksFormat;
-import org.openqa.selenium.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -500,5 +498,24 @@ public class GroupHighwayToAqaTest extends BaseTest {
         WebElement numOfItemsInCart = getDriver().findElement(By.xpath("//div[@data-block='minicart']//span[@class='counter-number']"));
 
         assertEquals(numOfItemsInCart.getText(), "1");
+    }
+
+    @Test
+    public void testHoodiesAndSweatshirtsHeader() throws InterruptedException {
+        getDriver().get(BASE_URL);
+
+        Thread.sleep(2000);
+        WebElement whatsNewLink = getDriver().findElement(By.xpath("//a[@id='ui-id-3']"));
+        whatsNewLink.click();
+
+        Thread.sleep(2000);
+
+        WebElement hoodiesAndSweatshirtsLink = getDriver().findElement
+                (By.xpath("//div[@class='categories-menu']/ul/li/a[contains(@href,'sweatshirts-women')]"));
+        hoodiesAndSweatshirtsLink.click();
+
+        Thread.sleep(2000);
+
+        Assert.assertEquals(getDriver().findElement(By.xpath("//span[@data-ui-id='page-title-wrapper']")).getText(),"Hoodies & Sweatshirts");
     }
 }

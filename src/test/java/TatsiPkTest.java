@@ -5,42 +5,34 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+import runner.BaseTest;
 
-public class TatsiPkTest {
+public class TatsiPkTest extends BaseTest {
 
-    @Ignore
     @Test
-    public void Test_TC_001_Original() throws InterruptedException {
+    public void testCheckSalesIcon() throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
+        getDriver().findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
+        WebElement icon = getDriver().findElement(By.xpath("//span[@class='onsale']"));
 
-        driver.manage().window().maximize();
-        driver.get("https://askomdch.com/");
-        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
-
-        String fieldValidation = driver.findElement(By.xpath("//h2[@class=\"has-text-align-center\"]")).getText();
-        Assert.assertEquals(fieldValidation, "Featured Products");
-
-        Thread.sleep(2000);
-
-        String saleTag = driver.findElement(By.xpath("//span[@class=\"onsale\"]")).getText();
-        Assert.assertEquals(saleTag, "Sale!");
-
-        driver.quit();
+        Assert.assertEquals(icon.getText(), "Sale!");
     }
 
     @Test
-    public void Test_TC_003_Original() throws InterruptedException {
+    public void testCheckDiscount() throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://askomdch.com/");
+        WebElement discount = getDriver().findElement(By.xpath("//h3[contains(text(), '25%')]"));
 
-        Thread.sleep(2000);
+        Assert.assertEquals(discount.getText(), "25% OFF On all products");
+    }
 
-        WebElement text = driver.findElement(By.xpath("//h3[contains(text(), '25%')]"));
-        Assert.assertEquals(text.getText(), "25% OFF On all products");
-
-        driver.quit();
+    @Ignore
+    @Test
+    //TC_005 Home Page: Verify the Store page is opened after clicking on the "Shop Now" button
+    public void testShopNowButton() {
+;
+        Assert.assertEquals(getDriver().getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        getDriver().findElement(By.xpath("//a[@href='/Men']")).click();
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://askomdch.com/men/");
     }
 }

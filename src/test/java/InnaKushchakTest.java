@@ -83,14 +83,15 @@ public class InnaKushchakTest extends BaseTest {
         }
         
     @Test
-    public void testWebDriverSearch(){
+    public void testWebDriverSearch() {
 
-        WebElement featureProducts=getDriver().findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
-        List<WebElement> products=featureProducts.findElements(By.tagName("li"));
+        WebElement featureProducts = getDriver().findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
+        List<WebElement> products = featureProducts.findElements(By.tagName("li"));
         products.get(0).getAttribute("baseURI");
         products.get(0).findElement(By.tagName("h2")).getAttribute("textContent");
         products.get(0).findElement(By.tagName("h2")).getAttribute("outerHTML");
-        System.out.println( products.get(0).findElement(By.tagName("h2")).getAttribute("innerHTML"));
+        System.out.println(products.get(0).findElement(By.tagName("h2")).getAttribute("innerHTML"));
+    }
 }
 
 

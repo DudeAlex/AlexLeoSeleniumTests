@@ -23,7 +23,7 @@ public class IuliiaKuznetcovaTest extends BaseTest {
     @Test
     public void testAddCastomerGlobalsqa() throws InterruptedException {
         getDriver().get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager/addCust");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         fillField(firstName, firstNameField);
         fillField(lastName, lastNameField);

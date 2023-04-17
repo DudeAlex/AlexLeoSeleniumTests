@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-public class AzatBTest {
 
-    @Ignore
+
+public class DavidMTest {
+
     @Test
     public void testFirst() throws InterruptedException {
 
@@ -21,7 +21,7 @@ public class AzatBTest {
 
         WebDriver driver = new ChromeDriver(chromeOptions);
 
-        driver.get("https://www.google.com/");
+        driver.get("https://www.google.com");
 
         WebElement textBox = driver.findElement(By.name("q"));
 
@@ -32,13 +32,13 @@ public class AzatBTest {
 
         WebElement text = driver.findElement(By.xpath("//h3[text() = 'Selenium']"));
 
-        Assert.assertEquals(text.getText(), "Selenium");
+        Assert.assertEquals(text.getText(),"Selenium");
 
         driver.quit();
     }
 
     @Test
-    public void testSecond() throws InterruptedException {
+    public void TestSecond() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
@@ -48,6 +48,8 @@ public class AzatBTest {
 
         String title = driver.getTitle();
         Assert.assertEquals("Web form", title);
+
+
 
         Thread.sleep(2000);
 
@@ -60,8 +62,23 @@ public class AzatBTest {
         WebElement message = driver.findElement(By.id("message"));
         String value = message.getText();
         Assert.assertEquals("Received!", value);
-
+      //test
         driver.quit();
+    }
+    @Test
+    public void testOneMore(){
+        System.out.println("I do not know how to write tests");
+
+    }
+
+    @Test
+    public void testTest(){
+        System.out.println("Simple test");
+
+    }
+    @Test
+    public void testShort(){
+        System.out.println("This is short test");
     }
 
 }

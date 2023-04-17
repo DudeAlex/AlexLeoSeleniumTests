@@ -5,16 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 
+import static org.testng.Assert.assertEquals;
 
-public class DinaraFirstTest {
-    @Ignore
+public class AleksandraMTest {
     @Test
-    public void FirstTest() throws InterruptedException {
+    public void testFirst() {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
@@ -23,11 +22,9 @@ public class DinaraFirstTest {
         driver.get("https://www.selenium.dev/selenium/web/web-form.html");
 
         String title = driver.getTitle();
-        Assert.assertEquals("Web form", title);
+        assertEquals("Web form", title);
 
-        Thread.sleep(3000);
-
-//        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         WebElement textBox = driver.findElement(By.name("my-text"));
         WebElement submitButton = driver.findElement(By.cssSelector("button"));
@@ -37,11 +34,8 @@ public class DinaraFirstTest {
 
         WebElement message = driver.findElement(By.id("message"));
         String value = message.getText();
-        Assert.assertEquals("Received!", value);
+        assertEquals("Received!", value);
 
         driver.quit();
     }
-
 }
-
-

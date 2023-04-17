@@ -13,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -30,7 +31,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
     String email = faker.internet().emailAddress();
-    String password = faker.internet().password(11,12,true,
+    String password = faker.internet().password(11, 12, true,
             true, true);
 
 
@@ -86,7 +87,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
         Assert.assertEquals(text.getText(), "Create New Customer Account");
 
-        WebElement firstName =getDriver().findElement(By.xpath("//input[@id = 'firstname']"));
+        WebElement firstName = getDriver().findElement(By.xpath("//input[@id = 'firstname']"));
         firstName.sendKeys("Marina");
         WebElement lastName = getDriver().findElement(By.xpath("//input[@id = 'lastname']"));
         lastName.sendKeys("Los");
@@ -423,7 +424,8 @@ public class GroupHighwayToAqaTest extends BaseTest {
         WebElement buttonForCreationAccout = getDriver().findElement(By.xpath("//form[@id='form-validate']//button/span[text()='Create an Account']"));
         buttonForCreationAccout.click();
         Thread.sleep(2000);
-        WebElement titleOfSucessCreationAccountMessage = getDriver().findElement(By.xpath("//div[@class='message-success success message']"));;
+        WebElement titleOfSucessCreationAccountMessage = getDriver().findElement(By.xpath("//div[@class='message-success success message']"));
+        ;
 
         Assert.assertEquals(titleOfSucessCreationAccountMessage.getText(), "Thank you for registering with Main Website Store.");
     }
@@ -473,7 +475,7 @@ public class GroupHighwayToAqaTest extends BaseTest {
         WebElement cartDropDownDialog = getDriver().findElement(
                 By.xpath("//div[@id='ui-id-1']//div[@class='block-content']//strong"));
 
-        assertEquals(cartDropDownDialog.getText(),"You have no items in your shopping cart.");
+        assertEquals(cartDropDownDialog.getText(), "You have no items in your shopping cart.");
     }
 
     @Test
@@ -501,4 +503,40 @@ public class GroupHighwayToAqaTest extends BaseTest {
 
         assertEquals(numOfItemsInCart.getText(), "1");
     }
+
+    @Test
+    public void testAddWishlist() throws InterruptedException {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get(BASE_URL);
+
+        Thread.sleep(3000);
+        driver.findElement(By.className("authorization-link")).click();
+
+        Thread.sleep(2000);
+        driver.findElement(By.id("email")).sendKeys("kmgoncharova@ya.ru");
+        driver.findElement(By.id("pass")).sendKeys("qwerty123!");
+        driver.findElement(By.id("send2")).click();
+
+        Thread.sleep(2000);
+        WebElement actionToItem = driver.findElement(By.className("product-image-photo"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", actionToItem);
+        driver.findElement(By.className("product-image-photo")).click();
+
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[@class='product-addto-links']//a[@class='action towishlist']")).click();
+
+        Thread.sleep(3000);
+        WebElement textSuccessAddToWishlist = driver.findElement(By.xpath("//*[@id=\"maincontent\"]/div[1]/div[2]/div/div/div"));
+
+        assertEquals(textSuccessAddToWishlist.getText(), "Radiant Tee has been added to your Wish List. Click here to continue shopping.");
+
+        driver.quit();
+    }
 }
+
+
+
+
+

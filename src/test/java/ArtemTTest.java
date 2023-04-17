@@ -8,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 public class ArtemTTest extends BaseTest {
 
     @Test
-    public void Test_TC_001_33() {
+    public void testVerifySaleIconOnSaleProducts() {
         getDriver().get("https://askomdch.com/");
 
         WebElement featuredProducts = getDriver()

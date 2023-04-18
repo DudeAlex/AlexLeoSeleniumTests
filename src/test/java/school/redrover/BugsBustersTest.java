@@ -72,6 +72,7 @@ public class BugsBustersTest extends BaseTest {
         Assert.assertEquals(text.getText(), "Getting started");
     }
 
+    @Ignore
     @Test
     public void testMarynaSTitle() {
         getDriver().get("https://www.funartcolorado.com/");

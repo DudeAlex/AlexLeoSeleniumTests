@@ -8,30 +8,23 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import java.time.Duration;
 
 public class AlekseiKtest {
-
     @Test
-    public void dishesTest() throws InterruptedException {
-
+    public void titleOfTheHomePageCheckedTest() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
 
         WebDriver driver = new ChromeDriver(chromeOptions);
 
-        driver.get("https://www.canvashomestore.com/");
-
-
-        driver.findElement(By.name("q")).sendKeys("plate\n");
-        List<WebElement> platesList = driver.findElements(By.xpath("//main//div[@class='grid__item']"));
-
-        String finalPlate;
-        for (int i = 0; i < platesList.size(); i++) {
-            finalPlate = platesList.get(i).getText();
-            assert finalPlate.contains("Blue");
-        }
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
+        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
+        driver.get("https://askomdch.com/");
+        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        driver.findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
+        WebElement icon = driver.findElement(By.xpath("//span[@class='onsale']"));
+        Assert.assertEquals(icon.getText(), "Sale!");
         driver.quit();
     }
 }

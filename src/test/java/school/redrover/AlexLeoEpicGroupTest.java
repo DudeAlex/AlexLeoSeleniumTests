@@ -622,5 +622,12 @@ public class AlexLeoEpicGroupTest extends BaseTest{
 
         Assert.assertEquals(getDriver().getCurrentUrl(),accountPage);
     }
+    @Test
+    public void testSearchButtonColorVerification() {
+
+        getDriver().get("https://askomdch.com/");
+        getDriver().findElement(By.cssSelector("li[id='menu-item-1228']")).click();
+        Assert.assertEquals(getDriver().findElement(By.xpath("//button[@value='Search']")).getCssValue("background-color"), "rgba(49, 151, 214, 1)");
+    }
 
 }

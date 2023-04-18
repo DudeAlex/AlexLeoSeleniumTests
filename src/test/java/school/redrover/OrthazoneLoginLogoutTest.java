@@ -21,6 +21,7 @@ public class OrthazoneLoginLogoutTest extends BaseTest{
         Assert.assertEquals(textForAssert.getText(),"Auto");
 
         getDriver().findElement(By.className("y-header__user")).click();
+        Thread.sleep(1000);
         getDriver().findElement(By.xpath("//div[@class='y-header__user']//a[2]")).click();
 
         WebElement textOnLogoutPage = getDriver().findElement(By.xpath("//div[@class='asteps__head']"));

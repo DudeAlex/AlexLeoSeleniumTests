@@ -9,40 +9,34 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
-import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupUkrTest extends BaseTest {
-    @Ignore
     @Test
-    public void youtubeSearchTest(){
-        ChromeOptions optionsChrome = new ChromeOptions();
-        optionsChrome.addArguments("--headless","--window-size=1920,1080");
+    public void testToolsPageHeaders() {
+        getDriver().get("https://www.postman.com/");
+        String titleMainPage = getDriver().getTitle();
+        Assert.assertEquals("Postman API Platform | Sign Up for Free", titleMainPage);
 
-        WebDriver driver = new ChromeDriver(optionsChrome);
-        driver.get("https://www.youtube.com/");
+        WebElement menuProduct = getDriver().findElement(By.xpath("//div[contains(text(),'Product')]"));
+        menuProduct.click();
+        WebElement itemProductTools = getDriver().findElement(By.xpath("//a[@href='https://www.postman.com/product/tools/']"));
+        itemProductTools.click();
+        String titleToolPage = getDriver().getTitle();
+        Assert.assertEquals("API Tools | Postman API Platform", titleToolPage);
 
-        String title = driver.getTitle();
-        Assert.assertEquals("YouTube", title);
+        WebElement pageMainHeader = getDriver().findElement(By.xpath("//h1[contains(text(),'Tools')]"));
+        String header = pageMainHeader.getText();
+        Assert.assertEquals(header, "Tools");
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
-
-        WebElement searchInput = driver.findElement(By.xpath("//input[@id='search']"));
-        WebElement searchButton = driver.findElement(By.xpath("//button[@id='search-icon-legacy']"));
-
-        searchInput.sendKeys("Что такое Selenium?");
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
-
-        searchButton.click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
-
-        WebElement link = driver.findElement(By.xpath("//a[@title='Что такое Selenium?']"));
-        String value = link.getText();
-
-        Assert.assertEquals(value, "Что такое Selenium?");
-
-        driver.quit();
-
+        List<WebElement> pageSubHeaders = new ArrayList<>(getDriver().findElements(By.xpath("//h2")));
+        String[] subHeaderTools = {"API client", "API design", "API documentation", "API testing", "Mock servers", "Monitors", "API detection"};
+        for (int i = 0; i < 7; i++) {
+            Assert.assertEquals(pageSubHeaders.get(i).getText(), subHeaderTools[i]);
+        }
     }
+
     @Test
     public void testRenameBtn(){
         final String NAME = "new button name";
@@ -114,6 +108,7 @@ public class GroupUkrTest extends BaseTest {
 
         driver.quit();
     }
+    @Ignore
     @Test
     public void testAuthorizationAndLogOut() throws InterruptedException {
         getDriver().get("https://www.demoblaze.com/");
@@ -122,7 +117,7 @@ public class GroupUkrTest extends BaseTest {
         WebElement logInButton = getDriver().findElement(By.xpath("//a[@id='login2']"));
         logInButton.click();
 
-        Thread.sleep(1100);
+        Thread.sleep(1000);
         WebElement inputUsernameLogInForm = getDriver().findElement(By.xpath("//input[@id='loginusername']"));
         inputUsernameLogInForm.sendKeys("TestAuthMax");
         WebElement inputPasswordLogInForm = getDriver().findElement(By.xpath("//input[@id='loginpassword']"));

@@ -75,26 +75,19 @@ public class BugsBustersTest extends BaseTest {
     }
 
     @Test
-    public void YuliyaTFirstTest(){
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
-//        chromeOptions.addArguments("--remote-allow-origins=*", "--window-size=1920,1080");
+    public void testGetSeleniumWebDriverPageTitle(){
 
+        getDriver().get("https://www.selenium.dev/");
 
-        WebDriver driver = new ChromeDriver(chromeOptions);
-
-        driver.get("https://www.selenium.dev/");
-
-        WebElement readMoreButton = driver.findElement(By.xpath("//a[@href='/documentation/webdriver/']"));
+        WebElement readMoreButton = getDriver().findElement(By.xpath("//a[@href='/documentation/webdriver/']"));
         readMoreButton.click();
 
-        WebElement getStatedButton = driver.findElement(By.xpath("//a[@href='/documentation/webdriver/getting_started/']"));
+        WebElement getStatedButton = getDriver().findElement(By.xpath("//a[@href='/documentation/webdriver/getting_started/']"));
         getStatedButton.click();
 
-        WebElement text = driver.findElement(By.xpath("//h1"));
-        Assert.assertEquals(text.getText(), "Getting started");
+        WebElement text = getDriver().findElement(By.xpath("//h1"));
 
-        driver.quit();
+        Assert.assertEquals(text.getText(), "Getting started");
     }
 
     @Test

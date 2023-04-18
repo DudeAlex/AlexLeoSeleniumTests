@@ -6,7 +6,6 @@ import runner.BaseTest;
 import java.util.List;
 
 public class InnaKushchakTest extends BaseTest {
-
     @Test
     public void testVerifySaleIcon() {
 
@@ -15,7 +14,7 @@ public class InnaKushchakTest extends BaseTest {
     }
 
     @Test
-    public void  testValidate$SignIsPresent() {
+    public void testValidate$SignIsPresent() {
 
         WebElement sign = getDriver().findElement(By.xpath("//span[@class='woocommerce-Price-currencySymbol']"));
         Assert.assertEquals(sign.getText(), "$");
@@ -63,35 +62,27 @@ public class InnaKushchakTest extends BaseTest {
     }
 
     @Test
-    public void testWebDriver(){
+    public void testNumberOfElementInFutureProducts() {
 
-        WebElement featureProducts=getDriver().findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
-        List<WebElement> products=featureProducts.findElements(By.tagName("li"));
-        for (WebElement elem:products) {
-         List<WebElement> x= elem.findElements(By.tagName("h2"));
-            System.out.println(x.size());
-        }
+        WebElement featureProducts = getDriver().findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
+        List<WebElement> products = featureProducts.findElements(By.tagName("li"));
+
+        Assert.assertEquals(products.size(), 5);
     }
 
-    @Test
-    public void testBestSellers(){
-            WebElement bestSellers=getDriver().findElement(By.xpath("//ul[@class='product_list_widget']"));
-            List<WebElement> validateProducts= bestSellers.findElements(By.tagName("li"));
-            for(WebElement listOfBest:validateProducts){
-
-            }
-        }
 
     @Test
-    public void testWebDriverSearch(){
+    public void testWebDriverSearchBlueShoes() {
 
-        WebElement featureProducts=getDriver().findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
-        List<WebElement> products=featureProducts.findElements(By.tagName("li"));
+        WebElement featureProducts = getDriver().findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
+        List<WebElement> products = featureProducts.findElements(By.tagName("li"));
         products.get(0).getAttribute("baseURI");
         products.get(0).findElement(By.tagName("h2")).getAttribute("textContent");
         products.get(0).findElement(By.tagName("h2")).getAttribute("outerHTML");
-        System.out.println( products.get(0).findElement(By.tagName("h2")).getAttribute("innerHTML"));
+
+        Assert.assertEquals(products.get(0).findElement(By.tagName("h2")).getAttribute("innerHTML"), "Blue Shoes");
+    }
 }
-}
+
 
 

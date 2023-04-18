@@ -43,10 +43,12 @@ public class ViktoriiaKarpusTest extends BaseTest {
     @Test
     public void testNumberOfProductsDisplayed_TC_009() {
         getDriver().findElement(By.xpath("//li[@id='menu-item-1229']/a")).click();
-        List<WebElement> womenProducts = getDriver()
-                .findElements(By.xpath("//div//ul[@class='products columns-4']//li"));
+        WebElement womenProducts = getDriver()
+                .findElement(By.xpath("//div[@class='ast-woocommerce-container']//ul"));
 
-        Assert.assertEquals(womenProducts.size(),7);
+        List<WebElement> count = womenProducts.findElements(By.tagName("li"));
+
+        Assert.assertEquals(count.size(),7);
     }
 
     @Test

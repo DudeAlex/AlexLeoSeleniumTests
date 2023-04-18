@@ -13,6 +13,7 @@ import java.util.List;
 public class AlekseiKtest {
 
     @Test
+
     public void dishesTest() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -25,6 +26,7 @@ public class AlekseiKtest {
         driver.findElement(By.name("q")).sendKeys("plate\n");
         List<WebElement> platesList = driver.findElements(By.xpath("//main//div[@class='grid__item']"));
 
+
         String finalPlate;
         for (int i = 0; i < platesList.size(); i++) {
             finalPlate = platesList.get(i).getText();
@@ -33,5 +35,4 @@ public class AlekseiKtest {
 
         driver.quit();
     }
-
 }

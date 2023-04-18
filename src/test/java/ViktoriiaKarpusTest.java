@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 
+import java.util.List;
+
 public class ViktoriiaKarpusTest extends BaseTest {
 
     @Test
@@ -31,10 +33,19 @@ public class ViktoriiaKarpusTest extends BaseTest {
     }
 
     @Test
-    public void testShopNow_TC_005() throws InterruptedException {
+    public void testShopNow_TC_005() {
         getDriver().findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
         WebElement pageStore = getDriver().findElement(By.xpath("//h1[contains(text(), \"Store\")]"));
 
         Assert.assertEquals(pageStore.getText(), "Store");
+    }
+
+    @Test
+    public void testNumberOfProductsDisplayed_TC_009() {
+        getDriver().findElement(By.xpath("//li[@id='menu-item-1229']/a")).click();
+        List<WebElement> womenProducts = getDriver()
+                .findElements(By.xpath("//div//ul[@class='products columns-4']//li"));
+
+        Assert.assertEquals(womenProducts.size(),7);
     }
 }

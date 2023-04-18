@@ -22,6 +22,7 @@ public class AlekseiKtest {
 
         driver.get("https://www.canvashomestore.com/");
 
+
         driver.findElement(By.name("q")).sendKeys("plate\n");
         List<WebElement> platesList = driver.findElements(By.xpath("//main//div[@class='grid__item']"));
 

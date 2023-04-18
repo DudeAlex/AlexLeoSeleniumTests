@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
@@ -19,17 +20,18 @@ import static org.testng.AssertJUnit.assertEquals;
 public class GroupILoveBugsTest extends BaseTest {
     WebDriver driver;
     Faker faker = new Faker();
-    String firstName = faker.internet().uuid();
-    String lastName = faker.internet().uuid();
-    String postCode = faker.address().zipCode();
+    private String firstName = faker.internet().uuid();
+    private String lastName = faker.internet().uuid();
+    private String postCode = faker.address().zipCode();
 
-    By firstNameField = By.xpath("//input[@placeholder='First Name']");
-    By lastNameField = By.xpath("//input[@placeholder='Last Name']");
-    By postCodeField = By.xpath("//input[@placeholder='Post Code']");
-    By homeButton = By.xpath("//*[@ng-click='home()']");
-    By addCustomerRegistrationButton = By.xpath("//button[@type='submit']");
-    @Test
-    public void ADFirstTest() throws InterruptedException {
+    private static final By firstNameField = By.xpath("//input[@placeholder='First Name']");
+    private static final By lastNameField = By.xpath("//input[@placeholder='Last Name']");
+    private static final By postCodeField = By.xpath("//input[@placeholder='Post Code']");
+    private static final By homeButton = By.xpath("//*[@ng-click='home()']");
+    private static final By addCustomerRegistrationButton = By.xpath("//button[@type='submit']");
+
+      @Test
+    public void testAdFirst() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");

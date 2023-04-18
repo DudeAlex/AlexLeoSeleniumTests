@@ -30,7 +30,7 @@ public class GroupILoveBugsTest extends BaseTest {
     private static final By homeButton = By.xpath("//*[@ng-click='home()']");
     private static final By addCustomerRegistrationButton = By.xpath("//button[@type='submit']");
 
-      @Test
+    @Test
     public void testAdFirst() throws InterruptedException {
 
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -50,7 +50,7 @@ public class GroupILoveBugsTest extends BaseTest {
     }
 
     @Test
-    public void testSteam(){
+    public void testSteam() {
         final String MAIN_PAGE = "https://store.steampowered.com/";
         final By LOGIN_BUTTON = By.xpath("//a[@class='global_action_link']");
         final By SIGN_IN_BUTTON = By.cssSelector(".newlogindialog_SubmitButton_2QgFE");

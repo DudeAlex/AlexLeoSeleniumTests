@@ -75,7 +75,7 @@ public class BugsBustersTest extends BaseTest {
     }
 
     @Test
-    public void YuliyaTFirstTest(){
+    public void testGetSeleniumWebDriverPageTitle(){
 
         getDriver().get("https://www.selenium.dev/");
 
@@ -86,6 +86,7 @@ public class BugsBustersTest extends BaseTest {
         getStatedButton.click();
 
         WebElement text = getDriver().findElement(By.xpath("//h1"));
+
         Assert.assertEquals(text.getText(), "Getting started");
     }
 

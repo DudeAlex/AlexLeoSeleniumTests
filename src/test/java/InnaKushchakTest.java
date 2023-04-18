@@ -70,6 +70,7 @@ public class InnaKushchakTest extends BaseTest {
         Assert.assertEquals(products.size(), 5);
     }
 
+
     @Test
     public void testWebDriverSearchBlueShoes() {
 
@@ -82,5 +83,6 @@ public class InnaKushchakTest extends BaseTest {
         Assert.assertEquals(products.get(0).findElement(By.tagName("h2")).getAttribute("innerHTML"), "Blue Shoes");
     }
 }
+
 
 

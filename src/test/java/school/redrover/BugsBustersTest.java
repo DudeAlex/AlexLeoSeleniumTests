@@ -87,8 +87,6 @@ public class BugsBustersTest extends BaseTest {
 
         WebElement text = getDriver().findElement(By.xpath("//h1"));
         Assert.assertEquals(text.getText(), "Getting started");
-
-        getDriver().quit();
     }
 
     @Test

@@ -48,4 +48,12 @@ public class ViktoriiaKarpusTest extends BaseTest {
 
         Assert.assertEquals(womenProducts.size(),7);
     }
+
+    @Test
+    public void testColorOfTheSearchButton() {
+        getDriver().findElement(By.xpath("//li[@id='menu-item-1228']")).click();
+        WebElement searchButton = getDriver().findElement(By.cssSelector("button[value='Search']"));
+
+        Assert.assertEquals(searchButton.getCssValue("background-color"), "rgba(49, 151, 214, 1)");
+    }
 }

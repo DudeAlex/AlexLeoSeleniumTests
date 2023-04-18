@@ -30,6 +30,7 @@ public class AlekseiKtest {
             finalPlate = platesList.get(i).getText();
             assert finalPlate.contains("Blue");
         }
+
         driver.quit();
     }
 }

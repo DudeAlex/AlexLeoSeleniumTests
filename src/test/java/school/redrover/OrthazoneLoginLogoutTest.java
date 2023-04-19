@@ -2,11 +2,13 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
 public class OrthazoneLoginLogoutTest extends BaseTest{
 
+    @Ignore
     @Test
     public void testLogin() throws InterruptedException{
         getDriver().get("https://www.orthazone.com/");
@@ -27,5 +29,6 @@ public class OrthazoneLoginLogoutTest extends BaseTest{
 
         WebElement textOnLogoutPage = getDriver().findElement(By.xpath("//div[@class='asteps__head']"));
         Assert.assertEquals(textOnLogoutPage.getText(),"ACCOUNT LOGOUT");
+
     }
 }

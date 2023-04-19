@@ -497,6 +497,7 @@ public class GroupOlesyaTests extends BaseTest {
                         "Back Home");
         Assert.assertTrue(getDriver().findElement(By.id("back-to-products")).isDisplayed());
     }
+
     @Test
     public void checkTheFinalPriceCalculation() {
         loginToSite(LOGIN);

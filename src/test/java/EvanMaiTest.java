@@ -66,4 +66,11 @@ public class EvanMaiTest extends BaseTest {
         WebElement buttonSearch = getDriver().findElement(By.cssSelector("button[value='Search']"));
         Assert.assertEquals(buttonSearch.getCssValue("background-color"), "rgba(49, 151, 214, 1)");
     }
+
+    @Test
+    public void testVerifyButtonRedirect() {
+        getDriver().findElement(By.xpath("//a[text() ='Find More']")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.xpath("//h1[text()='Contact Us']")).getText(), "Contact Us");
+    }
 }

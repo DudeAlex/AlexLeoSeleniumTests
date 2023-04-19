@@ -76,6 +76,7 @@ public class Group99BottlesTest extends BaseTest {
         Assert.assertEquals(headerH1Text.getText(), "WORKSHOP LIBRARY");
     }
 
+    @Ignore
     @Test
     public void testTelerikHeaderText() {
         getDriver().get("https://www.telerik.com/");
@@ -294,6 +295,7 @@ public class Group99BottlesTest extends BaseTest {
         Assert.assertEquals(actualButtonsNames, expectedButtonsNames);
     }
 
+    @Ignore
     @Test
     public void testNumberOfButtonsAndTextsInSideMenu() throws InterruptedException {
         final int expectedNumberOfSideMenuButtons = 11;

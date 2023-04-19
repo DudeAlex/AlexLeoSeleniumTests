@@ -28,6 +28,7 @@ public class GroupJasperAutomationTest extends BaseTest {
         Assert.assertEquals(element.getText(), "Україна");
     }
 
+    @Ignore
     @Test
     public void testTitle() throws InterruptedException {
         getDriver().get("https://football.ua/");

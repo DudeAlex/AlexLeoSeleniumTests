@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
+
 public class CaramelSyrupForJavaTest extends BaseTest {
 
     public void clickCustom(WebElement element) {

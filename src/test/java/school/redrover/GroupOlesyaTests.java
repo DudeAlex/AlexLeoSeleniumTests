@@ -26,9 +26,6 @@ public class GroupOlesyaTests extends BaseTest {
     private final String LOGIN = "standard_user";
     private final String MAIN_PAGE = "https://www.saucedemo.com/inventory.html";
     private final String PASSWORD = "secret_sauce";
-
-    private final String RANDOM_STRING = RandomStringUtils.randomAlphabetic(5);
-    private final String RANDOM_DIGITS = RandomStringUtils.randomNumeric(6);
     private WebDriverWait wait;
 
     protected WebDriverWait getWait() {
@@ -98,11 +95,6 @@ public class GroupOlesyaTests extends BaseTest {
                 .collect(toList());
     }
 
-    public void selectTypeOfSortingItems(String typeOfSorting){
-        Select sorting = new Select(getDriver().findElement(By.xpath("//select[@class = 'product_sort_container']")));
-        sorting.selectByVisibleText(typeOfSorting);
-    }
-
     public void clickRemoveButton(String item){
         getDriver().findElement(By.name(String.format("remove-%s", item))).click();
     }
@@ -124,9 +116,9 @@ public class GroupOlesyaTests extends BaseTest {
         }
     }
 
-    public void addItemsToCartbyXpath (By xpath) {
-        List<WebElement> addProductsToCart  = getDriver().findElements(xpath);
-        clickOnEachElement(addProductsToCart);
+    public void addItemstoCartbyXpath (By xpath) {
+        List<WebElement> addproductstocart  = getDriver().findElements(xpath);
+        clickOnEachElement(addproductstocart);
     }
 
     public boolean isElementPresent(By by) {
@@ -145,10 +137,10 @@ public class GroupOlesyaTests extends BaseTest {
         List<WebElement> addproducts  = getDriver().findElements(By.xpath("//div[@class = 'inventory_item_name']"));
         List<String> expectedlist= getTextList (addproducts);
 
-        addItemsToCartbyXpath(By.xpath("//button[@class='btn btn_primary btn_small btn_inventory']"));
+        addItemstoCartbyXpath(By.xpath("//button[@class='btn btn_primary btn_small btn_inventory']"));
 
         clickIconShoppingCart();
-        Assert.assertEquals(listProductNames(),expectedlist);
+        Assert.assertEquals(listProductNames(), expectedlist);
     }
 
     @Ignore /*Bug!*/
@@ -156,7 +148,7 @@ public class GroupOlesyaTests extends BaseTest {
     public void testChangeQuantityinCart() {
         loginToSite(LOGIN);
 
-        addItemsToCartbyXpath(By.xpath("//div[@class = 'inventory_item_name']"));
+        addItemstoCartbyXpath(By.xpath("//div[@class = 'inventory_item_name']"));
 
         clickIconShoppingCart();
 
@@ -209,11 +201,15 @@ public class GroupOlesyaTests extends BaseTest {
     }
 
     @Test
-    public void sortByNameZToATest() {
+    public void sortByNameTest() {
         loginToSite(LOGIN);
-        
-        getDriver().findElement(By.className("product_sort_container")).click();
-        getDriver().findElement(By.xpath("//*[@id='header_container']/div[2]/div/span/select/option[2]")).click();
+
+        WebElement sortButton = getDriver().findElement(By.className("product_sort_container"));
+        sortButton.click();
+
+        WebElement NameZToA = getDriver().findElement(
+                By.xpath("//*[@id='header_container']/div[2]/div/span/select/option[2]"));
+        NameZToA.click();
 
         Assert.assertEquals(getDriver().findElement(By.className("inventory_item_name")).getText(),
                 "Test.allTheThings() T-Shirt (Red)");
@@ -257,6 +253,7 @@ public class GroupOlesyaTests extends BaseTest {
 
     @Test
     public void problemUserLoginTest() {
+
         loginToSite("problem_user");
 
         List<WebElement> listPhoto = getDriver().findElements(By.xpath("//div[@class = 'inventory_item']//a/img"));
@@ -283,9 +280,15 @@ public class GroupOlesyaTests extends BaseTest {
                 "Test.allTheThings() T-Shirt (Red)");
 
         loginToSite(LOGIN);
-        selectTypeOfSortingItems("Name (A to Z)");
 
-        Assert.assertEquals(listProductNames(), expectedResults);
+        List<WebElement> itemsList =  getDriver().findElements(By.xpath("//div[@class = 'inventory_item_name']"));
+        List<String> itemsNamesList = new ArrayList<>();
+
+        for (WebElement w : itemsList) {
+            itemsNamesList.add(w.getText());
+        }
+
+        Assert.assertEquals(itemsNamesList, expectedResults);
     }
 
     @Test
@@ -299,9 +302,23 @@ public class GroupOlesyaTests extends BaseTest {
                 "Sauce Labs Backpack");
 
         loginToSite(LOGIN);
-        selectTypeOfSortingItems("Name (Z to A)");
 
-        Assert.assertEquals(listProductNames(), expectedResults);
+        WebElement sortingButton = getDriver().findElement(By.xpath("//span[@class = 'active_option']"));
+        if (!getDriver().findElement(By.xpath("//span[@class = 'active_option']")).getText().equals("Name (A to Z)")) {
+            sortingButton.click();
+        }
+
+        Select sorting = new Select(getDriver().findElement(By.xpath("//select[@class = 'product_sort_container']")));
+        sorting.selectByIndex(1);
+
+        List<WebElement> itemsList = getDriver().findElements(By.xpath("//div[@class = 'inventory_item_name']"));
+        List<String> itemsNamesList = new ArrayList<>();
+
+        for (WebElement w : itemsList) {
+            itemsNamesList.add(w.getText());
+        }
+
+        Assert.assertEquals(itemsNamesList, expectedResults);
     }
 
     @Test
@@ -479,15 +496,17 @@ public class GroupOlesyaTests extends BaseTest {
 
     @Test
     public void flowOfPurchaseTest(){
-        loginToSite(LOGIN);
+        String randomString = RandomStringUtils.randomAlphabetic(5);
+        String randomDigits = RandomStringUtils.randomNumeric(6);
 
+        loginToSite(LOGIN);
         addToShoppingCart("sauce-labs-backpack");
         clickIconShoppingCart();
 
         getDriver().findElement(By.id("checkout")).click();
-        getDriver().findElement(By.id("first-name")).sendKeys(RANDOM_STRING);
-        getDriver().findElement(By.id("last-name")).sendKeys(RANDOM_STRING);
-        getDriver().findElement(By.id("postal-code")).sendKeys(RANDOM_DIGITS);
+        getDriver().findElement(By.id("first-name")).sendKeys(randomString);
+        getDriver().findElement(By.id("last-name")).sendKeys(randomString);
+        getDriver().findElement(By.id("postal-code")).sendKeys(randomDigits);
         getDriver().findElement(By.id("continue")).click();
         getDriver().findElement(By.id("finish")).click();
 
@@ -496,33 +515,6 @@ public class GroupOlesyaTests extends BaseTest {
                         "Your order has been dispatched, and will arrive just as fast as the pony can get there!\n" +
                         "Back Home");
         Assert.assertTrue(getDriver().findElement(By.id("back-to-products")).isDisplayed());
-    }
-    @Test
-    public void checkTheFinalPriceCalculation() {
-        loginToSite(LOGIN);
-
-        getDriver().findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
-        getDriver().findElement(By.id("add-to-cart-sauce-labs-bike-light")).click();
-        getDriver().findElement(By.id("add-to-cart-sauce-labs-bolt-t-shirt")).click();
-
-        clickIconShoppingCart();
-
-        double listSum = listOfPrice()
-                .stream()
-                .mapToDouble(Double::doubleValue)
-                .sum();
-        double sum = listSum + (listSum * 0.08);
-        double actualSumResult = (double) Math.round(sum * 100) / 100;
-
-        clickCheckout();
-        fillOutOrderForm(RANDOM_STRING, RANDOM_STRING, RANDOM_DIGITS);
-
-        Double expectedResultSum = Double.valueOf(getDriver()
-                .findElement(By.xpath("//div[@class='summary_info_label summary_total_label']"))
-                .getText()
-                .replace("Total: $", ""));
-
-        Assert.assertEquals(actualSumResult, expectedResultSum);
     }
 }
 

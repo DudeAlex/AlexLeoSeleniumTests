@@ -73,4 +73,13 @@ public class EvanMaiTest extends BaseTest {
 
         Assert.assertEquals(getDriver().findElement(By.xpath("//h1[text()='Contact Us']")).getText(), "Contact Us");
     }
+
+    @Test
+    public void testVerifyNumberProducts() {
+        getDriver().findElement(By.cssSelector("a[href='https://askomdch.com/product-category/women/'")).click();
+
+        List<WebElement> listOfProducts = getDriver().findElements(By.className("astra-shop-thumbnail-wrap"));
+
+        Assert.assertEquals(listOfProducts.size(), 7);
+    }
 }

@@ -27,8 +27,8 @@ public class GroupOlesyaTests extends BaseTest {
     private final String MAIN_PAGE = "https://www.saucedemo.com/inventory.html";
     private final String PASSWORD = "secret_sauce";
 
-    private String randomString = RandomStringUtils.randomAlphabetic(5);
-    private String randomDigits = RandomStringUtils.randomNumeric(6);
+    private final String RANDOM_STRING = RandomStringUtils.randomAlphabetic(5);
+    private final String RANDOM_DIGITS = RandomStringUtils.randomNumeric(6);
     private WebDriverWait wait;
 
     protected WebDriverWait getWait() {
@@ -484,13 +484,10 @@ public class GroupOlesyaTests extends BaseTest {
         addToShoppingCart("sauce-labs-backpack");
         clickIconShoppingCart();
 
-        addToShoppingCart("add-to-cart-sauce-labs-backpack");
-        clickIconShoppingCart();
-
         getDriver().findElement(By.id("checkout")).click();
-        getDriver().findElement(By.id("first-name")).sendKeys(randomString);
-        getDriver().findElement(By.id("last-name")).sendKeys(randomString);
-        getDriver().findElement(By.id("postal-code")).sendKeys(randomDigits);
+        getDriver().findElement(By.id("first-name")).sendKeys(RANDOM_STRING);
+        getDriver().findElement(By.id("last-name")).sendKeys(RANDOM_STRING);
+        getDriver().findElement(By.id("postal-code")).sendKeys(RANDOM_DIGITS);
         getDriver().findElement(By.id("continue")).click();
         getDriver().findElement(By.id("finish")).click();
 
@@ -508,7 +505,7 @@ public class GroupOlesyaTests extends BaseTest {
         getDriver().findElement(By.id("add-to-cart-sauce-labs-bike-light")).click();
         getDriver().findElement(By.id("add-to-cart-sauce-labs-bolt-t-shirt")).click();
 
-        clickIconShoppingCart();;
+        clickIconShoppingCart();
 
         double listSum = listOfPrice()
                 .stream()
@@ -518,7 +515,7 @@ public class GroupOlesyaTests extends BaseTest {
         double actualSumResult = (double) Math.round(sum * 100) / 100;
 
         clickCheckout();
-        fillOutOrderForm(randomString, randomString, randomDigits);
+        fillOutOrderForm(RANDOM_STRING, RANDOM_STRING, RANDOM_DIGITS);
 
         Double expectedResultSum = Double.valueOf(getDriver()
                 .findElement(By.xpath("//div[@class='summary_info_label summary_total_label']"))

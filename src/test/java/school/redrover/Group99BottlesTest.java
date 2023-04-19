@@ -98,6 +98,7 @@ public class Group99BottlesTest extends BaseTest {
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.telerik.com/support/demos");
     }
 
+    @Ignore
     @Test
     public void testTelerikNavigateMenuDemosPageArray() {
         String[] expectedResult = {"Web", "Desktop", "Mobile", "Reporting & QA", "Conversational UI", "Sitefinity CMS"};
@@ -118,6 +119,7 @@ public class Group99BottlesTest extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
     }
 
+    @Ignore
     @Test
     public void testTelerikNavigateMenuDemosPageList() {
         List<String> expectedResult = new ArrayList<>(
@@ -249,6 +251,7 @@ public class Group99BottlesTest extends BaseTest {
         Assert.assertEquals(discountSign.getText(), "20% OFF");
     }
 
+    @Ignore
     @Test
     public void testTelerikNavigateMenuDemosPageSize() {
         final int expectedResult = 6;

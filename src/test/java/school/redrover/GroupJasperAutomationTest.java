@@ -20,14 +20,12 @@ import static org.testng.Assert.assertEquals;
 public class GroupJasperAutomationTest extends BaseTest {
 
     @Test
-
     public void testFootballua() throws InterruptedException {
 
         getDriver().get("https://football.ua/");
         WebElement element = getDriver().findElement(By.xpath("//*[text()='Україна']"));
         Assert.assertEquals(element.getText(), "Україна");
     }
-
 
     @Test
     public void testTitle() throws InterruptedException {

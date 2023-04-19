@@ -203,6 +203,20 @@ public class GroupForwardTest extends BaseTest {
         Assert.assertEquals(text.getText(),"How To Take Care Of Orchid Plants Indoors");
 
     }
+    @Test
+    public void testMaimonidesMedicalCenter() {
+
+        getDriver().get("https://www.google.com/");
+
+        WebElement textBox = getDriver().findElement(By.name("q"));
+        textBox.sendKeys("Maimonides Medical Center");
+        textBox.sendKeys(Keys.RETURN);
+
+        WebElement text = getDriver().findElement(By.xpath("//*[@class='g']/div[1]/div/div/div/div/div[1]/a/h3"));
+
+        Assert.assertEquals(text.getText(), "Maimonides Medical Center | Brooklyn, New York Hospital");
+
+    }
 
 }
 

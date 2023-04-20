@@ -310,4 +310,3 @@ public class GroupCATTest extends BaseTest {
         Assert.assertEquals(check, true);
     }
 }
-

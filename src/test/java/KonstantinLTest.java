@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import runner.BaseTest;
 
 import javax.crypto.spec.PSource;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -128,6 +129,50 @@ public class KonstantinLTest extends BaseTest {
             current = iter.next();
             Assert.assertTrue(previous.compareTo(current) <= 0);
             previous = current;
+        }
+    }
+
+    @Test
+    public void testNumberOfProductsInCartVerification() throws InterruptedException {
+        getDriver().get("https://askomdch.com/");
+        WebElement featuredProductsElement = getDriver().findElement(By.xpath("//h2[@class='has-text-align-center']"));
+        List<WebElement> featuredProducts = featuredProductsElement.findElements(By.xpath(
+                "//div[@class='astra-shop-thumbnail-wrap']/parent::li"));
+
+        int numItemsInCart = 0;
+        for (int i = 0; i < featuredProducts.size() - 1; i++) {
+            featuredProducts.get(i).findElement(By.xpath("//div[@class='astra-shop-summary-wrap']/a[contains(@href, " +
+                    "'add-to-cart')]")).click();
+            numItemsInCart++;
+        }
+        Thread.sleep(3000);
+
+        String expectedQuantity = getDriver().findElement(By.xpath("//div[@class='ast-cart-menu-wrap']/span")).getText();
+        Assert.assertEquals(Integer.parseInt(expectedQuantity), numItemsInCart);
+    }
+
+    @Test
+    public void testDiscountedPriceVerification() {
+        getDriver().get("https://askomdch.com/");
+        getDriver().findElement(By.xpath("//li[@id='menu-item-1230']/a[@href='https://askomdch.com/product-category/" +
+                "accessories/']")).click();
+        List<WebElement> elements = getDriver().findElements(By.xpath("//div[@id='woocommerce_top_rated_products-3']/" +
+                "ul/li"));
+
+        for (WebElement element : elements) {
+            String isDiscounted = "false";
+            try {
+                isDiscounted = element.findElement(By.cssSelector("li > del[aria-hidden*='true']"))
+                        .getAttribute("aria-hidden");
+            } catch (Exception e) {}
+
+            if (isDiscounted.equals("true")) {
+                double discountedPrice = Double.parseDouble(element.findElement(By.cssSelector("ins > span > bdi"))
+                        .getText().substring(1));
+                double price = Double.parseDouble(element.findElement(By.cssSelector("del > span > bdi"))
+                        .getText().substring(1));
+                Assert.assertTrue(discountedPrice < price);
+            }
         }
     }
 

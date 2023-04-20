@@ -113,7 +113,8 @@ public class AndreyPomazTest extends BaseTest {
         Thread.sleep(2000);
         Assert.assertEquals(got.getText(), "Thanks for submitting the form");
     }
-    @Ignore
+
+   @Ignore
     @Test
     public void testFindBook() throws InterruptedException {
         getDriver().get("https://demoqa.com/");

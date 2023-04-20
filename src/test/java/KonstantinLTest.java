@@ -1,9 +1,13 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 
+import javax.crypto.spec.PSource;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class KonstantinLTest extends BaseTest {
@@ -90,5 +94,56 @@ public class KonstantinLTest extends BaseTest {
 
         Assert.assertEquals(actaulPage, expectedPage);
         Assert.assertEquals(actualLink, expectedLink);
+    }
+
+    @Test
+    public void testNumberOfProductsDisplayedVerification() {
+        getDriver().findElement(By.cssSelector("li[id='menu-item-1229']>a")).click();
+        List<WebElement> products = getListOfProducts(getDriver()).findElements(By.xpath("li"));
+
+        Assert.assertEquals(products.size(), 7);
+    }
+
+    @Test
+    public void testPriceSortingVerification() {
+        getDriver().findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
+        getDriver().findElement(By.xpath("//select[@name='orderby']")).click();
+        getDriver().findElement(By.xpath("//option[@value='price']")).click();
+
+        WebElement products1 = getListOfProducts(getDriver());
+        List<Double> pageList1 = getPrices(products1);
+
+        getDriver().findElement(By.xpath("//a[@class='page-numbers']")).click();
+        WebElement products2 = getListOfProducts(getDriver());
+        List<Double> pageList2 = getPrices(products2);
+
+        List<Double> result = new ArrayList<>(pageList1);
+        result.addAll(pageList2);
+
+        Assert.assertEquals(result.size(), 13);
+
+        Iterator<Double> iter = result.iterator();
+        Double current, previous = iter.next();
+        while (iter.hasNext()) {
+            current = iter.next();
+            Assert.assertTrue(previous.compareTo(current) <= 0);
+            previous = current;
+        }
+    }
+
+    private List<Double> getPrices(WebElement products) {
+        List<WebElement> priceList = products.findElements(By.xpath("//span[@class='price']//ins//bdi | " +
+                "//span[@class='price']/span/bdi"));
+
+        List<Double> prices = new ArrayList<>();
+        for (WebElement element : priceList) {
+            prices.add(Double.parseDouble(element.getText().substring(1)));
+        }
+        return prices;
+    }
+
+    private WebElement getListOfProducts(WebDriver driver) {
+        return driver.findElement(By.xpath("//div[@class='ast-woocommerce-container']" +
+                "//ul[@class='products columns-4']"));
     }
 }

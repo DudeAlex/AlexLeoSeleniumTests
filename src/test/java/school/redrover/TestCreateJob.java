@@ -10,10 +10,10 @@ public class TestCreateJob extends BaseTest {
 
     @Test
     public void createFreestyleProject() {
-        WebElement createJobButton = getDriver().findElement(By.linkText("Create a job"));
+        WebElement createJobButton = getDriver().findElement(By.linkText("New Item"));
         createJobButton.click();
 
-        WebElement jobNameInput = getDriver().findElement(By.xpath("//input[@class = 'jenkins-input']"));
+        WebElement jobNameInput = getDriver().findElement(By.xpath("//input[@id = 'name']"));
         jobNameInput.sendKeys("TestJob");
         WebElement freestyleProjectSelect = getDriver().findElement(By.xpath("//input[@value = 'hudson.model.FreeStyleProject']//parent::label"));
         freestyleProjectSelect.click();

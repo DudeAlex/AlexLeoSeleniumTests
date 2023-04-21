@@ -13,7 +13,7 @@ public class TestCreateJob extends BaseTest {
         WebElement createJobButton = getDriver().findElement(By.linkText("Create a job"));
         createJobButton.click();
 
-        WebElement jobNameInput = getDriver().findElement(By.xpath("//input[@id = 'name']"));
+        WebElement jobNameInput = getDriver().findElement(By.xpath("//input[@class = 'jenkins-input']"));
         jobNameInput.sendKeys("TestJob");
         WebElement freestyleProjectSelect = getDriver().findElement(By.xpath("//input[@value = 'hudson.model.FreeStyleProject']//parent::label"));
         freestyleProjectSelect.click();

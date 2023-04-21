@@ -9,7 +9,7 @@ import school.redrover.runner.BaseTest;
 public class TestCreateJob extends BaseTest {
 
     @Test
-    public void createFreestyleProject() {
+    public void testCreateFreestyleProject() {
         WebElement createJobButton = getDriver().findElement(By.linkText("New Item"));
         createJobButton.click();
 

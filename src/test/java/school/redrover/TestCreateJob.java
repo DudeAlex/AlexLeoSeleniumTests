@@ -31,8 +31,8 @@ public class TestCreateJob extends BaseTest {
         WebElement jobListTable = getDriver().findElement(By.xpath("//table[@id = 'projectstatus']"));
         WebElement jobNameLink = jobListTable.findElement(By.linkText("TestJob"));
 
-        boolean expected = jobNameLink.isDisplayed();
+        boolean actual = jobNameLink.isDisplayed();
 
-        Assert.assertTrue(expected);
+        Assert.assertTrue(actual);
     }
 }

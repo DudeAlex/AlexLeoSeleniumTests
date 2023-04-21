@@ -1,9 +1,6 @@
 package school.redrover;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -35,12 +32,25 @@ public class GroupCATTest extends BaseTest {
     @FindBy(xpath = "//div[@class='row chunks features uniform-height']//h5")
     public List<WebElement> featureListSegment;
 
+    @FindBy(xpath = "//a[@aria-label='Navigate to main page']")
+    public WebElement jetLabel;
+
+    @FindBy(xpath = "//h1[@class='rs-h1 rs-h1_theme_dark home-page__title']")
+    public WebElement jetTitle;
+
     public final static String BASE_URL = "https://www.jenkins.io/";
+    public final static String JET_URL = "https://www.jetbrains.com/";
 
     public WebDriverWait webDriverWait10;
 
     public final void getBaseUrl() {
         getDriver().get(BASE_URL);
+
+        PageFactory.initElements(getDriver(), this);
+    }
+
+    public final void getJetUrl() {
+        getDriver().get(JET_URL);
 
         PageFactory.initElements(getDriver(), this);
     }
@@ -133,25 +143,17 @@ public class GroupCATTest extends BaseTest {
     }
 
     @Test
-    public void testVerifyRedirectFromJetLabel() throws InterruptedException {
+    public void testVerifyRedirectFromJetLabel() {
 
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+        getJetUrl();
+        getWait10();
+        jetLabel.click();
 
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.get("https://www.jetbrains.com/");
+        Assert.assertEquals(getDriver().getCurrentUrl(), JET_URL);
+        Assert.assertEquals(jetTitle.getText(), "Essential tools for software developers and teams");
 
-        Thread.sleep(3000);
+       getDriver().quit();
 
-        WebElement label = driver.findElement(By.xpath("//a[@aria-label='Navigate to main page']"));
-        label.click();
-
-        WebElement title = driver.findElement(By.xpath("//h1[@class='rs-h1 rs-h1_theme_dark home-page__title']"));
-
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.jetbrains.com/");
-        Assert.assertEquals(title.getText(), "Essential tools for software developers and teams");
-
-        driver.quit();
     }
 
     @Test
@@ -245,5 +247,66 @@ public class GroupCATTest extends BaseTest {
 
         Assert.assertEquals(actualNamesOfNamesOfFeatureListSegment, expectedNamesOfFeatureListSegment);
         getDriver().quit();
+    }
+
+    @Test
+
+    public void testClickStoreButton() throws InterruptedException{
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*", "--headless", "--window-size=1920,1080");
+
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        driver.get("https://blingrus.azurewebsites.net");
+
+        Thread.sleep(3000);
+
+        WebElement store = driver.findElement(By.cssSelector("body > nav.navbar.navbar-default > div > ul:nth-child(1) > li:nth-child(1) > a"));
+        store.click();
+
+        Assert.assertEquals(driver.getCurrentUrl(), "https://blingrus.azurewebsites.net/Store/index");
+
+        driver.quit();
+    }
+
+    public void waitForButton(String element) {
+        WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(element)));
+    }
+
+    @Test
+    public void testAddCustomer() {
+        String firstName = "Jack", lastName = "Black", postCode = "77333";
+        getDriver().get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
+
+        waitForButton("button[ng-click = 'manager()']");
+        getDriver().findElement(By.cssSelector("button[ng-click = 'manager()']")).click();
+
+        waitForButton("button[ng-click = 'addCust()']");
+        getDriver().findElement(By.cssSelector("button[ng-click = 'addCust()']")).click();
+
+        waitForButton("button[type = 'submit']");
+        getDriver().findElement(By.cssSelector("input[placeholder = 'First Name']")).sendKeys(firstName);
+        getDriver().findElement(By.cssSelector("input[placeholder = 'Last Name']")).sendKeys(lastName);
+        getDriver().findElement(By.cssSelector("input[placeholder = 'Post Code']")).sendKeys(postCode);
+
+        getDriver().findElement(By.cssSelector("button[type = 'submit']")).click();
+        Alert alert = getDriver().switchTo().alert();
+        alert.accept();
+
+        getDriver().findElement(By.cssSelector("button[ng-click = 'home()']")).click();
+        waitForButton("button[ng-click = 'customer()']");
+        getDriver().findElement(By.cssSelector("button[ng-click = 'customer()']")).click();
+        waitForButton("select[id = 'userSelect']");
+        List<WebElement> customersList = getDriver().findElements(By.cssSelector("select[id = 'userSelect']" + ">*"));
+
+        List<String> namesList = new ArrayList<>();
+        for (int i = 1; i < customersList.size(); i++) {
+            namesList.add(customersList.get(i).getText());
+        }
+
+        boolean check = namesList.contains(firstName + " " + lastName);
+
+        Assert.assertEquals(check, true);
     }
 }

@@ -16,7 +16,7 @@ public class TestProjectWindow extends BaseTest {
     public void testAddProjectDescription() {
         String textDescription = "This is test description for Jenkins project";
 
-        WebElement editDescriptionLink = getDriver().findElement(By.linkText("Edit description"));
+        WebElement editDescriptionLink = getDriver().findElement(By.xpath("//a[@id = 'description-link']"));
         editDescriptionLink.click();
 
         new WebDriverWait(getDriver(), Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(By.xpath("//textarea[@name = 'description']")));

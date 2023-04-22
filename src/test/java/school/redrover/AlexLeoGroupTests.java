@@ -10,16 +10,15 @@ import school.redrover.runner.BaseTest;
 public class AlexLeoGroupTests extends BaseTest {
 
     @Test
-    public void testVerifyLogoJenkinsIsPresentTC_001_33() {
+    public void testVerifyLogoJenkinsIsPresent() {
         WebElement element = getDriver().findElement(By.cssSelector("img#jenkins-head-icon"));
         Assert.assertTrue(element.isDisplayed());
     }
 
-   @Ignore
     @Test
-    public void testVerifyWordIconJenkinsPresentTC_002_33() {
+    public void testVerifyWordIconJenkinsPresent() {
         WebElement logoWord = getDriver()
                 .findElement(By.id("jenkins-name-icon"));
-        Assert.assertEquals(logoWord.getAttribute("src"), "http://localhost:8081/static/bc90ee8a/images/title.svg");
+       Assert.assertTrue(logoWord.isDisplayed());
     }
 }

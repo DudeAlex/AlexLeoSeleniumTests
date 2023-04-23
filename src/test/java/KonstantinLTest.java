@@ -5,8 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 
-import javax.crypto.spec.PSource;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -134,7 +132,6 @@ public class KonstantinLTest extends BaseTest {
 
     @Test
     public void testNumberOfProductsInCartVerification() throws InterruptedException {
-        getDriver().get("https://askomdch.com/");
         WebElement featuredProductsElement = getDriver().findElement(By.xpath("//h2[@class='has-text-align-center']"));
         List<WebElement> featuredProducts = featuredProductsElement.findElements(By.xpath(
                 "//div[@class='astra-shop-thumbnail-wrap']/parent::li"));
@@ -153,7 +150,6 @@ public class KonstantinLTest extends BaseTest {
 
     @Test
     public void testDiscountedPriceVerification() {
-        getDriver().get("https://askomdch.com/");
         getDriver().findElement(By.xpath("//li[@id='menu-item-1230']/a[@href='https://askomdch.com/product-category/" +
                 "accessories/']")).click();
         List<WebElement> elements = getDriver().findElements(By.xpath("//div[@id='woocommerce_top_rated_products-3']/" +
@@ -174,6 +170,70 @@ public class KonstantinLTest extends BaseTest {
                 Assert.assertTrue(discountedPrice < price);
             }
         }
+    }
+
+    @Test
+    public void testAddedProductsOver33Verification() throws InterruptedException {
+        getDriver().findElement(By.id("menu-item-1227")).click();
+        WebElement products = getListOfProducts(getDriver());
+        List<WebElement> productList = products.findElements(By.cssSelector("li"));
+
+        int numItemsInCart = 0;
+        for (WebElement element : productList) {
+            String isDiscounted = "false";
+            try {
+                isDiscounted = element.findElement(By.cssSelector("del[aria-hidden*='true']"))
+                        .getAttribute("aria-hidden");
+            } catch (Exception e) {}
+
+            double price = 0;
+            if (isDiscounted.equals("true")) {
+                price = Double.parseDouble(element.findElement(By.cssSelector("ins > span > bdi"))
+                        .getText().substring(1));
+            } else {
+                price = Double.parseDouble(element.findElement(By.cssSelector("div > span > span > bdi"))
+                        .getText().substring(1));
+            }
+
+            if (price > 33) {
+                element.findElement(By.cssSelector("a[href*='?add-to-cart']")).click();
+                numItemsInCart++;
+            }
+        }
+        Thread.sleep(3000);
+
+        String expectedQuantity = getDriver().findElement(By.xpath("//div[@class='ast-cart-menu-wrap']/span")).getText();
+        Assert.assertEquals(Integer.parseInt(expectedQuantity), numItemsInCart);
+    }
+
+    @Test
+    public void testDeletedProductsVerification() throws InterruptedException {
+        List<WebElement> featuredProducts = getDriver().findElements(By.xpath("//div[@class='woocommerce columns-5 ']/ul/li"));
+
+        int numItemsInCart = 0;
+        for (WebElement element : featuredProducts) {
+            String isDiscounted = "false";
+            try {
+                isDiscounted = element.findElement(By.cssSelector("del[aria-hidden*='true']"))
+                        .getAttribute("aria-hidden");
+            } catch (Exception e) {}
+
+            if (isDiscounted.equals("true")) {
+                element.findElement(By.cssSelector("a[href*='?add-to-cart']")).click();
+                numItemsInCart++;
+            }
+        }
+        Thread.sleep(2000);
+        getDriver().findElement(By.xpath("//div[@class='ast-main-header-wrap main-header-bar-wrap ']//span")).click();
+
+        for (int i = 0; i < numItemsInCart; i++) {
+            getDriver().findElement(By.xpath("//td[@class='product-remove']/a[contains(@aria-label, 'Remove this item')]")).click();
+            Thread.sleep(1500);
+        }
+
+        String emptyCart = getDriver().findElement(By.xpath("//p[@class='cart-empty woocommerce-info']")).getText();
+        String expectedString = "Your cart is currently empty.";
+        Assert.assertEquals(emptyCart, expectedString);
     }
 
     private List<Double> getPrices(WebElement products) {

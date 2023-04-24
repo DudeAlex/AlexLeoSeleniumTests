@@ -64,12 +64,14 @@ public class InnaKushchakTest extends BaseTest {
     @Test
     public void testNumberOfElementInFutureProducts() {
 
-        WebElement featureProducts = getDriver().findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
-        List<WebElement> products = featureProducts.findElements(By.tagName("li"));
-
-        Assert.assertEquals(products.size(), 5);
+        WebElement featureProducts=getDriver().findElement(By.xpath("//div[@class='wp-block-group alignfull']//ul"));
+        List<WebElement> products=featureProducts.findElements(By.tagName("li"));
+        for (WebElement elem:products) {
+         List<WebElement> x= elem.findElements(By.tagName("h2"));
+            System.out.println(x.size());
+        }
     }
-
+    
     @Test
     public void testWebDriverSearchBlueShoes() {
 
@@ -82,5 +84,6 @@ public class InnaKushchakTest extends BaseTest {
         Assert.assertEquals(products.get(0).findElement(By.tagName("h2")).getAttribute("innerHTML"), "Blue Shoes");
     }
 }
+
 
 

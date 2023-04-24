@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
@@ -65,5 +66,41 @@ public class EvanMaiTest extends BaseTest {
         getDriver().findElement(By.cssSelector("a[href='https://askomdch.com/product-category/men/']")).click();
         WebElement buttonSearch = getDriver().findElement(By.cssSelector("button[value='Search']"));
         Assert.assertEquals(buttonSearch.getCssValue("background-color"), "rgba(49, 151, 214, 1)");
+    }
+
+    @Test
+    public void testVerifyButtonRedirect() {
+        getDriver().findElement(By.xpath("//a[text() ='Find More']")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.xpath("//h1[text()='Contact Us']")).getText(), "Contact Us");
+    }
+
+    @Test
+    public void testVerifyNumberProducts() {
+        getDriver().findElement(By.cssSelector("a[href='https://askomdch.com/product-category/women/'")).click();
+
+        List<WebElement> listOfProducts = getDriver().findElements(By.className("astra-shop-thumbnail-wrap"));
+
+        Assert.assertEquals(listOfProducts.size(), 7);
+    }
+
+    @Test
+    public void testVerifySortByPrice() {
+        getDriver().findElement(By.cssSelector("a[href='/store']")).click();
+
+        Select drpSortBy = new Select(getDriver().findElement(By.cssSelector("select[name='orderby']")));
+        drpSortBy.selectByValue("price");
+
+        List<WebElement> listOfPrices = getDriver().findElements(By.cssSelector("span[class='price']"));
+
+        double price = 0, price1;
+        for(WebElement e : listOfPrices) {
+            String[] arrPrice = e.getText().split(" ");
+            price1 = Double.parseDouble(arrPrice[arrPrice.length - 1].substring(1));
+
+            Assert.assertTrue(price <= price1);
+
+            price = price1;
+        }
     }
 }

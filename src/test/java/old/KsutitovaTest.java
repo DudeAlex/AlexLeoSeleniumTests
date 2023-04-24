@@ -1,3 +1,5 @@
+package old;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -6,15 +8,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.List;
-
-
+@Ignore
 public class KsutitovaTest {
 
     private WebDriver driver;
+
     @BeforeMethod
     public void beforeMethod() {
         driver = new ChromeDriver();
@@ -60,5 +63,6 @@ public class KsutitovaTest {
         List<WebElement> womenProducts = driver.findElements(By.xpath("//div[@class='astra-shop-thumbnail-wrap']"));
         Assert.assertEquals(womenProducts.size(), 7);
     }
+
 
 }

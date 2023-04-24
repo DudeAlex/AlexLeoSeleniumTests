@@ -1,3 +1,5 @@
+package old;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -6,7 +8,7 @@ import org.testng.annotations.Test;
 import runner.BaseTest;
 @Ignore
 public class PetroMatsiuraTest extends BaseTest {
-    
+
     @Test
     public void testSale() {
         for(WebElement element : getDriver().findElements(By.cssSelector("span[class='onsale']"))){

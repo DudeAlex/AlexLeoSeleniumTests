@@ -1,3 +1,5 @@
+package old;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -5,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -25,6 +28,7 @@ public class MariaBassTests {
         driver.quit();
     }
 
+    @Ignore
     @Test
     public void testCheckSaleTag_TC_001() {
 
@@ -41,7 +45,7 @@ public class MariaBassTests {
             }
         }
     }
-
+    @Ignore
     @Test
     public void testDollarSignPresence_TC_002() {
         WebElement featuredProducts = driver.findElement(By.
@@ -53,7 +57,7 @@ public class MariaBassTests {
             Assert.assertTrue(allItemText[allItemText.length - 2].contains("$"));
         }
     }
-
+    @Ignore
     @Test
     public void verifyDiscountMethodTest_TC_003() {
         WebElement block1 = driver.findElement(By.

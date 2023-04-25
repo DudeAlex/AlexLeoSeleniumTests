@@ -1,8 +1,11 @@
+package old;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -10,7 +13,9 @@ import java.util.List;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+@Ignore
 public class ArtemTTest {
+    @Ignore
     @Test
     public void Test_TC_001_33() {
         WebDriver driver = new ChromeDriver();

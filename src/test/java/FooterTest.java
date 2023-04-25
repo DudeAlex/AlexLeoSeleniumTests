@@ -21,4 +21,10 @@ public class FooterTest extends BaseTest {
 
         Assert.assertEquals(getDriver().findElement(By.cssSelector("h1[class='page-title'] > span")).getText().trim(), "Jenkins");
     }
+
+    @Test
+    public void testVerifyJenkinsVersion() {
+
+        Assert.assertEquals(getDriver().findElement(By.xpath("//a[@href='https://www.jenkins.io/']")).getText(), "Jenkins 2.387.2");
+    }
 }

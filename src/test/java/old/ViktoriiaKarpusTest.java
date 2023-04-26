@@ -1,11 +1,16 @@
+package old;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 
+import java.util.List;
+@Ignore
 public class ViktoriiaKarpusTest extends BaseTest {
 
     @Test
@@ -31,10 +36,29 @@ public class ViktoriiaKarpusTest extends BaseTest {
     }
 
     @Test
-    public void testShopNow_TC_005() throws InterruptedException {
+    public void testShopNow_TC_005() {
         getDriver().findElement(By.xpath("//a[@class='wp-block-button__link']")).click();
         WebElement pageStore = getDriver().findElement(By.xpath("//h1[contains(text(), \"Store\")]"));
 
         Assert.assertEquals(pageStore.getText(), "Store");
+    }
+
+    @Test
+    public void testNumberOfProductsDisplayed_TC_009() {
+        getDriver().findElement(By.xpath("//li[@id='menu-item-1229']/a")).click();
+        WebElement womenProducts = getDriver()
+                .findElement(By.xpath("//div[@class='ast-woocommerce-container']//ul"));
+
+        List<WebElement> count = womenProducts.findElements(By.tagName("li"));
+
+        Assert.assertEquals(count.size(),7);
+    }
+
+    @Test
+    public void testColorOfTheSearchButton() {
+        getDriver().findElement(By.xpath("//li[@id='menu-item-1228']")).click();
+        WebElement searchButton = getDriver().findElement(By.cssSelector("button[value='Search']"));
+
+        Assert.assertEquals(searchButton.getCssValue("background-color"), "rgba(49, 151, 214, 1)");
     }
 }

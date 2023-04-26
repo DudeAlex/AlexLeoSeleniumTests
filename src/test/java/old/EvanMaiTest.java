@@ -1,16 +1,48 @@
 package old;
 
+import jdk.jfr.Description;
+import net.bytebuddy.TypeCache;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 
+import javax.swing.*;
+import java.time.Duration;
 import java.util.List;
 @Ignore
 public class EvanMaiTest extends BaseTest {
+
+    private WebDriver driver;
+
+    @BeforeMethod
+    private void beforeMethod() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless", "--window-size=1920,1080");
+        driver = new ChromeDriver(chromeOptions);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        getDriver().get("https://askomdch.com/");
+    }
+
+    @AfterMethod
+    private void afterMethod(){
+        driver.quit();
+    }
+
+    protected WebDriver getDriver() {
+        return driver;
+    }
 
     @Test
     public void testSaleIconPresent() {
@@ -97,7 +129,7 @@ public class EvanMaiTest extends BaseTest {
         List<WebElement> listOfPrices = getDriver().findElements(By.cssSelector("span[class='price']"));
 
         double price = 0, price1;
-        for(WebElement e : listOfPrices) {
+        for (WebElement e : listOfPrices) {
             String[] arrPrice = e.getText().split(" ");
             price1 = Double.parseDouble(arrPrice[arrPrice.length - 1].substring(1));
 
@@ -105,5 +137,20 @@ public class EvanMaiTest extends BaseTest {
 
             price = price1;
         }
+    }
+
+    @Description("Verify number on shopping cart")
+    @Test
+    public void testVerifyNumberShoppingCart() {
+        List<WebElement> listOfProducts = getDriver().findElements(By.xpath("//a[@data-product_id]"));
+        listOfProducts.remove(4);
+
+        for(WebElement we : listOfProducts) {
+            we.click();
+        }
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+
+        Assert.assertTrue(wait.until(ExpectedConditions.textToBe(By.xpath("//span[@class='count']"), "4")));
     }
 }

@@ -12,4 +12,10 @@ public class AnnaMorozTest extends BaseTest {
 
     Assert.assertTrue(getDriver().findElement(By.cssSelector("img#jenkins-head-icon")).isDisplayed());
     }
+
+    @Test
+    public void testRestAPILink(){
+
+       Assert.assertEquals(getDriver().findElement(By.xpath("//a[@href='api/']")).getText(),"REST API");
+    }
 }

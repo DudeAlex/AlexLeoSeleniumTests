@@ -24,4 +24,9 @@ public class AlexLeoGroupJenkins06Tests extends BaseTest {
         WebElement icon=getDriver().findElement(By.xpath("//h1[text()='Welcome to Jenkins!']"));
         Assert.assertEquals(icon.getText(),"Welcome to Jenkins!");
     }
+
+    @Test
+    public void testVerifyDRPMenu() {
+        Assert.assertEquals(getDriver().findElement(By.xpath("//div[@id='breadcrumbBar']/ol/li/a")).getText(), "Dashboard");
+    }
 }

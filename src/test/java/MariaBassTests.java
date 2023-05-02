@@ -1,64 +1,65 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import runner.BaseTest;
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MariaBassTests {
-
-    private WebDriver driver;
-
-    @BeforeMethod
-    public void beforeMethod() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://askomdch.com/");
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        driver.quit();
-    }
+public class MariaBassTests extends BaseTest {
 
     @Test
-    public void testCheckSaleTag_TC_001() {
-
-        WebElement featuredProducts = driver.findElement(By.xpath(
-                "//ul[@class = 'products columns-5']"));
-        List<WebElement> items = featuredProducts.findElements(By.tagName("li"));
-        for (WebElement item : items) {
-            int numberOfElements = item.findElements((By.tagName("bdi"))).size();
-            boolean onSaleTag;
-            if (numberOfElements == 2) {
-                WebElement sale = item.findElement(By.className("onsale"));
-                onSaleTag = sale != null;
-                Assert.assertTrue(onSaleTag);
-            }
+    public void testNewItemPageContainsSixProjectTypes() {
+        getDriver().findElement(By.xpath("//a[@href='/view/all/newJob']")).click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(3));
+        List<WebElement> allProjectTypes = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
+                .xpath("//ul[@class='j-item-options']//span")));
+        List<String> allProjectTypesNames = new ArrayList<>();
+        for (WebElement projectType : allProjectTypes) {
+            allProjectTypesNames.add(projectType.getText());
         }
+        List<String> expectedResult = List.of("Freestyle project", "Pipeline", "Multi-configuration project",
+                "Folder", "Multibranch Pipeline", "Organization Folder");
+
+        Assert.assertEquals(allProjectTypesNames, expectedResult);
     }
 
     @Test
-    public void testDollarSignPresence_TC_002() {
-        WebElement featuredProducts = driver.findElement(By.
-                xpath("//ul[@class = 'products columns-5']"));
-        List<WebElement> items = featuredProducts.findElements(By.tagName("li"));
+    public void testCreatingNewFreestyleProject() {
+        getDriver().findElement(By.xpath("//a[@href='/view/all/newJob']")).click();
+        getDriver().findElement(By.xpath("//input[@id='name']"))
+                .sendKeys("FreeStyle Project 01");
+        getDriver().findElement(By.xpath("//span[text()='Freestyle project']")).click();
+        getDriver().findElement(By.id("ok-button")).click();
+        getDriver().findElement(By.name("Submit")).click();
+        getDriver().findElement(By.tagName("h1"));
 
-        for (WebElement item : items) {
-            String[] allItemText = item.getText().split("\n");
-            Assert.assertTrue(allItemText[allItemText.length - 2].contains("$"));
-        }
+        Assert.assertEquals(getDriver().findElement(By.tagName("h1"))
+                .getAttribute("outerText"), "Project FreeStyle Project 01");
+
+
     }
 
+
     @Test
-    public void verifyDiscountMethodTest_TC_003() {
-        WebElement block1 = driver.findElement(By.
-                xpath("//div[@class = 'wp-block-cover alignfull has-background-dim']"));
-        String allText = block1.getText();
-        Assert.assertTrue(allText.contains("25% OFF On all products"));
+    public void testCreatingAndDisablingFreestyleProject() {
+        getDriver().findElement(By.xpath("//a[@href='/view/all/newJob']")).click();
+        getDriver().findElement(By.xpath("//input[@id='name']"))
+                .sendKeys("FreeStyle Project 01");
+        getDriver().findElement(By.xpath("//span[text()='Freestyle project']")).click();
+        getDriver().findElement(By.id("ok-button")).click();
+        getDriver().findElement(By.name("Submit")).click();
+        getDriver().findElement(By.xpath("//button[normalize-space()='Disable Project']")).click();
+
+        String allTextInTheElement = getDriver().findElement(By.xpath("//form[@id='enable-project']"))
+                .getText();
+        String[] allTextInTheElementArray = allTextInTheElement.split("\n");
+
+        Assert.assertEquals(allTextInTheElementArray[0], "This project is currently disabled");
+
     }
 }

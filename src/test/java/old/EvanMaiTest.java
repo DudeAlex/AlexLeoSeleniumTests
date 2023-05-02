@@ -10,6 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
@@ -146,8 +150,26 @@ public class EvanMaiTest extends BaseTestOld {
             we.click();
         }
 
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        Assert.assertTrue(getWait().until(ExpectedConditions.textToBe(By.xpath("//span[@class='count']"), "4")));
+    }
 
-        Assert.assertTrue(wait.until(ExpectedConditions.textToBe(By.xpath("//span[@class='count']"), "4")));
+    @Description("Verify all Links of Home Page")
+    @Test
+    public void testVerifyAllLinksHomePage() throws IOException, InterruptedException {
+        getDriver().get("https://askomdch.com/");
+
+        Thread.sleep(1000);
+
+        List<WebElement> listOfLinks = getDriver().findElements(By.tagName("a"));
+
+        for (WebElement link : listOfLinks) {
+            String urlLink = link.getAttribute("href");
+            URL url = new URL(urlLink);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.connect();
+
+            Assert.assertTrue(httpURLConnection.getResponseCode() < 400);
+        }
     }
 }

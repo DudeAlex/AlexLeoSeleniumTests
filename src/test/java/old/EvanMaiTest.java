@@ -1,6 +1,5 @@
 package old;
 
-import jdk.jfr.Description;
 import old.runnerOld.BaseTestOld;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -135,7 +134,6 @@ public class EvanMaiTest extends BaseTestOld {
         }
     }
 
-    @Description("Verify number on shopping cart")
     @Test
     public void testVerifyNumberShoppingCart() {
         getDriver().get("https://askomdch.com/");
@@ -150,7 +148,6 @@ public class EvanMaiTest extends BaseTestOld {
         Assert.assertTrue(getWait().until(ExpectedConditions.textToBe(By.xpath("//span[@class='count']"), "4")));
     }
 
-    @Description("Verify all Links of Home Page")
     @Test
     public void testVerifyAllLinksHomePage() throws IOException, InterruptedException {
         getDriver().get("https://askomdch.com/");
@@ -170,7 +167,6 @@ public class EvanMaiTest extends BaseTestOld {
         }
     }
 
-    @Description("Add to shopping cart products over $33 on the Store Page")
     @Test
     public void testAddToCartProducts() {
         getDriver().get("https://askomdch.com/");

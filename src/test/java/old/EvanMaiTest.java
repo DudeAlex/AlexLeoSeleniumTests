@@ -1,20 +1,18 @@
 package old;
 
+import com.beust.ah.A;
 import jdk.jfr.Description;
 import old.runnerOld.BaseTestOld;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.List;
 
 public class EvanMaiTest extends BaseTestOld {
@@ -171,5 +169,24 @@ public class EvanMaiTest extends BaseTestOld {
 
             Assert.assertTrue(httpURLConnection.getResponseCode() < 400);
         }
+    }
+
+    @Description("Add to shopping cart products over $33 on the Store Page")
+    @Test
+    public void testAddToCartProducts() {
+        getDriver().get("https://askomdch.com/");
+        getDriver().findElement(By.cssSelector("a[href='https://askomdch.com/store/'")).click();
+
+        List<WebElement> listOfWebElements = getDriver().findElements(By.cssSelector(".price"));
+        List<WebElement> listAddToCart = getDriver().findElements(By.xpath("//a[contains(@href,'?add-to-cart')]"));
+
+        for(int i = 0; i < listOfWebElements.size(); i++) {
+            String[] arr = listOfWebElements.get(i).getText().split(" ");
+            if(Double.parseDouble(arr[arr.length - 1].substring(1)) > 33) {
+                listAddToCart.get(i).click();
+            }
+        }
+
+        Assert.assertTrue(getWait().until(ExpectedConditions.textToBe(By.xpath("//span[@class='count']"), "5")));
     }
 }

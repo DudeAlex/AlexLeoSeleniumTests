@@ -1,6 +1,5 @@
 package old;
 
-import com.beust.ah.A;
 import jdk.jfr.Description;
 import old.runnerOld.BaseTestOld;
 import org.openqa.selenium.By;

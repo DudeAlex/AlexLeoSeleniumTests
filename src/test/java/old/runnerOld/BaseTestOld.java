@@ -34,7 +34,7 @@ public abstract class BaseTestOld {
 
     protected WebDriverWait getWait() {
         if(wait == null) {
-            return new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+            wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
         }
         return wait;
     }

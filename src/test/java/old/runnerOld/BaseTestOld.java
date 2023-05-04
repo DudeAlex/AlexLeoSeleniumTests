@@ -13,6 +13,8 @@ public abstract class BaseTestOld {
 
     private WebDriver driver;
 
+    private WebDriverWait wait;
+
     @BeforeMethod
     protected void beforeMethod() {
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -29,7 +31,11 @@ public abstract class BaseTestOld {
     protected WebDriver getDriver() {
         return driver;
     }
+
     protected WebDriverWait getWait() {
-        return new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        if(wait == null) {
+            return new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        }
+        return wait;
     }
 }

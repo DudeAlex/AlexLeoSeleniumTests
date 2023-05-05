@@ -22,7 +22,7 @@ public class AlexLeoGroupJenkins06Tests extends BaseTest {
                 .findElement(By.id("jenkins-name-icon"));
        Assert.assertTrue(logoWord.isDisplayed());
     }
-;    @Test
+    @Test
     public void testIconVerification(){
         WebElement icon=getDriver().findElement(By.xpath("//h1[text()='Welcome to Jenkins!']"));
         Assert.assertEquals(icon.getText(),"Welcome to Jenkins!");

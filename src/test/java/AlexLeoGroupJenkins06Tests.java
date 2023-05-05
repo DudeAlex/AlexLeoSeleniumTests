@@ -33,7 +33,6 @@ public class AlexLeoGroupJenkins06Tests extends BaseTest {
         Assert.assertEquals(getDriver().findElement(By.xpath("//div[@id='breadcrumbBar']/ol/li/a")).getText(), "Dashboard");
     }
 
-
     @Test
     public void testManageOldData() {
         getDriver().findElement(By.xpath("//a[@href='/manage']")).click();

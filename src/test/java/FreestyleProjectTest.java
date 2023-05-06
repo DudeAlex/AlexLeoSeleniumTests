@@ -2,11 +2,14 @@ import net.bytebuddy.description.type.TypeList;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,7 +87,7 @@ public class FreestyleProjectTest extends BaseTest {
 
 
     @Test
-    public void testAddDescriptionToFreestyleProject() {
+    public void testAddDescriptionToFreestyleProject() throws InterruptedException {
 
         getDriver().findElement(By.linkText("New Item")).click();
         getDriver().findElement(By.id("name")).sendKeys(FREESTYLE_NAME);
@@ -96,6 +99,8 @@ public class FreestyleProjectTest extends BaseTest {
 
         getDriver().findElement(By.xpath("//a[@href='job/" + FREESTYLE_NAME + "/']")).click();
         getDriver().findElement(By.id("description-link")).click();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         getDriver().findElement(By.xpath("//div[@class='setting-main help-sibling']/textarea")).sendKeys("Job " + FREESTYLE_NAME);
         getDriver().findElement(By.cssSelector("button.jenkins-button.jenkins-button--primary")).click();
 

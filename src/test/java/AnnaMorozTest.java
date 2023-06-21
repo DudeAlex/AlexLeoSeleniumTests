@@ -21,4 +21,12 @@ public class AnnaMorozTest extends BaseTest {
         Assert.assertTrue(getDriver().findElement(By.cssSelector("img#jenkins-head-icon")).isDisplayed());
     }
 
+    @Test
+    public void testCheckIconJenkinsOnHeader3(){
+
+        Assert.assertTrue(getDriver().findElement(By.cssSelector("img#jenkins-name-icon")).isDisplayed());
+
+        Assert.assertTrue(getDriver().findElement(By.cssSelector("img#jenkins-head-icon")).isDisplayed());
+    }
+
 }

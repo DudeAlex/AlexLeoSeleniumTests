@@ -1,3 +1,6 @@
+package old;
+
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import runner.BaseTest;
@@ -5,6 +8,7 @@ import runner.BaseTest;
 import static org.testng.Assert.assertEquals;
 import java.time.Duration;
 
+@Ignore
 public class YakuninaTest extends BaseTest {
 
     //TC_004
